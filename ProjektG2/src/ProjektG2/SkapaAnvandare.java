@@ -13,14 +13,14 @@ import oru.inf.InfException;
  *
  * @author lisajansson
  */
-public class SkapaInlogg extends javax.swing.JFrame {
+public class SkapaAnvandare extends javax.swing.JFrame {
 
     private InfDB idb;
 
     /**
      * Creates new form SkapaInlogg
      */
-    public SkapaInlogg(InfDB idb) {
+    public SkapaAnvandare(InfDB idb) {
         initComponents();
         this.idb = idb;
     }
