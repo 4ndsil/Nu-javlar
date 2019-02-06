@@ -134,13 +134,13 @@ public class LoggaIn extends javax.swing.JFrame {
                     new AdminHuvud(db).setVisible(true);
                 } else if (admin.equals("F")) {
                     dispose();
-                    new AdminForskning(db).setVisible(true);
+                    //new AdminForskning(db).setVisible(true);
                 } else if (admin.equals("U")) {
                     dispose();
-                    new AdminUtbildning(db).setVisible(true);
+                    //new AdminUtbildning(db).setVisible(true);
                 } else if (admin.equals("V")) {
                     dispose();
-                    new Anvandare(db).setVisible(true);
+                    //new Anvandare(db).setVisible(true);
                 }
             }
 
