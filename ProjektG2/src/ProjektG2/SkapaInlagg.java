@@ -5,7 +5,11 @@
  */
 package ProjektG2;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
+import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -14,10 +18,11 @@ import oru.inf.InfDB;
 public class SkapaInlagg extends javax.swing.JFrame {
 
     private InfDB db;
-    
+
     public SkapaInlagg(InfDB db) {
         initComponents();
         this.db = db;
+
     }
 
     /**
@@ -29,24 +34,215 @@ public class SkapaInlagg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cbHuvudkategori = new javax.swing.JComboBox<>();
+        cbUnderkategori = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taText = new javax.swing.JTextArea();
+        tfRubrik = new javax.swing.JTextField();
+        lblRubrik = new javax.swing.JLabel();
+        taUnderkategori = new javax.swing.JTextField();
+        lblSkapaNyKategori = new javax.swing.JLabel();
+        lblSkrivInlagg = new javax.swing.JLabel();
+        btnPublicera = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cbHuvudkategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Huvudkategori", "Utbildning", "Forskning", "Informell" }));
+        cbHuvudkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbHuvudkategoriActionPerformed(evt);
+            }
+        });
+
+        cbUnderkategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Välj Underkategori", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbUnderkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUnderkategoriActionPerformed(evt);
+            }
+        });
+
+        taText.setColumns(20);
+        taText.setRows(5);
+        jScrollPane1.setViewportView(taText);
+
+        lblRubrik.setText("Rubrik");
+
+        taUnderkategori.setColumns(10);
+        taUnderkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taUnderkategoriActionPerformed(evt);
+            }
+        });
+
+        lblSkapaNyKategori.setText("Skapa ny underkategori:");
+
+        lblSkrivInlagg.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblSkrivInlagg.setText("Skriv inlägg");
+
+        btnPublicera.setText("Publicera");
+        btnPublicera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPubliceraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfRubrik)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(lblSkrivInlagg))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnPublicera)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSkapaNyKategori)
+                                    .addComponent(taUnderkategori, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cbUnderkategori, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbHuvudkategori, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(lblSkrivInlagg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRubrik)
+                .addGap(2, 2, 2)
+                .addComponent(tfRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(cbHuvudkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbUnderkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSkapaNyKategori)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(taUnderkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPublicera)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void cbHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHuvudkategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbHuvudkategoriActionPerformed
+
+    private void cbUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnderkategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbUnderkategoriActionPerformed
+
+    private void taUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taUnderkategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_taUnderkategoriActionPerformed
+
+    private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
+
+        //LAGRAR INKOMMANDE VÄRDE I VARIABLAR
+        String rubrik = tfRubrik.getText();
+        String text = taText.getText();
+
+        //DATUM OBJEKT 
+        Date date = new Date();
+        //HÄMTAR TIDEN
+        long time = date.getTime();
+        //HÄMTAR INLOGGATPERSONUMMER FRÅN LOGGA IN KLASSEN
+        String pnr = LoggaIn.returneraInloggadPnr();
+        //LAGRAR TIDSSTÄMPEL
+        Timestamp datum = new Timestamp(time);
+
+        Object[] alternativ = {"Visa inlägg", "Skapa nytt inlägg", "Gå tillbaka till startsidan"};
+
+        //TILLFÄLLIGA
+        String bildfil = "då";
+        String fil = "re";
+        String offentlig = "h";
+
+        if (Validering.textFaltHarVarde(rubrik)) {
+            if (Validering.textFaltHarVarde(text)) {
+                try {
+                    //TILLDELAR INLAGG AUTOMATISKT ID 
+                    String bloggId = db.getAutoIncrement("BLOGGINLAGG", "BLOGGID");
+
+                    //LÄGGER TILL INLÄGG I DATABASEN
+                    String skapaInlagg = "INSERT INTO BLOGGINLAGG VALUES(" + bloggId + ", '" + rubrik + "', '" + datum + "', '" + bildfil
+                            + "', '" + fil + "', '" + text + "', '" + offentlig + "', '" + pnr + "');";
+                    db.insert(skapaInlagg);
+
+                    //SKAPAR EN DIALOGRUTA MED ALTERNATIV
+                    int input = JOptionPane.showOptionDialog(null, "Ditt blogginlägg har publicerats.", "Vind i seglen!", JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE, null, alternativ, null);
+
+                    //OM INPUT ÄR LIKA MED 0
+                    switch (input) {
+                        //OM INPUT ÄR LIKA MED 1
+                        case 0:
+                            //STÄNGER AKTUELL SIDA OCH ÖPPNAR VISAINLAGG
+                            dispose();
+                            new VisaInlagg(db).setVisible(true);
+                            break;
+
+                        //OM INPUT ÄR LIKA MED 2
+                        case 1:
+                            //STÄNGER AKTUELL SIDA OCH ÖPPNAR FÖRSTASIDAN
+                            dispose();
+                            new SkapaInlagg(db).setVisible(true);
+                            break;
+                        case 2:
+                            //KOM IHÅG ATT LÄGGA OLIKA FÖNSTER BEROENDE FÖR VEM SOM ÄR INLOGGAD
+
+                            //STÄNGER AKTUELL SIDA OCH ÖPPNAR FÖRSTASIDAN
+                            dispose();
+                            new AdminHuvud(db).setVisible(true);
+                            break;
+                        default:
+                            break;
+                    }
+                    //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
+                } catch (InfException e) {
+                    JOptionPane.showMessageDialog(null, "Något gick fel.");
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Inlägget är tomt.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Var snäll och skriv en rubrik.");
+
+        }
+    }//GEN-LAST:event_btnPubliceraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPublicera;
+    private javax.swing.JComboBox<String> cbHuvudkategori;
+    private javax.swing.JComboBox<String> cbUnderkategori;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblRubrik;
+    private javax.swing.JLabel lblSkapaNyKategori;
+    private javax.swing.JLabel lblSkrivInlagg;
+    private javax.swing.JTextArea taText;
+    private javax.swing.JTextField taUnderkategori;
+    private javax.swing.JTextField tfRubrik;
     // End of variables declaration//GEN-END:variables
 }

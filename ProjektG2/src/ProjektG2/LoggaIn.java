@@ -16,6 +16,8 @@ import oru.inf.InfException;
 public class LoggaIn extends javax.swing.JFrame {
 
     private InfDB db;
+    private static String user = "";
+            
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
@@ -119,7 +121,7 @@ public class LoggaIn extends javax.swing.JFrame {
 
         String loggaIn = "";
         String pw = pfText.getText();
-        String user = tfUser.getText();
+        user = tfUser.getText();
         String admin = "";
 
         try {
@@ -150,6 +152,11 @@ public class LoggaIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInloggActionPerformed
 
+    public static String returneraInloggadPnr()
+    {    
+    return user;
+    }
+    
     private void tfUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUserActionPerformed
