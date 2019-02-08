@@ -341,7 +341,11 @@ public class Profil extends javax.swing.JFrame {
         String kontorsnr = tfRum.getText();
         String email = tfMail.getText();
         String losen2 = tfLosen2.getText();
-
+        
+        if(Validering.textFaltHarVarde(tfFornamn) && Validering.textFaltHarVarde(tfEfternamn)){
+         if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
+             if(Validering.textFaltHarVarde(tfTitel) && Validering.textFaltHarVarde(tfMail) && Validering.textFaltHarVarde(tfRum)){
+             if (Validering.vardeArSiffra(tfRum)){
         try {
                 if (!losen2.isEmpty()) {
                     String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen2 + "' WHERE PNR = '" + pnr + "'";
@@ -385,7 +389,7 @@ public class Profil extends javax.swing.JFrame {
                     tfMail.setText(sql17);
                 }
                
-        }catch(Exception e){}
+        }catch(Exception e){}}}}}
 
     }//GEN-LAST:event_btnAndraActionPerformed
 
@@ -444,13 +448,17 @@ public class Profil extends javax.swing.JFrame {
         String kontorsnr = tfRum.getText();
         String email = tfMail.getText();
         String losen2 = tfLosen2.getText();
-
+        
+        
+      
         try {
             String sql = "SELECT LOSENORD FROM ANVANDARE WHERE PNR =" + "'" + pnr + "'";
 
             String sql10 = db.fetchSingle(sql);
             if (sql10.equals(losen)) {
-
+               
+               
+                
                 String sql2 = "SELECT LOSENORD FROM ANVANDARE WHERE PNR ='" + pnr + "'";
                 String sql11 = db.fetchSingle(sql2);
                 tfLosen2.setText(sql11);
@@ -478,19 +486,19 @@ public class Profil extends javax.swing.JFrame {
                 String sql8 = "SELECT MAIL FROM EMAIL WHERE PNR = '" + pnr + "'";
                 String sql17 = db.fetchSingle(sql8);
                 tfMail.setText(sql17);
-
+                    
             }else{
                 JOptionPane.showMessageDialog(null, "Fel lösenord eller personnummer.");
             }
-
+                    
         } catch (Exception e) {
-
+        
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnVisaActionPerformed
 
     
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnAndra;

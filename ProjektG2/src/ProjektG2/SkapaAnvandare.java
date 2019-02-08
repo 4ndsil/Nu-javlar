@@ -42,17 +42,17 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         beskrivning = new javax.swing.JLabel();
         kontorsrum = new javax.swing.JLabel();
         titel = new javax.swing.JLabel();
-        tf1 = new javax.swing.JTextField();
-        tf2 = new javax.swing.JTextField();
-        tf3 = new javax.swing.JTextField();
-        tf4 = new javax.swing.JTextField();
-        tf5 = new javax.swing.JTextField();
-        tf6 = new javax.swing.JTextField();
+        tfPnr = new javax.swing.JTextField();
+        tfTitel = new javax.swing.JTextField();
+        tfFornamn = new javax.swing.JTextField();
+        tfEfternamn = new javax.swing.JTextField();
+        tfBeskrivning = new javax.swing.JTextField();
+        tfRum = new javax.swing.JTextField();
         btn1 = new javax.swing.JButton();
         personnummer1 = new javax.swing.JLabel();
-        tf8 = new javax.swing.JTextField();
+        tfMail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tf7 = new javax.swing.JTextField();
+        tfLosen = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,9 +74,9 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
         titel.setText("Titel");
 
-        tf5.addActionListener(new java.awt.event.ActionListener() {
+        tfBeskrivning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf5ActionPerformed(evt);
+                tfBeskrivningActionPerformed(evt);
             }
         });
 
@@ -89,9 +89,9 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
         personnummer1.setText("Email");
 
-        tf8.addActionListener(new java.awt.event.ActionListener() {
+        tfMail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf8ActionPerformed(evt);
+                tfMailActionPerformed(evt);
             }
         });
 
@@ -124,23 +124,23 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tf3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf1))
+                            .addComponent(tfFornamn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfTitel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfPnr))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tf4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf5, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf6, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(tfEfternamn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfRum, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(161, 161, 161))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(tf8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf7))
+                            .addComponent(tfMail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfLosen))
                         .addGap(161, 161, 161))))
         );
         layout.setVerticalGroup(
@@ -151,39 +151,39 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(personnummer)
-                    .addComponent(tf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfPnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(text1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titel)
-                    .addComponent(tf2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fornamn)
-                    .addComponent(tf3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(efternamn)
-                    .addComponent(tf4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(tf5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfBeskrivning, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(beskrivning)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kontorsrum)
-                    .addComponent(tf6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfRum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tf7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(personnummer1)
-                    .addComponent(tf8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn1)
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -196,15 +196,15 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         // Knapp lägg till en ny lärare i systemet
 
         //VARIABLAR FÖR LÄGGA TILL ANVÄNDARE
-        String pnr = tf1.getText(); //Textbox personnummer, lokal variabel hämtar textfältet
-        String titeln = tf2.getText();
-        String fnamn = tf3.getText();
-        String enamn = tf4.getText();
-        String beskrivningen = tf5.getText();
-        String kontorsnr = tf6.getText();
-        String losenord = tf7.getText();
-        String admin = "I"; //Sätter användare till icke admin by default
-        String email = tf8.getText();
+        String pnr = tfPnr.getText(); //Textbox personnummer, lokal variabel hämtar textfältet
+        String titeln = tfTitel.getText();
+        String fnamn = tfFornamn.getText();
+        String enamn = tfEfternamn.getText();
+        String beskrivningen = tfBeskrivning.getText();
+        String kontorsnr = tfRum.getText();
+        String losenord = tfLosen.getText();
+        String admin = "V"; //Sätter användare till icke admin by default
+        String email = tfMail.getText();
         String notis = "F";
 
         //VARIABLAR FÖR EMAIL
@@ -212,7 +212,10 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         String valkommen = "Välkommen " + fnamn + " till lärarplattformen för Informatik! \n\n"
                 + "Ditt användarnamn är: " + pnr + " \n"
                 + "Ditt lösenord är: " + losenord;
-
+        
+        if(Validering.textFaltHarVarde(tfPnr) && Validering.textFaltHarVarde(tfTitel) && Validering.textFaltHarVarde(tfFornamn) && Validering.textFaltHarVarde(tfEfternamn) && Validering.textFaltHarVarde(tfRum) && Validering.textFaltHarVarde(tfLosen) && Validering.textFaltHarVarde(tfMail)){
+          if(Validering.vardeArSiffra(tfRum) && Validering.vardeArSiffra(tfPnr)){
+              if(Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn) && Validering.vardeArString(tfTitel) ){
         try {
 
             String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivningen + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
@@ -228,18 +231,18 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
-        }
+        }}}}
 
 
     }//GEN-LAST:event_btn1ActionPerformed
 
-    private void tf8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf8ActionPerformed
+    private void tfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf8ActionPerformed
+    }//GEN-LAST:event_tfMailActionPerformed
 
-    private void tf5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf5ActionPerformed
+    private void tfBeskrivningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBeskrivningActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf5ActionPerformed
+    }//GEN-LAST:event_tfBeskrivningActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -253,14 +256,14 @@ public class SkapaAnvandare extends javax.swing.JFrame {
     private javax.swing.JLabel personnummer;
     private javax.swing.JLabel personnummer1;
     private javax.swing.JLabel text1;
-    private javax.swing.JTextField tf1;
-    private javax.swing.JTextField tf2;
-    private javax.swing.JTextField tf3;
-    private javax.swing.JTextField tf4;
-    private javax.swing.JTextField tf5;
-    private javax.swing.JTextField tf6;
-    private javax.swing.JTextField tf7;
-    private javax.swing.JTextField tf8;
+    private javax.swing.JTextField tfBeskrivning;
+    private javax.swing.JTextField tfEfternamn;
+    private javax.swing.JTextField tfFornamn;
+    private javax.swing.JTextField tfLosen;
+    private javax.swing.JTextField tfMail;
+    private javax.swing.JTextField tfPnr;
+    private javax.swing.JTextField tfRum;
+    private javax.swing.JTextField tfTitel;
     private javax.swing.JLabel titel;
     // End of variables declaration//GEN-END:variables
 }
