@@ -32,6 +32,7 @@ public class AdminHuvud extends javax.swing.JFrame {
         lblRubrikAdminHuvud = new javax.swing.JLabel();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
+        miTillStart = new javax.swing.JMenuItem();
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
@@ -53,6 +54,15 @@ public class AdminHuvud extends javax.swing.JFrame {
 
         mStart.setText("Start");
         mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miTillStart.setText("Till Startsidan");
+        miTillStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTillStartActionPerformed(evt);
+            }
+        });
+        mStart.add(miTillStart);
+
         mbAdminHuvud.add(mStart);
 
         mBlogg.setText("Blogg");
@@ -184,6 +194,14 @@ public class AdminHuvud extends javax.swing.JFrame {
     new LoggaIn(db).setVisible(true);
     }//GEN-LAST:event_miLoggaUtActionPerformed
 
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA 
+        new AdminHuvud(db).setVisible(true);
+    
+    }//GEN-LAST:event_miTillStartActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblRubrikAdminHuvud;
@@ -196,6 +214,7 @@ public class AdminHuvud extends javax.swing.JFrame {
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
+    private javax.swing.JMenuItem miTillStart;
     private javax.swing.JMenuItem miUnderkategori;
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
