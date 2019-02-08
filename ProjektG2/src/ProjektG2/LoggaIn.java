@@ -17,7 +17,7 @@ public class LoggaIn extends javax.swing.JFrame {
 
     private InfDB db;
     private static String user = "";
-            
+
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
@@ -124,39 +124,45 @@ public class LoggaIn extends javax.swing.JFrame {
         user = tfUser.getText();
         String admin = "";
 
-        try {
+        if (Validering.textFaltHarVarde(user)) {
 
-            String sql = "SELECT LOSENORD FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
-            loggaIn = db.fetchSingle(sql);
-            String sql1 = "SELECT ADMINSTATUS FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
-            admin = db.fetchSingle(sql1);
-            if (pw.equals(loggaIn)) {
-                if (admin.equals("H")) {
-                    dispose();
-                    new AdminHuvud(db).setVisible(true);
-                } else if (admin.equals("F")) {
-                    dispose();
-                    //new AdminForskning(db).setVisible(true);
-                } else if (admin.equals("U")) {
-                    dispose();
-                    //new AdminUtbildning(db).setVisible(true);
-                } else if (admin.equals("V")) {
-                    dispose();
-                    //new Anvandare(db).setVisible(true);
+            try {
+
+                String sql = "SELECT LOSENORD FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
+                loggaIn = db.fetchSingle(sql);
+                String sql1 = "SELECT ADMINSTATUS FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
+                admin = db.fetchSingle(sql1);
+                if (pw.equals(loggaIn)) {
+                    if (admin.equals("H")) {
+                        dispose();
+                        new AdminHuvud(db).setVisible(true);
+                    } else if (admin.equals("F")) {
+                        dispose();
+                        //new AdminForskning(db).setVisible(true);
+                    } else if (admin.equals("U")) {
+                        dispose();
+                        //new AdminUtbildning(db).setVisible(true);
+                    } else if (admin.equals("V")) {
+                        dispose();
+                        //new Anvandare(db).setVisible(true);
+                    }
                 }
+
+            } catch (InfException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Felaktigt lösenord.");
             }
 
-        } catch (InfException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Felaktigt lösenord eller personnummer.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Alla fält är inte ifyllda.");
+
         }
     }//GEN-LAST:event_btnInloggActionPerformed
 
-    public static String returneraInloggadPnr()
-    {    
-    return user;
+    public static String returneraInloggadPnr() {
+        return user;
     }
-    
+
     private void tfUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUserActionPerformed

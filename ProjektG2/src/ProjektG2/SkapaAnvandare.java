@@ -200,36 +200,59 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         String titeln = tf2.getText();
         String fnamn = tf3.getText();
         String enamn = tf4.getText();
-        String beskrivningen = tf5.getText();
+        String beskrivning = tf5.getText();
         String kontorsnr = tf6.getText();
         String losenord = tf7.getText();
         String admin = "I"; //Sätter användare till icke admin by default
         String email = tf8.getText();
         String notis = "F";
 
-        //VARIABLAR FÖR EMAIL
-        String amne = "Nytt konto har skapats";
-        String valkommen = "Välkommen " + fnamn + " till lärarplattformen för Informatik! \n\n"
-                + "Ditt användarnamn är: " + pnr + " \n"
-                + "Ditt lösenord är: " + losenord;
+        //KOLLAR OM NÅGON RUTA ÄR TOM
+        if (Validering.textFaltHarVarde(pnr) && Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(fnamn)
+                && Validering.textFaltHarVarde(enamn) && Validering.textFaltHarVarde(beskrivning) && Validering.textFaltHarVarde(kontorsnr)
+                && Validering.textFaltHarVarde(losenord) && Validering.textFaltHarVarde(email)) {
 
-        try {
+            //KOLLA OM NAMN ELLER EFTERNAMN ÄR I BOKSTÄVER
+            if (Validering.vardeArString(tf3) && Validering.vardeArString(tf4)) {
 
-            String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivningen + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
-            idb.insert(fraga); // Uppdaterar databasen
+                //KOLLAR OM PERSONNR ÄR SIFFRA
+                if (Validering.vardeArSiffra(tf1)) {
 
-            String fraga2 = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "', '" + notis + "', '" + pnr + "')";
+                    //VARIABLAR FÖR EMAIL
+                    String amne = "Nytt konto har skapats";
+                    String valkommen = "Välkommen " + fnamn + " till lärarplattformen för Informatik! \n\n"
+                            + "Ditt användarnamn är: " + pnr + " \n"
+                            + "Ditt lösenord är: " + losenord;
 
-            JOptionPane.showMessageDialog(null, "Användaren har lagts till i systemet");
-            idb.insert(fraga2); // Uppdaterar databasen         
+                    try {
 
-            //KÖR METOD FÖR ATT SKICKA MAIL I KLASSEN START
-            Mail.start(email, amne, valkommen);
+                        String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivning + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
+                        idb.insert(fraga); // Uppdaterar databasen
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
+                        String fraga2 = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "', '" + notis + "', '" + pnr + "')";
+
+                        JOptionPane.showMessageDialog(null, "Användaren har lagts till i systemet");
+                        idb.insert(fraga2); // Uppdaterar databasen         
+
+                        //KÖR METOD FÖR ATT SKICKA MAIL I KLASSEN START
+                        Mail.start(email, amne, valkommen);
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
+                    }
+                    
+                    //PERSONNUMMER INTE ÄR SIFFROR
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ditt personnummer måste vara i siffror.");
+                }
+                //OM FÖRNAMN ELLER EFTERNAMN ÄR ANNAT ÄN BOKSTÄVER
+            } else {
+                JOptionPane.showMessageDialog(null, "Är det där verkligen ditt namn?");
+            }
+            //OM NÅGOT FÄLT ÄR TOMT
+        } else {
+            JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda.");
         }
-
 
     }//GEN-LAST:event_btn1ActionPerformed
 
