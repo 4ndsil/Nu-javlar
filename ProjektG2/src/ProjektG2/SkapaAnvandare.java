@@ -217,6 +217,11 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
                 //KOLLAR OM PERSONNR ÄR SIFFRA
                 if (Validering.vardeArSiffra(tf1)) {
+                    
+//                    String regex = "[0-9]+{12,12}";
+//                    String input = tf1.getText();
+                    
+                    if(tf1.getText().length() == 12){
 
                     //VARIABLAR FÖR EMAIL
                     String amne = "Nytt konto har skapats";
@@ -240,7 +245,10 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
                     }
-                    
+                    // PERSONNUMMRET ÄR INTE 12 SIFFOR
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ditt personnummer måste vara 12 siffror.");
+                    }
                     //PERSONNUMMER INTE ÄR SIFFROR
                 } else {
                     JOptionPane.showMessageDialog(null, "Ditt personnummer måste vara i siffror.");
