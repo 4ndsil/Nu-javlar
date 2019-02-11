@@ -29,7 +29,6 @@ public class Validering{
         boolean resultat = true;
 
         if (rutaAttKolla.isEmpty()) {
-            //JOptionPane.showMessageDialog(null, "Du har inte fyllt i alla ");
             resultat = false;
         }
         return resultat;
