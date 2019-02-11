@@ -289,7 +289,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
             //FYLLER CB
             for (String aResult : cbListaHuvudkategori) {
-                this.cbHuvudkategori.addItem(aResult);
+                cbHuvudkategori.addItem(aResult);
             }
         } catch (InfException e) {
             e.printStackTrace();
@@ -309,18 +309,20 @@ public class SkapaInlagg extends javax.swing.JFrame {
         //ARRAY SOM SKA LAGRA UNDERKATEGORIER
         ArrayList<String> cbListaUnderkategori;
 
-        //HÄMTAR UID FRÅN VALD HUVUDKATEGORI
-        String uid = "(SELECT UID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
-
-        //HÄMTAR UNDERKATEGORIER UTIFRÅN UID
-        String query = "SELECT NAMN FROM UNDERKATEGOR WHERE UID =" + uid;
+        String query = "SELECT NAMN FROM UNDERKATEGORI WHERE HID = (SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
+        
+//        //HÄMTAR UID FRÅN VALD HUVUDKATEGORI
+//        String uid = "(SELECT UID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
+//
+//        //HÄMTAR UNDERKATEGORIER UTIFRÅN UID
+//        String query = "SELECT NAMN FROM UNDERKATEGOR WHERE UID =" + uid;
 
         try {
             cbListaUnderkategori = db.fetchColumn(query);
 
             //FYLLER CB
             for (String aResult : cbListaUnderkategori) {
-                this.cbUnderkategori.addItem(aResult);
+                cbUnderkategori.addItem(aResult);
             }
         } catch (InfException e) {
             //lägg till jKPSGJSÖSFGSH
