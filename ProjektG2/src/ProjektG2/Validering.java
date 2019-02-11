@@ -25,10 +25,10 @@ public class Validering{
     }
 
     //KOLLAR OM EN RUTA ÄR TOM
-    public static boolean textFaltHarVarde(JTextField rutaAttKolla) {
+    public static boolean textFaltHarVarde(String rutaAttKolla) {
         boolean resultat = true;
 
-        if (rutaAttKolla.getText().isEmpty()) {
+        if (rutaAttKolla.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Inmatningsrutan är tom.");
             resultat = false;
         }

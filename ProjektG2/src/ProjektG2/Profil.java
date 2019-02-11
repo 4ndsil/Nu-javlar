@@ -341,9 +341,9 @@ public class Profil extends javax.swing.JFrame {
         String email = tfMail.getText();
         String losen2 = tfLosen2.getText();
 
-        if (Validering.textFaltHarVarde(tfFornamn) && Validering.textFaltHarVarde(tfEfternamn)) {
+        if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
-                if (Validering.textFaltHarVarde(tfTitel) && Validering.textFaltHarVarde(tfMail) && Validering.textFaltHarVarde(tfRum)) {
+                if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
                      
                         
                         try {

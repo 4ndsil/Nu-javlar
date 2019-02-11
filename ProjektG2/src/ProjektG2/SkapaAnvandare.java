@@ -48,7 +48,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         tfEfternamn = new javax.swing.JTextField();
         tfBeskrivning = new javax.swing.JTextField();
         tfRum = new javax.swing.JTextField();
-        btn1 = new javax.swing.JButton();
+        btnSkapa = new javax.swing.JButton();
         personnummer1 = new javax.swing.JLabel();
         tfMail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -80,10 +80,10 @@ public class SkapaAnvandare extends javax.swing.JFrame {
             }
         });
 
-        btn1.setText("Skapa ny användare");
-        btn1.addActionListener(new java.awt.event.ActionListener() {
+        btnSkapa.setText("Skapa ny användare");
+        btnSkapa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn1ActionPerformed(evt);
+                btnSkapaActionPerformed(evt);
             }
         });
 
@@ -138,7 +138,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                         .addGap(161, 161, 161))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnSkapa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(tfMail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfLosen))
                         .addGap(161, 161, 161))))
@@ -185,14 +185,14 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                     .addComponent(personnummer1)
                     .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn1)
+                .addComponent(btnSkapa)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+    private void btnSkapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaActionPerformed
         // Knapp lägg till en ny lärare i systemet
 
         //VARIABLAR FÖR LÄGGA TILL ANVÄNDARE
@@ -200,41 +200,68 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
-        String beskrivningen = tfBeskrivning.getText();
+        String beskrivning = tfBeskrivning.getText();
         String kontorsnr = tfRum.getText();
         String losenord = tfLosen.getText();
         String admin = "V"; //Sätter användare till icke admin by default
         String email = tfMail.getText();
         String notis = "F";
 
-        //VARIABLAR FÖR EMAIL
-        String amne = "Nytt konto har skapats";
-        String valkommen = "Välkommen " + fnamn + " till lärarplattformen för Informatik! \n\n"
-                + "Ditt användarnamn är: " + pnr + " \n"
-                + "Ditt lösenord är: " + losenord;
-        
-        if(Validering.textFaltHarVarde(tfPnr) && Validering.textFaltHarVarde(tfTitel) && Validering.textFaltHarVarde(tfFornamn) && Validering.textFaltHarVarde(tfEfternamn) && Validering.textFaltHarVarde(tfRum) && Validering.textFaltHarVarde(tfLosen) && Validering.textFaltHarVarde(tfMail)){
-          if(Validering.vardeArSiffra(tfRum) && Validering.vardeArSiffra(tfPnr)){
-              if(Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn) && Validering.vardeArString(tfTitel) ){
-        try {
+        //KOLLAR OM NÅGON RUTA ÄR TOM
+        if (Validering.textFaltHarVarde(pnr) && Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(fnamn)
+                && Validering.textFaltHarVarde(enamn) && Validering.textFaltHarVarde(beskrivning) && Validering.textFaltHarVarde(kontorsnr)
+                && Validering.textFaltHarVarde(losenord) && Validering.textFaltHarVarde(email)) {
 
-            String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivningen + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
-            idb.insert(fraga); // Uppdaterar databasen
+            //KOLLA OM NAMN ELLER EFTERNAMN ÄR I BOKSTÄVER
+            if (Validering.vardeArString(tfEfternamn) && Validering.vardeArString(tfBeskrivning)) {
 
-            String fraga2 = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "', '" + notis + "', '" + pnr + "')";
+                //KOLLAR OM PERSONNR ÄR SIFFRA
+                if (Validering.vardeArSiffra(tfPnr) && tfPnr.getText().length() == 12) {
 
-            JOptionPane.showMessageDialog(null, "Användaren har lagts till i systemet");
-            idb.insert(fraga2); // Uppdaterar databasen         
+                    //VARIABLAR FÖR EMAIL
+                    String amne = "Nytt konto har skapats";
+                    String valkommen = "Välkommen " + fnamn + " till lärarplattformen för Informatik! \n\n"
+                            + "Ditt användarnamn är: " + pnr + " \n"
+                            + "Ditt lösenord är: " + losenord;
 
-            //KÖR METOD FÖR ATT SKICKA MAIL I KLASSEN START
-            Mail.start(email, amne, valkommen);
+                    try {
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
-        }}}}
+                        String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivning + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
+                        idb.insert(fraga); // Uppdaterar databasen
 
+                        String fraga2 = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "', '" + notis + "', '" + pnr + "')";
 
-    }//GEN-LAST:event_btn1ActionPerformed
+                        JOptionPane.showMessageDialog(null, "Användaren har lagts till i systemet");
+                        idb.insert(fraga2); // Uppdaterar databasen        
+
+                        //KÖR METOD FÖR ATT SKICKA MAIL I KLASSEN START
+                        Mail.start(email, amne, valkommen);
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
+                    }
+                    // PERSONNUMMRET ÄR INTE 12 SIFFOR
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ditt personnummer måste vara 12 siffror.");
+                }
+                //OM FÖRNAMN ELLER EFTERNAMN ÄR ANNAT ÄN BOKSTÄVER
+            } else {
+                JOptionPane.showMessageDialog(null, "Är det där verkligen ditt namn?");
+            }
+            //OM NÅGOT FÄLT ÄR TOMT
+        } else {
+            JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda.");
+        }
+
+    }
+
+    private void tf8ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void tf5ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:                             
+    }//GEN-LAST:event_btnSkapaActionPerformed
 
     private void tfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMailActionPerformed
         // TODO add your handling code here:
@@ -247,7 +274,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
-    private javax.swing.JButton btn1;
+    private javax.swing.JButton btnSkapa;
     private javax.swing.JLabel efternamn;
     private javax.swing.JLabel fornamn;
     private javax.swing.JLabel jLabel1;
