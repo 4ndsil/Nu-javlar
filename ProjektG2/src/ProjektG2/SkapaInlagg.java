@@ -367,21 +367,22 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 
                 //TILLDELAR UNDERKATEGORI AUTOMATISKT ID
                 String uid = db.getAutoIncrement("UNDERKATEGOR", "UID");
-                String laggaTillUid = "INSERT INTO UNDERKATGOR VALUES('"+ nyUnderkategori + "', " + uid + "')"; 
+                String hamtaHID = "SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "'";
+                String laggaTillUid = "INSERT INTO UNDERKATGOR VALUES('"+ nyUnderkategori + "', " + uid + "," + hamtaHID + ")"; 
                 db.insert(laggaTillUid);
                 
                 //LAGRAR SQL I STRÄNG
-                String uidQuery = "SELECT HID FROM HUVUDKATEGORI WHERE UID = "
-                        + "(SELECT UID FROM UNDERKATEGOR WHERE NAMN = '" + nyUnderkategori + "') "
-                        + "AND NAMN  = '" + huvudkategori + "'";
+//                String uidQuery = "SELECT HID FROM UNDERKATEGORI WHERE UID = " + uid
+//                        + "(SELECT UID FROM UNDERKATEGOR WHERE NAMN = '" + nyUnderkategori + "') "
+//                        + "AND NAMN  = '" + huvudkategori + "'";
                 
-                try {
-                    //OMVANDLAR STRING TILL INT OCH UPPDATERAR DATABASEN
-                    hid = Integer.parseInt(db.fetchSingle(uidQuery));
-                } catch (InfException e) {
-                    JOptionPane.showMessageDialog(null, "Något gick fel.");
-                    System.out.println(e.getMessage());
-                }
+//                try {
+//                    //OMVANDLAR STRING TILL INT OCH UPPDATERAR DATABASEN
+//                    hid = Integer.parseInt(db.fetchSingle(uidQuery));
+//                } catch (InfException e) {
+//                    JOptionPane.showMessageDialog(null, "Något gick fel.");
+//                    System.out.println(e.getMessage());
+//                }
                 
             } catch (InfException ex) {
                 Logger.getLogger(SkapaInlagg.class.getName()).log(Level.SEVERE,null, ex);
