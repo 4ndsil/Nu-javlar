@@ -74,12 +74,6 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
         titel.setText("Titel");
 
-        tfBeskrivning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBeskrivningActionPerformed(evt);
-            }
-        });
-
         btnSkapa.setText("Skapa ny användare");
         btnSkapa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,12 +82,6 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         });
 
         personnummer1.setText("Email");
-
-        tfMail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfMailActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Lösenord");
 
@@ -254,14 +242,6 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnSkapaActionPerformed
-
-    private void tfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfMailActionPerformed
-
-    private void tfBeskrivningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBeskrivningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBeskrivningActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
