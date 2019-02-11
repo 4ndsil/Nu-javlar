@@ -213,7 +213,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                 && Validering.textFaltHarVarde(losenord) && Validering.textFaltHarVarde(email)) {
 
             //KOLLA OM NAMN ELLER EFTERNAMN ÄR I BOKSTÄVER
-            if (Validering.vardeArString(tfEfternamn) && Validering.vardeArString(tfBeskrivning)) {
+            if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
 
                 //KOLLAR OM PERSONNR ÄR SIFFRA
                 if (Validering.vardeArSiffra(tfPnr) && tfPnr.getText().length() == 12) {
