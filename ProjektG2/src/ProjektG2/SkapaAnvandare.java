@@ -243,7 +243,6 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSkapaActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnSkapa;
