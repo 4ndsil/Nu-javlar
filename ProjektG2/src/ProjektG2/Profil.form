@@ -130,71 +130,48 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnVisa" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="personnummer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="text1" min="-2" pref="128" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="tfPnr2" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="tfLosen2" pref="176" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tfLosen" min="-2" pref="303" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnAndra" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="titel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="beskrivning" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="efternamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="fornamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="kontorsrum" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="personnummer1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="tfMail" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfRum" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfBeskrivning" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfEfternamn" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfFornamn" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfTitel" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="lblRubrikAdminHuvud" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnAndra" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="titel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="beskrivning" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="efternamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="fornamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="kontorsrum" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="personnummer1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="tfMail" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfRum" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfBeskrivning" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfEfternamn" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfFornamn" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfTitel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfLosen2" alignment="0" pref="478" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -203,21 +180,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="lblRubrikAdminHuvud" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="personnummer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="text1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfLosen" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfPnr2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfLosen2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnVisa" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="titel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfTitel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -241,8 +204,11 @@
                           <Component id="tfRum" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="kontorsrum" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfLosen2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tfMail" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -250,41 +216,19 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnAndra" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="beskrivning" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="tfBeskrivning">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBeskrivningActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="text1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="2"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="&#xc5;&#xc5;&#xc5;&#xc5;MMDDXXXX"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnVisa">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Visa information"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfRum">
     </Component>
@@ -328,22 +272,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfLosen2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfLosen">
-    </Component>
     <Component class="javax.swing.JLabel" name="efternamn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Efternamn"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="L&#xf6;senord"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfTitel">
@@ -366,8 +300,6 @@
         <Property name="text" type="java.lang.String" value="Beskrivning"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfPnr2">
-    </Component>
     <Component class="javax.swing.JTextField" name="tfMail">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfMailActionPerformed"/>
@@ -381,14 +313,6 @@
           <Font name="Tahoma" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Kontorsrum"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="personnummer">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Personnummer"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRubrikAdminHuvud">
