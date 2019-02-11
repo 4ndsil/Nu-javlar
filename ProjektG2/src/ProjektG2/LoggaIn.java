@@ -16,6 +16,8 @@ import oru.inf.InfException;
 public class LoggaIn extends javax.swing.JFrame {
 
     private InfDB db;
+    private static String user = "";
+
     public LoggaIn(InfDB db) {
         initComponents();
         this.db = db;
@@ -48,7 +50,7 @@ public class LoggaIn extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Inloggning");
+        jLabel1.setText("Logga in");
 
         tfUser.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tfUser.addActionListener(new java.awt.event.ActionListener() {
@@ -68,7 +70,7 @@ public class LoggaIn extends javax.swing.JFrame {
         jLabel2.setText("Password");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("yymmddxxxx");
+        jLabel3.setText("yyyymmddxxxx");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,18 +78,16 @@ public class LoggaIn extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(357, 357, 357)
-                            .addComponent(btnInlogg))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(357, 357, 357)
+                        .addComponent(btnInlogg)
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -97,9 +97,9 @@ public class LoggaIn extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -119,36 +119,47 @@ public class LoggaIn extends javax.swing.JFrame {
 
         String loggaIn = "";
         String pw = pfText.getText();
-        String user = tfUser.getText();
+        user = tfUser.getText();
         String admin = "";
 
-        try {
+        if (Validering.textFaltHarVarde(user)) {
 
-            String sql = "SELECT LOSENORD FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
-            loggaIn = db.fetchSingle(sql);
-            String sql1 = "SELECT ADMINSTATUS FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
-            admin = db.fetchSingle(sql1);
-            if (pw.equals(loggaIn)) {
-                if (admin.equals("H")) {
-                    dispose();
-                    new AdminHuvud(db).setVisible(true);
-                } else if (admin.equals("F")) {
-                    dispose();
-                    //new AdminForskning(db).setVisible(true);
-                } else if (admin.equals("U")) {
-                    dispose();
-                    //new AdminUtbildning(db).setVisible(true);
-                } else if (admin.equals("V")) {
-                    dispose();
-                    //new Anvandare(db).setVisible(true);
+            try {
+
+                String sql = "SELECT LOSENORD FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
+                loggaIn = db.fetchSingle(sql);
+                String sql1 = "SELECT ADMINSTATUS FROM ANVANDARE WHERE PNR = " + "'" + user + "'";
+                admin = db.fetchSingle(sql1);
+                if (pw.equals(loggaIn)) {
+                    if (admin.equals("H")) {
+                        dispose();
+                        new AdminHuvud(db).setVisible(true);
+                    } else if (admin.equals("F")) {
+                        dispose();
+                        //new AdminForskning(db).setVisible(true);
+                    } else if (admin.equals("U")) {
+                        dispose();
+                        //new AdminUtbildning(db).setVisible(true);
+                    } else if (admin.equals("V")) {
+                        dispose();
+                        //new Anvandare(db).setVisible(true);
+                    }
                 }
+
+            } catch (InfException e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Felaktigt lösenord.");
             }
 
-        } catch (InfException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Felaktigt lösenord eller personnummer.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Alla fält är inte ifyllda.");
+
         }
     }//GEN-LAST:event_btnInloggActionPerformed
+
+    public static String returneraInloggadPnr() {
+        return user;
+    }
 
     private void tfUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserActionPerformed
         // TODO add your handling code here:

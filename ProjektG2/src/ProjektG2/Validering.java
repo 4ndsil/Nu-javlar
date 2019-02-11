@@ -52,7 +52,7 @@ public class Validering{
         return arString;
     } 
     
-    //KOLLAR SÅ ATT DET SOM SKRIVS IN ÄR EN SIFFRA ELLER FLERA SIFFROR
+    //KOLLAR SÅ ATT DET SOM SKRIVS IN ÄR EN ELLER FLERA SIFFROR
     public static boolean vardeArSiffra(JTextField rutaAttKolla) {
         boolean arSiffra = false;
 
