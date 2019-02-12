@@ -32,6 +32,7 @@ public class AdminHuvud extends javax.swing.JFrame {
         lblRubrikAdminHuvud = new javax.swing.JLabel();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
+        miTillStart = new javax.swing.JMenuItem();
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
@@ -42,6 +43,8 @@ public class AdminHuvud extends javax.swing.JFrame {
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miLoggaUt = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +56,15 @@ public class AdminHuvud extends javax.swing.JFrame {
 
         mStart.setText("Start");
         mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miTillStart.setText("Till Startsidan");
+        miTillStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTillStartActionPerformed(evt);
+            }
+        });
+        mStart.add(miTillStart);
+
         mbAdminHuvud.add(mStart);
 
         mBlogg.setText("Blogg");
@@ -126,6 +138,19 @@ public class AdminHuvud extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mProfil);
 
+        jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
+
         setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,7 +167,7 @@ public class AdminHuvud extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(lblRubrikAdminHuvud)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,8 +209,25 @@ public class AdminHuvud extends javax.swing.JFrame {
     new LoggaIn(db).setVisible(true);
     }//GEN-LAST:event_miLoggaUtActionPerformed
 
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA 
+        new AdminHuvud(db).setVisible(true);
+    
+    }//GEN-LAST:event_miTillStartActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
@@ -196,6 +238,7 @@ public class AdminHuvud extends javax.swing.JFrame {
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
+    private javax.swing.JMenuItem miTillStart;
     private javax.swing.JMenuItem miUnderkategori;
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
