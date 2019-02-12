@@ -5,17 +5,27 @@
  */
 package ProjektG2;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
- * @author edith
+ * @author Aquelin
  */
-public class SkapaUnderkategori extends javax.swing.JFrame {
+public class GemensamKalender extends javax.swing.JFrame {
 
-    private InfDB db;
+     private InfDB db;
     
-    public SkapaUnderkategori(InfDB db) {
+    /**
+     * Creates new form GemensamKalender
+     */
+    public GemensamKalender(InfDB db) {
         initComponents();
         this.db = db;
     }
@@ -29,6 +39,11 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jCal = new com.toedter.calendar.JCalendar();
+        btnVisaResultat = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taVisaResultat = new javax.swing.JTextArea();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -46,6 +61,40 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnVisaResultat.setText("Visa Resultat");
+        btnVisaResultat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaResultatActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(414, 414, 414)
+                        .addComponent(btnVisaResultat))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCal, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCal, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVisaResultat))
+        );
+
+        taVisaResultat.setColumns(20);
+        taVisaResultat.setRows(5);
+        jScrollPane1.setViewportView(taVisaResultat);
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -153,15 +202,68 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVisaResultatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaResultatActionPerformed
+//      Rensar all information i textrutan.
+        taVisaResultat.setText(null);
+
+//      Hämtar ut all information från vårt kalenderobjekt.      
+        Calendar calVart = jCal.getCalendar();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 0);
+        Date date = calVart.getTime();
+//      Ändrar  formatet på datumet.
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
+        String aktivtDatum = null;
+
+        try {
+            aktivtDatum = format1.format(date);
+
+            // Hämtar ut ID, förnamn, efternamn, mötestid, mötesdatum och lokal för varje möte.
+            ArrayList<HashMap<String, String>> informationMoteLista;
+            informationMoteLista = db.fetchRows("SELECT ANVANDARE.FORNAMN, EFTERNAMN, DELTAMOTE.MOTESID, MOTE.STARTTID, MOTE.SLUTTID, MOTE.DATUM, MOTE.MOTESID, MOTE.LOKAL FROM ANVANDARE\n"
+                    + "JOIN DELTAMOTE ON ANVANDARE.PNR = DELTAMOTE.PNR\n"
+                    + "JOIN MOTE ON DELTAMOTE.MOTESID = MOTE.MOTESID\n"
+                    + "WHERE MOTE.DATUM = '" + aktivtDatum + "'");
+            // Kontrollerar om det finns några mötet denna dag.
+            if (informationMoteLista != null) {
+                for (HashMap<String, String> informationData : informationMoteLista) {
+                    String fnamn = informationData.get("FORNAMN");
+                    String enamn = informationData.get("EFTERNAMN");
+                    String starttid = informationData.get("STARTTID");
+                    String sluttid = informationData.get("SLUTTID");
+                    String datum = informationData.get("DATUM");
+                    String lokal = informationData.get("LOKAL");
+                    taVisaResultat.append("Namn: " + fnamn + " " + enamn + " Datum: " + datum + " Tid: " + starttid + "-" + sluttid +" Lokal: " + lokal + "\n");
+                }
+            } // Om inget möte finns detta datum skrivs detta ut i textrutan.
+            else {
+                taVisaResultat.setText("Finns inga möten detta datum.");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnVisaResultatActionPerformed
 
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
         //STÄNGER NUVARANDE FLIK
@@ -214,11 +316,48 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(GemensamKalender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(GemensamKalender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(GemensamKalender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(GemensamKalender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new GemensamKalender().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVisaResultat;
+    private com.toedter.calendar.JCalendar jCal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
@@ -232,5 +371,6 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
     private javax.swing.JMenuItem miUnderkategori;
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
+    private javax.swing.JTextArea taVisaResultat;
     // End of variables declaration//GEN-END:variables
 }

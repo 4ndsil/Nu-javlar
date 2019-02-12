@@ -5,7 +5,12 @@
  */
 package ProjektG2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -15,10 +20,44 @@ public class VisaInlagg extends javax.swing.JFrame {
 
     private InfDB db;
     
+    
     public VisaInlagg(InfDB db) {
         initComponents();
         this.db = db;
         
+        fyllLista();
+        
+    }
+    
+    public void fyllLista()
+    {
+ 
+        try {
+            //EN ARRYLIST AV HASHMAP AV STRING 
+            ArrayList<HashMap<String, String>> listaBloggInlagg;
+//            String värde = "";
+            listaBloggInlagg = db.fetchRows("SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG");
+
+            DefaultListModel dlm = new DefaultListModel();
+
+            //LOOPAR LISTA OCH HÄMTAR ELEVHEMSNAMN OCH LÄGGER IN DEM I ELEVHEMSLISTAN
+            for (HashMap<String, String> inlagg : listaBloggInlagg) {
+//                värde = inlagg.get("RUBRIK");
+//                dlm.addElement(värde);
+                
+                String rubrik = inlagg.get("RUBRIK");
+                String datum = inlagg.get("DATUM");
+                String innehall = inlagg.get("INNEHALL");
+                lista.append(rubrik + "\n" + datum + "\n" + innehall + "\n" );
+            }
+//            lista.setModel(dlm);
+
+            //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            System.out.println(e.getMessage());
+        }
+    
     }
 
     /**
@@ -30,23 +69,312 @@ public class VisaInlagg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
+        jLayeredPane5 = new javax.swing.JLayeredPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lista = new javax.swing.JTextArea();
+        jLayeredPane6 = new javax.swing.JLayeredPane();
+        jLayeredPane7 = new javax.swing.JLayeredPane();
+        jButton1 = new javax.swing.JButton();
+        mbAdminHuvud = new javax.swing.JMenuBar();
+        mStart = new javax.swing.JMenu();
+        miTillStart = new javax.swing.JMenuItem();
+        mBlogg = new javax.swing.JMenu();
+        miVisaInlagg = new javax.swing.JMenuItem();
+        miSkapaInlagg = new javax.swing.JMenuItem();
+        mLaggTill = new javax.swing.JMenu();
+        miSkapaAnvandare = new javax.swing.JMenuItem();
+        miSkapaHuvudkategori = new javax.swing.JMenuItem();
+        miUnderkategori = new javax.swing.JMenuItem();
+        mProfil = new javax.swing.JMenu();
+        miVisaProfil = new javax.swing.JMenuItem();
+        miLoggaUt = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel1.setText("Lärarplattform Informatik: Bloggportal");
+
+        lista.setColumns(20);
+        lista.setRows(5);
+        jScrollPane5.setViewportView(lista);
+
+        jLayeredPane5.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
+        jLayeredPane5.setLayout(jLayeredPane5Layout);
+        jLayeredPane5Layout.setHorizontalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jLayeredPane5Layout.setVerticalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane5.addTab("Forskningsblogg", jLayeredPane5);
+
+        javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
+        jLayeredPane6.setLayout(jLayeredPane6Layout);
+        jLayeredPane6Layout.setHorizontalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 498, Short.MAX_VALUE)
+        );
+        jLayeredPane6Layout.setVerticalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+        );
+
+        jTabbedPane5.addTab("Utbildningsblogg", jLayeredPane6);
+
+        javax.swing.GroupLayout jLayeredPane7Layout = new javax.swing.GroupLayout(jLayeredPane7);
+        jLayeredPane7.setLayout(jLayeredPane7Layout);
+        jLayeredPane7Layout.setHorizontalGroup(
+            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 498, Short.MAX_VALUE)
+        );
+        jLayeredPane7Layout.setVerticalGroup(
+            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+        );
+
+        jTabbedPane5.addTab("Informellblogg", jLayeredPane7);
+
+        jButton1.setText("Tillbaka");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mbAdminHuvud.setRequestFocusEnabled(false);
+
+        mStart.setText("Start");
+        mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miTillStart.setText("Till Startsidan");
+        miTillStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTillStartActionPerformed(evt);
+            }
+        });
+        mStart.add(miTillStart);
+
+        mbAdminHuvud.add(mStart);
+
+        mBlogg.setText("Blogg");
+        mBlogg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaInlagg.setText("Visa inlägg");
+        miVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaInlaggActionPerformed(evt);
+            }
+        });
+        mBlogg.add(miVisaInlagg);
+
+        miSkapaInlagg.setText("Skapa inlägg");
+        miSkapaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSkapaInlaggActionPerformed(evt);
+            }
+        });
+        mBlogg.add(miSkapaInlagg);
+
+        mbAdminHuvud.add(mBlogg);
+
+        mLaggTill.setText("Lägg till");
+        mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miSkapaAnvandare.setText("Användare");
+        miSkapaAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSkapaAnvandareActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(miSkapaAnvandare);
+
+        miSkapaHuvudkategori.setText("Huvudkategori");
+        miSkapaHuvudkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSkapaHuvudkategoriActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(miSkapaHuvudkategori);
+
+        miUnderkategori.setText("Underkategori");
+        miUnderkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miUnderkategoriActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(miUnderkategori);
+
+        mbAdminHuvud.add(mLaggTill);
+
+        mProfil.setText("Profil");
+        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaProfil.setText("Visa profil");
+        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaProfilActionPerformed(evt);
+            }
+        });
+        mProfil.add(miVisaProfil);
+
+        miLoggaUt.setText("Logga ut");
+        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLoggaUtActionPerformed(evt);
+            }
+        });
+        mProfil.add(miLoggaUt);
+
+        mbAdminHuvud.add(mProfil);
+
+        jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
+
+        setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1)
+                .addGap(24, 24, 24)
+                .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        dispose(); // Stönger ner nuvarande fönster
+        AdminHuvud a = new AdminHuvud(db); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
+        a.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA
+        new AdminHuvud(db).setVisible(true);
+
+    }//GEN-LAST:event_miTillStartActionPerformed
+
+    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
+
+        dispose();
+        new VisaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miVisaInlaggActionPerformed
+
+    private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
+        dispose();
+        new SkapaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaInlaggActionPerformed
+
+    private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
+        dispose();
+        new SkapaAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaAnvandareActionPerformed
+
+    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
+        dispose();
+        new SkapaHuvudkategori(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
+
+    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
+        dispose();
+        new SkapaUnderkategori(db).setVisible(true);
+    }//GEN-LAST:event_miUnderkategoriActionPerformed
+
+    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
+        dispose();
+        new Profil(db).setVisible(true);
+    }//GEN-LAST:event_miVisaProfilActionPerformed
+
+    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
+        dispose();
+        new LoggaIn(db).setVisible(true);
+    }//GEN-LAST:event_miLoggaUtActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane5;
+    private javax.swing.JLayeredPane jLayeredPane6;
+    private javax.swing.JLayeredPane jLayeredPane7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPane5;
+    private javax.swing.JTextArea lista;
+    private javax.swing.JMenu mBlogg;
+    private javax.swing.JMenu mLaggTill;
+    private javax.swing.JMenu mProfil;
+    private javax.swing.JMenu mStart;
+    private javax.swing.JMenuBar mbAdminHuvud;
+    private javax.swing.JMenuItem miLoggaUt;
+    private javax.swing.JMenuItem miSkapaAnvandare;
+    private javax.swing.JMenuItem miSkapaHuvudkategori;
+    private javax.swing.JMenuItem miSkapaInlagg;
+    private javax.swing.JMenuItem miTillStart;
+    private javax.swing.JMenuItem miUnderkategori;
+    private javax.swing.JMenuItem miVisaInlagg;
+    private javax.swing.JMenuItem miVisaProfil;
     // End of variables declaration//GEN-END:variables
 }
