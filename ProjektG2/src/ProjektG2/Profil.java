@@ -311,7 +311,7 @@ public class Profil extends javax.swing.JFrame {
     }
     
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
-
+        
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
@@ -319,58 +319,67 @@ public class Profil extends javax.swing.JFrame {
         String kontorsnr = tfRum.getText();
         String email = tfMail.getText();
         String losen = tfLosen2.getText();
+        String user = loggaIn.returneraInloggadPnr();
 
         if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
                 if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
                                         
-                        try {
-                              
-                  String user = loggaIn.returneraInloggadPnr();
-                if (!losen.isEmpty()) {
-                    String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen + "' WHERE PNR = '" + user + "'";
-                     String sql11 = db.fetchSingle(sql2);
-                    tfLosen2.setText(sql11);
-                }
-                if (!titeln.isEmpty()) {
+                    try {
 
-                    String sql3 = "UPDATE ANVANDARE SET TITEL ='" + titeln + "' WHERE PNR = '" + user + "'";
-                     String sql12 = db.fetchSingle(sql3);
-                    tfTitel.setText(sql12);
-                }
-                if (!fnamn.isEmpty()) {
+                        if (!losen.isEmpty()) {
+                            String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen + "' WHERE PNR = '" + user + "'";
+                            String sql11 = db.fetchSingle(sql2);
+                            tfLosen2.setText(sql11);
+                        }
+                        if (!titeln.isEmpty()) {
 
-                    String sql4 = "UPDATE ANVANDARE SET FORNAMN ='" + fnamn + "' WHERE PNR = '" + user + "'";
-                     String sql13 = db.fetchSingle(sql4);
-                    tfFornamn.setText(sql13);
-                }
-                if (!enamn.isEmpty()) {
+                            String sql3 = "UPDATE ANVANDARE SET TITEL ='" + titeln + "' WHERE PNR = '" + user + "'";
+                            String sql12 = db.fetchSingle(sql3);
+                            tfTitel.setText(sql12);
+                        }
+                        if (!fnamn.isEmpty()) {
 
-                    String sql5 = "UPDATE ANVANDARE SET EFTERNAMN ='" + enamn + "' WHERE PNR = '" + user + "'";
-                     String sql14 = db.fetchSingle(sql5);
-                    tfEfternamn.setText(sql14);
-                }
-               if (!beskrivningen.isEmpty()) {
+                            String sql4 = "UPDATE ANVANDARE SET FORNAMN ='" + fnamn + "' WHERE PNR = '" + user + "'";
+                            String sql13 = db.fetchSingle(sql4);
+                            tfFornamn.setText(sql13);
+                        }
+                        if (!enamn.isEmpty()) {
 
-                    String sql6 = "UPDATE ANVANDARE SET BESKRIVNING ='" + beskrivningen + "' WHERE PNR = '" + user + "'";
-                    String sql15 = db.fetchSingle(sql6);
-                    tfBeskrivning.setText(sql15);
-                }
-               if (!kontorsnr.isEmpty()) {
+                            String sql5 = "UPDATE ANVANDARE SET EFTERNAMN ='" + enamn + "' WHERE PNR = '" + user + "'";
+                            String sql14 = db.fetchSingle(sql5);
+                            tfEfternamn.setText(sql14);
+                        }
+                        if (!beskrivningen.isEmpty()) {
 
-                    String sql7 = "UPDATE ANVANDARE SET KONTORSNR ='" + kontorsnr + "' WHERE PNR = '" + user + "'";
-                     String sql16 = db.fetchSingle(sql7);
-                     
-                    tfRum.setText(sql16);
-                }
-                if (!email.isEmpty()) {
+                            String sql6 = "UPDATE ANVANDARE SET BESKRIVNING ='" + beskrivningen + "' WHERE PNR = '" + user + "'";
+                            String sql15 = db.fetchSingle(sql6);
+                            tfBeskrivning.setText(sql15);
+                        }
+                        if (!kontorsnr.isEmpty()) {
 
-                    String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + user + "'";
-                    String sql17 = db.fetchSingle(sql8);
-                    tfMail.setText(sql17);
+                            String sql7 = "UPDATE ANVANDARE SET KONTORSNR ='" + kontorsnr + "' WHERE PNR = '" + user + "'";
+                            String sql16 = db.fetchSingle(sql7);
+
+                            tfRum.setText(sql16);
+                        }
+                        if (!email.isEmpty()) {
+
+                            String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + user + "'";
+                            String sql17 = db.fetchSingle(sql8);
+                            tfMail.setText(sql17);
+                            
+                            
+                            JOptionPane.showMessageDialog(null, "Informationen har ändrats.");
+                            visaInformation();
+                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Informationen uppdaterades inte.");
+                    }
                 }
-               
-        }catch(Exception e){}}}}
+            }
+        }
 
     }//GEN-LAST:event_btnAndraActionPerformed
 
