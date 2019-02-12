@@ -15,14 +15,14 @@ import oru.inf.InfException;
  */
 public class SkapaAnvandare extends javax.swing.JFrame {
 
-    private InfDB idb;
+    private InfDB db;
 
     /**
      * Creates new form SkapaInlogg
      */
     public SkapaAnvandare(InfDB idb) {
         initComponents();
-        this.idb = idb;
+        this.db = db;
     }
 
     /**
@@ -53,6 +53,21 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         tfMail = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tfLosen = new javax.swing.JTextField();
+        mbAdminHuvud = new javax.swing.JMenuBar();
+        mStart = new javax.swing.JMenu();
+        miTillStart = new javax.swing.JMenuItem();
+        mBlogg = new javax.swing.JMenu();
+        miVisaInlagg = new javax.swing.JMenuItem();
+        miSkapaInlagg = new javax.swing.JMenuItem();
+        mLaggTill = new javax.swing.JMenu();
+        miSkapaAnvandare = new javax.swing.JMenuItem();
+        miSkapaHuvudkategori = new javax.swing.JMenuItem();
+        miUnderkategori = new javax.swing.JMenuItem();
+        mProfil = new javax.swing.JMenu();
+        miVisaProfil = new javax.swing.JMenuItem();
+        miLoggaUt = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +99,107 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         personnummer1.setText("Email");
 
         jLabel2.setText("Lösenord");
+
+        mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mbAdminHuvud.setRequestFocusEnabled(false);
+
+        mStart.setText("Start");
+        mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miTillStart.setText("Till Startsidan");
+        miTillStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTillStartActionPerformed(evt);
+            }
+        });
+        mStart.add(miTillStart);
+
+        mbAdminHuvud.add(mStart);
+
+        mBlogg.setText("Blogg");
+        mBlogg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaInlagg.setText("Visa inlägg");
+        miVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaInlaggActionPerformed(evt);
+            }
+        });
+        mBlogg.add(miVisaInlagg);
+
+        miSkapaInlagg.setText("Skapa inlägg");
+        miSkapaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSkapaInlaggActionPerformed(evt);
+            }
+        });
+        mBlogg.add(miSkapaInlagg);
+
+        mbAdminHuvud.add(mBlogg);
+
+        mLaggTill.setText("Lägg till");
+        mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miSkapaAnvandare.setText("Användare");
+        miSkapaAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSkapaAnvandareActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(miSkapaAnvandare);
+
+        miSkapaHuvudkategori.setText("Huvudkategori");
+        miSkapaHuvudkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSkapaHuvudkategoriActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(miSkapaHuvudkategori);
+
+        miUnderkategori.setText("Underkategori");
+        miUnderkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miUnderkategoriActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(miUnderkategori);
+
+        mbAdminHuvud.add(mLaggTill);
+
+        mProfil.setText("Profil");
+        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaProfil.setText("Visa profil");
+        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaProfilActionPerformed(evt);
+            }
+        });
+        mProfil.add(miVisaProfil);
+
+        miLoggaUt.setText("Logga ut");
+        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLoggaUtActionPerformed(evt);
+            }
+        });
+        mProfil.add(miLoggaUt);
+
+        mbAdminHuvud.add(mProfil);
+
+        jMenu1.setText("Kalender");
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
+
+        setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,17 +242,17 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                             .addComponent(tfMail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfLosen))
                         .addGap(161, 161, 161))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(personnummer)
                     .addComponent(tfPnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +290,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                     .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSkapa)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,12 +331,12 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                     try {
 
                         String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivning + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
-                        idb.insert(fraga); // Uppdaterar databasen
+                        db.insert(fraga); // Uppdaterar databasen
 
                         String fraga2 = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "', '" + notis + "', '" + pnr + "')";
 
                         JOptionPane.showMessageDialog(null, "Användaren har lagts till i systemet");
-                        idb.insert(fraga2); // Uppdaterar databasen         
+                        db.insert(fraga2); // Uppdaterar databasen         
 
                         //KÖR METOD FÖR ATT SKICKA MAIL I KLASSEN START
                         Mail.start(email, amne, valkommen);
@@ -243,6 +359,57 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSkapaActionPerformed
 
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA
+        new AdminHuvud(db).setVisible(true);
+
+    }//GEN-LAST:event_miTillStartActionPerformed
+
+    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
+
+        dispose();
+        new VisaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miVisaInlaggActionPerformed
+
+    private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
+        dispose();
+        new SkapaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaInlaggActionPerformed
+
+    private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
+        dispose();
+        new SkapaAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaAnvandareActionPerformed
+
+    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
+        dispose();
+        new SkapaHuvudkategori(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
+
+    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
+        dispose();
+        new SkapaUnderkategori(db).setVisible(true);
+    }//GEN-LAST:event_miUnderkategoriActionPerformed
+
+    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
+        dispose();
+        new Profil(db).setVisible(true);
+    }//GEN-LAST:event_miVisaProfilActionPerformed
+
+    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
+        dispose();
+        new LoggaIn(db).setVisible(true);
+    }//GEN-LAST:event_miLoggaUtActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnSkapa;
@@ -250,7 +417,22 @@ public class SkapaAnvandare extends javax.swing.JFrame {
     private javax.swing.JLabel fornamn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel kontorsrum;
+    private javax.swing.JMenu mBlogg;
+    private javax.swing.JMenu mLaggTill;
+    private javax.swing.JMenu mProfil;
+    private javax.swing.JMenu mStart;
+    private javax.swing.JMenuBar mbAdminHuvud;
+    private javax.swing.JMenuItem miLoggaUt;
+    private javax.swing.JMenuItem miSkapaAnvandare;
+    private javax.swing.JMenuItem miSkapaHuvudkategori;
+    private javax.swing.JMenuItem miSkapaInlagg;
+    private javax.swing.JMenuItem miTillStart;
+    private javax.swing.JMenuItem miUnderkategori;
+    private javax.swing.JMenuItem miVisaInlagg;
+    private javax.swing.JMenuItem miVisaProfil;
     private javax.swing.JLabel personnummer;
     private javax.swing.JLabel personnummer1;
     private javax.swing.JLabel text1;

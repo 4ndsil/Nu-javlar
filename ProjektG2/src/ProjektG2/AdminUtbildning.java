@@ -9,15 +9,14 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author edith
+ * @author andre
  */
-public class SkapaUnderkategori extends javax.swing.JFrame {
+public class AdminUtbildning extends javax.swing.JFrame {
 
-    private InfDB db;
-    
-    public SkapaUnderkategori(InfDB db) {
+   private InfDB db;
+    public AdminUtbildning(InfDB db) {
         initComponents();
-        this.db = db;
+        this.db=db;
     }
 
     /**
@@ -29,6 +28,7 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblRubrikAdminHuvud = new javax.swing.JLabel();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -46,6 +46,9 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblRubrikAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblRubrikAdminHuvud.setText("Välkommen till lärarplattformen för informatik");
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -153,11 +156,17 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblRubrikAdminHuvud)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(lblRubrikAdminHuvud)
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,11 +223,12 @@ public class SkapaUnderkategori extends javax.swing.JFrame {
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
