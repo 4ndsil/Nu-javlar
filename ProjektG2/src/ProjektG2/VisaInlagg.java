@@ -77,10 +77,11 @@ public class VisaInlagg extends javax.swing.JFrame {
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jLayeredPane7 = new javax.swing.JLayeredPane();
         jButton1 = new javax.swing.JButton();
-        mbAdminHuvud1 = new javax.swing.JMenuBar();
-        mStart1 = new javax.swing.JMenu();
-        mBlogg1 = new javax.swing.JMenu();
-        miVisaInlagg1 = new javax.swing.JMenuItem();
+        mbAdminHuvud = new javax.swing.JMenuBar();
+        mStart = new javax.swing.JMenu();
+        miTillStart = new javax.swing.JMenuItem();
+        mBlogg = new javax.swing.JMenu();
+        miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
         mLaggTill = new javax.swing.JMenu();
         miSkapaAnvandare = new javax.swing.JMenuItem();
@@ -89,6 +90,8 @@ public class VisaInlagg extends javax.swing.JFrame {
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miLoggaUt = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,23 +156,32 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
-        mbAdminHuvud1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mbAdminHuvud1.setRequestFocusEnabled(false);
+        mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        mbAdminHuvud.setRequestFocusEnabled(false);
 
-        mStart1.setText("Start");
-        mStart1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mbAdminHuvud1.add(mStart1);
+        mStart.setText("Start");
+        mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        mBlogg1.setText("Blogg");
-        mBlogg1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        miVisaInlagg1.setText("Visa inlägg");
-        miVisaInlagg1.addActionListener(new java.awt.event.ActionListener() {
+        miTillStart.setText("Till Startsidan");
+        miTillStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miVisaInlagg1ActionPerformed(evt);
+                miTillStartActionPerformed(evt);
             }
         });
-        mBlogg1.add(miVisaInlagg1);
+        mStart.add(miTillStart);
+
+        mbAdminHuvud.add(mStart);
+
+        mBlogg.setText("Blogg");
+        mBlogg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaInlagg.setText("Visa inlägg");
+        miVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaInlaggActionPerformed(evt);
+            }
+        });
+        mBlogg.add(miVisaInlagg);
 
         miSkapaInlagg.setText("Skapa inlägg");
         miSkapaInlagg.addActionListener(new java.awt.event.ActionListener() {
@@ -177,9 +189,9 @@ public class VisaInlagg extends javax.swing.JFrame {
                 miSkapaInlaggActionPerformed(evt);
             }
         });
-        mBlogg1.add(miSkapaInlagg);
+        mBlogg.add(miSkapaInlagg);
 
-        mbAdminHuvud1.add(mBlogg1);
+        mbAdminHuvud.add(mBlogg);
 
         mLaggTill.setText("Lägg till");
         mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -208,7 +220,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         });
         mLaggTill.add(miUnderkategori);
 
-        mbAdminHuvud1.add(mLaggTill);
+        mbAdminHuvud.add(mLaggTill);
 
         mProfil.setText("Profil");
         mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -229,9 +241,22 @@ public class VisaInlagg extends javax.swing.JFrame {
         });
         mProfil.add(miLoggaUt);
 
-        mbAdminHuvud1.add(mProfil);
+        mbAdminHuvud.add(mProfil);
 
-        setJMenuBar(mbAdminHuvud1);
+        jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
+
+        setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,11 +291,28 @@ public class VisaInlagg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void miVisaInlagg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlagg1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        dispose(); // Stönger ner nuvarande fönster
+        AdminHuvud a = new AdminHuvud(db); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
+        a.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA
+        new AdminHuvud(db).setVisible(true);
+
+    }//GEN-LAST:event_miTillStartActionPerformed
+
+    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
 
         dispose();
         new VisaInlagg(db).setVisible(true);
-    }//GEN-LAST:event_miVisaInlagg1ActionPerformed
+    }//GEN-LAST:event_miVisaInlaggActionPerformed
 
     private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
         dispose();
@@ -302,14 +344,12 @@ public class VisaInlagg extends javax.swing.JFrame {
         new LoggaIn(db).setVisible(true);
     }//GEN-LAST:event_miLoggaUtActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
-        dispose(); // Stönger ner nuvarande fönster
-        AdminHuvud a = new AdminHuvud(db); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
-        a.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        dispose();
+
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -318,20 +358,23 @@ public class VisaInlagg extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JLayeredPane jLayeredPane7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTextArea lista;
-    private javax.swing.JMenu mBlogg1;
+    private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
-    private javax.swing.JMenu mStart1;
-    private javax.swing.JMenuBar mbAdminHuvud1;
+    private javax.swing.JMenu mStart;
+    private javax.swing.JMenuBar mbAdminHuvud;
     private javax.swing.JMenuItem miLoggaUt;
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
+    private javax.swing.JMenuItem miTillStart;
     private javax.swing.JMenuItem miUnderkategori;
-    private javax.swing.JMenuItem miVisaInlagg1;
+    private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
     // End of variables declaration//GEN-END:variables
 }

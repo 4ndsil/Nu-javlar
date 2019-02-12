@@ -139,6 +139,7 @@ public class AdminForskning extends javax.swing.JFrame {
         mbAdminHuvud.add(mProfil);
 
         jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jMenuItem1.setText("Se Kalender");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
