@@ -45,6 +45,8 @@ public class AdminHuvud extends javax.swing.JFrame {
         miLoggaUt = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +153,15 @@ public class AdminHuvud extends javax.swing.JFrame {
 
         mbAdminHuvud.add(jMenu1);
 
+        jMenu2.setText("Ta bort");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem2.setText("Användare");
+        jMenu2.add(jMenuItem2);
+
+        mbAdminHuvud.add(jMenu2);
+
         setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,7 +238,9 @@ public class AdminHuvud extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
