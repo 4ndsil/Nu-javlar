@@ -25,11 +25,10 @@ public class Validering{
     }
 
     //KOLLAR OM EN RUTA ÄR TOM
-    public static boolean textFaltHarVarde(JTextField rutaAttKolla) {
+    public static boolean textFaltHarVarde(String rutaAttKolla) {
         boolean resultat = true;
 
-        if (rutaAttKolla.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Inmatningsrutan är tom.");
+        if (rutaAttKolla.isEmpty()) {
             resultat = false;
         }
         return resultat;
@@ -53,7 +52,7 @@ public class Validering{
         return arString;
     } 
     
-    //KOLLAR SÅ ATT DET SOM SKRIVS IN ÄR EN SIFFRA ELLER FLERA SIFFROR
+    //KOLLAR SÅ ATT DET SOM SKRIVS IN ÄR EN ELLER FLERA SIFFROR
     public static boolean vardeArSiffra(JTextField rutaAttKolla) {
         boolean arSiffra = false;
 
