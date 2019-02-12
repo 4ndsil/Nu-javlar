@@ -306,7 +306,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         dispose(); // Stönger ner nuvarande fönster
-        AdminHuvud a = new AdminHuvud(); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
+        AdminHuvud a = new AdminHuvud(db); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
         a.setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed

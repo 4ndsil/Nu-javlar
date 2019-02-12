@@ -5,6 +5,7 @@
  */
 package ProjektG2;
 
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -310,13 +311,12 @@ public class SkapaInlagg extends javax.swing.JFrame {
         ArrayList<String> cbListaUnderkategori;
 
         String query = "SELECT NAMN FROM UNDERKATEGORI WHERE HID = (SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
-        
+
 //        //HÄMTAR UID FRÅN VALD HUVUDKATEGORI
 //        String uid = "(SELECT UID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
 //
 //        //HÄMTAR UNDERKATEGORIER UTIFRÅN UID
 //        String query = "SELECT NAMN FROM UNDERKATEGOR WHERE UID =" + uid;
-
         try {
             cbListaUnderkategori = db.fetchColumn(query);
 
@@ -360,22 +360,26 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         //SKAPAR LOKAL VARIABEL
         int hid = 0;
+        int uid = 0;
 
+        //TITTAR OM ANVÄNDAREN HAR SKRIVIT NÅGONTING I RUTAN FÖR ATT SKAPA NY UNDERKATEGORI
         if (!nyUnderkategori.isEmpty()) {
-
             try {
-                
+
                 //TILLDELAR UNDERKATEGORI AUTOMATISKT ID
-                String uid = db.getAutoIncrement("UNDERKATEGOR", "UID");
+                //String newUid = db.getAutoIncrement("UNDERKATEGORI", "UID");
+                String fetchMaxID = db.fetchSingle("SELECT MAX(UID) FROM UNDERKATEGORI");
+                uid = Integer.parseInt(fetchMaxID) + 1;
                 String hamtaHID = "SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "'";
-                String laggaTillUid = "INSERT INTO UNDERKATGOR VALUES('"+ nyUnderkategori + "', " + uid + "," + hamtaHID + ")"; 
+                //OMVANDLAR STRING TILL INT OCH HÄMTAR DATA FRÅN DATABASEN
+                hid = Integer.parseInt(db.fetchSingle(hamtaHID));
+                String laggaTillUid = "INSERT INTO UNDERKATEGORI VALUES(" + uid + ",'" + nyUnderkategori + "', " + hid + ")";
                 db.insert(laggaTillUid);
-                
+
                 //LAGRAR SQL I STRÄNG
 //                String uidQuery = "SELECT HID FROM UNDERKATEGORI WHERE UID = " + uid
 //                        + "(SELECT UID FROM UNDERKATEGOR WHERE NAMN = '" + nyUnderkategori + "') "
 //                        + "AND NAMN  = '" + huvudkategori + "'";
-                
 //                try {
 //                    //OMVANDLAR STRING TILL INT OCH UPPDATERAR DATABASEN
 //                    hid = Integer.parseInt(db.fetchSingle(uidQuery));
@@ -383,20 +387,21 @@ public class SkapaInlagg extends javax.swing.JFrame {
 //                    JOptionPane.showMessageDialog(null, "Något gick fel.");
 //                    System.out.println(e.getMessage());
 //                }
-                
             } catch (InfException ex) {
-                Logger.getLogger(SkapaInlagg.class.getName()).log(Level.SEVERE,null, ex);
+                Logger.getLogger(SkapaInlagg.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            //OM TEXTRUTAN ÄR TOM SÅ SKA ISTÄLLET DEN VALDA HUVUD- OCH UNDERKATEGORIN LAGRAS KOPPLAT TILL INLÄGGET
         } else {
             //LAGRAR SQL I STRÄNG
-            String uidQuery = "SELECT HID FROM HUVUDKATEGORI WHERE UID = "
-                    + "(SELECT UID FROM UNDERKATEGOR WHERE NAMN = '" + underkategori + "') "
-                    + "AND NAMN  = '" + huvudkategori + "'";
+            String uidQuery = "SELECT UID FROM UNDERKATEGORI WHERE NAMN = '" + underkategori + "'"
+                    + "AND HID = (SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
+            String hidQuery = "SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "'";
 
             try {
-                //OMVANDLAR STRING TILL INT OCH UPPDATERAR DATABASEN
-                hid = Integer.parseInt(db.fetchSingle(uidQuery));
+                //OMVANDLAR STRING TILL INT OCH HÄMTAR DATA FRÅN DATABASEN
+                uid = Integer.parseInt(db.fetchSingle(uidQuery));
+                hid = Integer.parseInt(db.fetchSingle(hidQuery));
             } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "Något gick fel.");
                 System.out.println(e.getMessage());
@@ -406,10 +411,12 @@ public class SkapaInlagg extends javax.swing.JFrame {
         Date date = new Date();
         //HÄMTAR TIDEN
         long time = date.getTime();
-        //HÄMTAR INLOGGATPERSONUMMER FRÅN LOGGA IN KLASSEN
+        //HÄMTAR INLOGGATPERSONUMMER FRÅN LOGGAIN-KLASSEN
         String pnr = LoggaIn.returneraInloggadPnr();
         //LAGRAR TIDSSTÄMPEL
         Timestamp datum = new Timestamp(time);
+
+        String datumOchTid = "20190211";
 
         Object[] alternativ = {"Visa inlägg", "Skapa nytt inlägg", "Gå tillbaka till startsidan"};
 
@@ -420,8 +427,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     String bloggId = db.getAutoIncrement("BLOGGINLAGG", "BLOGGID");
 
                     //LÄGGER TILL INLÄGG I DATABASEN
-                    String skapaInlagg = "INSERT INTO BLOGGINLAGG VALUES(" + bloggId + ", '" + rubrik + "', '" + datum + "', '" + null
-                            + "', '" + null + "', '" + text + "', '" + null + "', '" + pnr + "'," + hid + ");";
+                    String skapaInlagg = "INSERT INTO BLOGGINLAGG VALUES(" + bloggId + ", '" + rubrik + "', '" + datumOchTid + "', '" + null
+                            + "', '" + null + "', '" + text + "', '" + null + "', " + hid + ", '" + pnr + "'," + uid + ")";
                     db.insert(skapaInlagg);
 
                     //SKAPAR EN DIALOGRUTA MED ALTERNATIV
@@ -455,7 +462,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     }
                     //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
                 } catch (InfException e) {
-                    JOptionPane.showMessageDialog(null, "Något gick fel.");
+                    JOptionPane.showMessageDialog(null, "Något gick fel..");
                     System.out.println(e.getMessage());
                 }
 
