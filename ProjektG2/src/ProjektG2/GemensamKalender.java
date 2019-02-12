@@ -69,33 +69,32 @@ public class GemensamKalender extends javax.swing.JFrame {
             }
         });
 
-        taVisaResultat.setColumns(20);
-        taVisaResultat.setRows(5);
-        jScrollPane1.setViewportView(taVisaResultat);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCal, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisaResultat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(414, 414, 414)
+                        .addComponent(btnVisaResultat))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCal, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jCal, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVisaResultat))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1))
         );
+
+        taVisaResultat.setColumns(20);
+        taVisaResultat.setRows(5);
+        jScrollPane1.setViewportView(taVisaResultat);
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -185,6 +184,7 @@ public class GemensamKalender extends javax.swing.JFrame {
         mbAdminHuvud.add(mProfil);
 
         jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jMenuItem1.setText("Se Kalender");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -204,14 +204,20 @@ public class GemensamKalender extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -235,7 +241,7 @@ public class GemensamKalender extends javax.swing.JFrame {
 
             // Hämtar ut ID, förnamn, efternamn, mötestid, mötesdatum och lokal för varje möte.
             ArrayList<HashMap<String, String>> informationMoteLista;
-            informationMoteLista = db.fetchRows("SELECT ANVANDARE.FORNAMN, EFTERNAMN, DELTAMOTE.MOTESID, MOTE.TID, MOTE.DATUM, MOTE.MOTESID, MOTE.LOKAL FROM ANVANDARE\n"
+            informationMoteLista = db.fetchRows("SELECT ANVANDARE.FORNAMN, EFTERNAMN, DELTAMOTE.MOTESID, MOTE.STARTTID, MOTE.SLUTTID, MOTE.DATUM, MOTE.MOTESID, MOTE.LOKAL FROM ANVANDARE\n"
                     + "JOIN DELTAMOTE ON ANVANDARE.PNR = DELTAMOTE.PNR\n"
                     + "JOIN MOTE ON DELTAMOTE.MOTESID = MOTE.MOTESID\n"
                     + "WHERE MOTE.DATUM = '" + aktivtDatum + "'");
@@ -244,10 +250,11 @@ public class GemensamKalender extends javax.swing.JFrame {
                 for (HashMap<String, String> informationData : informationMoteLista) {
                     String fnamn = informationData.get("FORNAMN");
                     String enamn = informationData.get("EFTERNAMN");
-                    String tid = informationData.get("TID");
+                    String starttid = informationData.get("STARTTID");
+                    String sluttid = informationData.get("SLUTTID");
                     String datum = informationData.get("DATUM");
                     String lokal = informationData.get("LOKAL");
-                    taVisaResultat.append("Namn: " + fnamn + " " + enamn + " Datum: " + datum + " Tid: " + tid + " Lokal: " + lokal + "\n");
+                    taVisaResultat.append("Namn: " + fnamn + " " + enamn + " Datum: " + datum + " Tid: " + starttid + "-" + sluttid +" Lokal: " + lokal + "\n");
                 }
             } // Om inget möte finns detta datum skrivs detta ut i textrutan.
             else {

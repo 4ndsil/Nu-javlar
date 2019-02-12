@@ -16,10 +16,14 @@ import oru.inf.InfException;
 public class Profil extends javax.swing.JFrame {
 
     private InfDB db;
-
+    public LoggaIn loggaIn;
+    
+    
     public Profil(InfDB db) {
         initComponents();
         this.db = db;
+        visaInformation();
+        
     }
 
     /**
@@ -32,29 +36,24 @@ public class Profil extends javax.swing.JFrame {
     private void initComponents() {
 
         tfBeskrivning = new javax.swing.JTextField();
-        text1 = new javax.swing.JLabel();
-        btnVisa = new javax.swing.JButton();
         tfRum = new javax.swing.JTextField();
         titel = new javax.swing.JLabel();
         fornamn = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnAndra = new javax.swing.JButton();
         tfLosen2 = new javax.swing.JTextField();
-        tfLosen = new javax.swing.JTextField();
         efternamn = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         tfTitel = new javax.swing.JTextField();
         personnummer1 = new javax.swing.JLabel();
         tfFornamn = new javax.swing.JTextField();
         beskrivning = new javax.swing.JLabel();
-        tfPnr2 = new javax.swing.JTextField();
         tfMail = new javax.swing.JTextField();
         tfEfternamn = new javax.swing.JTextField();
         kontorsrum = new javax.swing.JLabel();
-        personnummer = new javax.swing.JLabel();
         lblRubrikAdminHuvud = new javax.swing.JLabel();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
+        miTillStart = new javax.swing.JMenuItem();
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
@@ -65,25 +64,10 @@ public class Profil extends javax.swing.JFrame {
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miLoggaUt = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        tfBeskrivning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBeskrivningActionPerformed(evt);
-            }
-        });
-
-        text1.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        text1.setText("ÅÅÅÅMMDDXXXX");
-
-        btnVisa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnVisa.setText("Visa information");
-        btnVisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisaActionPerformed(evt);
-            }
-        });
 
         titel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         titel.setText("Titel");
@@ -111,9 +95,6 @@ public class Profil extends javax.swing.JFrame {
         efternamn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         efternamn.setText("Efternamn");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Lösenord");
-
         personnummer1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         personnummer1.setText("Email");
 
@@ -129,9 +110,6 @@ public class Profil extends javax.swing.JFrame {
         kontorsrum.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         kontorsrum.setText("Kontorsrum");
 
-        personnummer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        personnummer.setText("Personnummer");
-
         lblRubrikAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblRubrikAdminHuvud.setText("Profil");
 
@@ -140,6 +118,15 @@ public class Profil extends javax.swing.JFrame {
 
         mStart.setText("Start");
         mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miTillStart.setText("Till Startsidan");
+        miTillStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miTillStartActionPerformed(evt);
+            }
+        });
+        mStart.add(miTillStart);
+
         mbAdminHuvud.add(mStart);
 
         mBlogg.setText("Blogg");
@@ -213,6 +200,19 @@ public class Profil extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mProfil);
 
+        jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
+
         setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -220,73 +220,45 @@ public class Profil extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVisa, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(personnummer)
-                                .addGap(18, 18, 18)
-                                .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tfPnr2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfLosen2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfLosen, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnAndra))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(titel)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(1, 1, 1)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(beskrivning)
-                                                .addComponent(efternamn)
-                                                .addComponent(fornamn)))
-                                        .addComponent(kontorsrum, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(personnummer1)
-                                    .addComponent(jLabel3))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfMail, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfRum, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfEfternamn, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfFornamn, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfTitel, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addGap(170, 170, 170))))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(lblRubrikAdminHuvud)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAndra))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(beskrivning)
+                                        .addComponent(efternamn)
+                                        .addComponent(fornamn)))
+                                .addComponent(kontorsrum, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(personnummer1)
+                            .addComponent(jLabel3))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfMail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfRum, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfEfternamn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfFornamn, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfTitel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfLosen2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))))
+                .addGap(154, 154, 154))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblRubrikAdminHuvud)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(personnummer)
-                    .addComponent(text1)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfLosen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPnr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfLosen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnVisa)
-                .addGap(90, 90, 90)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titel)
                     .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -306,85 +278,125 @@ public class Profil extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfRum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kontorsrum))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(tfLosen2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(personnummer1))
                         .addGap(18, 18, 18)
-                        .addComponent(btnAndra)
-                        .addGap(36, 36, 36))
+                        .addComponent(btnAndra))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(beskrivning)
-                        .addGap(293, 293, 293))))
+                        .addGap(233, 233, 233)))
+                .addGap(90, 90, 90))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   
+    public void visaInformation(){
 
-    private void tfBeskrivningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBeskrivningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBeskrivningActionPerformed
+        String user = loggaIn.returneraInloggadPnr();
+        
+        try {
+            String sql2 = "SELECT LOSENORD FROM ANVANDARE WHERE PNR ='" + user + "'";
+            String sql11 = db.fetchSingle(sql2);
+            tfLosen2.setText(sql11);
 
+            String sql3 = "SELECT TITEL FROM ANVANDARE WHERE PNR = '" + user + "'";
+            String sql12 = db.fetchSingle(sql3);
+            tfTitel.setText(sql12);
+
+            String sql4 = "SELECT FORNAMN FROM ANVANDARE WHERE PNR = '" + user + "'";
+            String sql13 = db.fetchSingle(sql4);
+            tfFornamn.setText(sql13);
+
+            String sql5 = "SELECT EFTERNAMN FROM ANVANDARE WHERE PNR = '" + user + "'";
+            String sql14 = db.fetchSingle(sql5);
+            tfEfternamn.setText(sql14);
+
+            String sql6 = "SELECT BESKRIVNING FROM ANVANDARE WHERE PNR = '" + user + "'";
+            String sql15 = db.fetchSingle(sql6);
+            tfBeskrivning.setText(sql15);
+
+            String sql7 = "SELECT KONTORSNR FROM ANVANDARE WHERE PNR = '" + user + "'";
+            String sql16 = db.fetchSingle(sql7);
+            tfRum.setText(sql16);
+
+            String sql8 = "SELECT MAIL FROM EMAIL WHERE PNR = '" + user + "'";
+            String sql17 = db.fetchSingle(sql8);
+            tfMail.setText(sql17);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
-
-        String pnr = tfPnr2.getText();
-        String losen = tfLosen2.getText();
+        
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
         String beskrivningen = tfBeskrivning.getText();
         String kontorsnr = tfRum.getText();
         String email = tfMail.getText();
-        String losen2 = tfLosen2.getText();
+        String losen = tfLosen2.getText();
+        String user = loggaIn.returneraInloggadPnr();
 
         if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
                 if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
-
+                                        
                     try {
-                        if (!losen2.isEmpty()) {
-                            String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen2 + "' WHERE PNR = '" + pnr + "'";
+
+                        if (!losen.isEmpty()) {
+                            String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen + "' WHERE PNR = '" + user + "'";
                             String sql11 = db.fetchSingle(sql2);
                             tfLosen2.setText(sql11);
                         }
                         if (!titeln.isEmpty()) {
 
-                            String sql3 = "UPDATE ANVANDARE SET TITEL ='" + titeln + "' WHERE PNR = '" + pnr + "'";
+                            String sql3 = "UPDATE ANVANDARE SET TITEL ='" + titeln + "' WHERE PNR = '" + user + "'";
                             String sql12 = db.fetchSingle(sql3);
                             tfTitel.setText(sql12);
                         }
                         if (!fnamn.isEmpty()) {
 
-                            String sql4 = "UPDATE ANVANDARE SET FORNAMN ='" + fnamn + "' WHERE PNR = '" + pnr + "'";
+                            String sql4 = "UPDATE ANVANDARE SET FORNAMN ='" + fnamn + "' WHERE PNR = '" + user + "'";
                             String sql13 = db.fetchSingle(sql4);
                             tfFornamn.setText(sql13);
                         }
                         if (!enamn.isEmpty()) {
 
-                            String sql5 = "UPDATE ANVANDARE SET EFTERNAMN ='" + enamn + "' WHERE PNR = '" + pnr + "'";
+                            String sql5 = "UPDATE ANVANDARE SET EFTERNAMN ='" + enamn + "' WHERE PNR = '" + user + "'";
                             String sql14 = db.fetchSingle(sql5);
                             tfEfternamn.setText(sql14);
                         }
                         if (!beskrivningen.isEmpty()) {
 
-                            String sql6 = "UPDATE ANVANDARE SET BESKRIVNING ='" + beskrivningen + "' WHERE PNR = '" + pnr + "'";
+                            String sql6 = "UPDATE ANVANDARE SET BESKRIVNING ='" + beskrivningen + "' WHERE PNR = '" + user + "'";
                             String sql15 = db.fetchSingle(sql6);
                             tfBeskrivning.setText(sql15);
                         }
                         if (!kontorsnr.isEmpty()) {
 
-                            String sql7 = "UPDATE ANVANDARE SET KONTORSNR ='" + kontorsnr + "' WHERE PNR = '" + pnr + "'";
+                            String sql7 = "UPDATE ANVANDARE SET KONTORSNR ='" + kontorsnr + "' WHERE PNR = '" + user + "'";
                             String sql16 = db.fetchSingle(sql7);
 
                             tfRum.setText(sql16);
                         }
                         if (!email.isEmpty()) {
 
-                            String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + pnr + "'";
+                            String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + user + "'";
                             String sql17 = db.fetchSingle(sql8);
                             tfMail.setText(sql17);
+                            
+                            
+                            JOptionPane.showMessageDialog(null, "Informationen har ändrats.");
+                            visaInformation();
                         }
 
                     } catch (Exception e) {
@@ -395,13 +407,22 @@ public class Profil extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAndraActionPerformed
 
+    private void tfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfMailActionPerformed
+
+    
     private void tfLosen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLosen2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfLosen2ActionPerformed
 
-    private void tfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfMailActionPerformed
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA
+        new AdminHuvud(db).setVisible(true);
+
+    }//GEN-LAST:event_miTillStartActionPerformed
 
     private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
 
@@ -439,68 +460,23 @@ public class Profil extends javax.swing.JFrame {
         new LoggaIn(db).setVisible(true);
     }//GEN-LAST:event_miLoggaUtActionPerformed
 
-    private void btnVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
 
-        String pnr = tfPnr2.getText();
-        String losen = tfLosen2.getText();
-        String titeln = tfTitel.getText();
-        String fnamn = tfFornamn.getText();
-        String enamn = tfEfternamn.getText();
-        String beskrivningen = tfBeskrivning.getText();
-        String kontorsnr = tfRum.getText();
-        String email = tfMail.getText();
-        String losen2 = tfLosen2.getText();
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-        try {
-            String sqlLosen = "SELECT LOSENORD FROM ANVANDARE WHERE PNR =" + "'" + pnr + "'";
-
-            String hittaLosen = db.fetchSingle(sqlLosen);
-            if (hittaLosen.equals(losen)) {
-                tfLosen2.setText(hittaLosen);
-
-                String sqlTitel = "SELECT TITEL FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String hittaTitel = db.fetchSingle(sqlTitel);
-                tfTitel.setText(hittaTitel);
-
-                String sqlFornamn = "SELECT FORNAMN FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String hittaFornamn = db.fetchSingle(sqlFornamn);
-                tfFornamn.setText(hittaFornamn);
-
-                String sqlEfternamn = "SELECT EFTERNAMN FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String hittaEfternamn = db.fetchSingle(sqlEfternamn);
-                tfEfternamn.setText(hittaEfternamn);
-
-                String sql6 = "SELECT BESKRIVNING FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String sql15 = db.fetchSingle(sql6);
-                tfBeskrivning.setText(sql15);
-
-                String sql7 = "SELECT KONTORSNR FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String sql16 = db.fetchSingle(sql7);
-                tfRum.setText(sql16);
-
-                String sql8 = "SELECT MAIL FROM EMAIL WHERE PNR = '" + pnr + "'";
-                String sql17 = db.fetchSingle(sql8);
-                tfMail.setText(sql17);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Fel lösenord eller personnummer.");
-            }
-
-        } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_btnVisaActionPerformed
-
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnAndra;
-    private javax.swing.JButton btnVisa;
     private javax.swing.JLabel efternamn;
     private javax.swing.JLabel fornamn;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel kontorsrum;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
@@ -512,19 +488,16 @@ public class Profil extends javax.swing.JFrame {
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
+    private javax.swing.JMenuItem miTillStart;
     private javax.swing.JMenuItem miUnderkategori;
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
-    private javax.swing.JLabel personnummer;
     private javax.swing.JLabel personnummer1;
-    private javax.swing.JLabel text1;
     private javax.swing.JTextField tfBeskrivning;
     private javax.swing.JTextField tfEfternamn;
     private javax.swing.JTextField tfFornamn;
-    private javax.swing.JTextField tfLosen;
     private javax.swing.JTextField tfLosen2;
     private javax.swing.JTextField tfMail;
-    private javax.swing.JTextField tfPnr2;
     private javax.swing.JTextField tfRum;
     private javax.swing.JTextField tfTitel;
     private javax.swing.JLabel titel;
