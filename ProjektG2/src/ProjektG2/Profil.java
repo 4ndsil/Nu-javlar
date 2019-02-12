@@ -16,8 +16,7 @@ import oru.inf.InfException;
 public class Profil extends javax.swing.JFrame {
 
     private InfDB db;
-    
-    
+
     public Profil(InfDB db) {
         initComponents();
         this.db = db;
@@ -66,8 +65,6 @@ public class Profil extends javax.swing.JFrame {
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miLoggaUt = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,18 +213,6 @@ public class Profil extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mProfil);
 
-        jMenu1.setText("Kalender");
-
-        jMenuItem1.setText("Se Kalender");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        mbAdminHuvud.add(jMenu1);
-
         setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -337,7 +322,7 @@ public class Profil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void tfBeskrivningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBeskrivningActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfBeskrivningActionPerformed
@@ -345,7 +330,7 @@ public class Profil extends javax.swing.JFrame {
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
 
         String pnr = tfPnr2.getText();
-        String losen = tfLosen.getText();
+        String losen = tfLosen2.getText();
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
@@ -357,53 +342,56 @@ public class Profil extends javax.swing.JFrame {
         if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
                 if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
-                     
-                        
-                        try {
-                if (!losen2.isEmpty()) {
-                    String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen2 + "' WHERE PNR = '" + pnr + "'";
-                     String sql11 = db.fetchSingle(sql2);
-                    tfLosen2.setText(sql11);
-                }
-                if (!titeln.isEmpty()) {
 
-                    String sql3 = "UPDATE ANVANDARE SET TITEL ='" + titeln + "' WHERE PNR = '" + pnr + "'";
-                     String sql12 = db.fetchSingle(sql3);
-                    tfTitel.setText(sql12);
-                }
-                if (!fnamn.isEmpty()) {
+                    try {
+                        if (!losen2.isEmpty()) {
+                            String sql2 = "UPDATE ANVANDARE SET LOSENORD ='" + losen2 + "' WHERE PNR = '" + pnr + "'";
+                            String sql11 = db.fetchSingle(sql2);
+                            tfLosen2.setText(sql11);
+                        }
+                        if (!titeln.isEmpty()) {
 
-                    String sql4 = "UPDATE ANVANDARE SET FORNAMN ='" + fnamn + "' WHERE PNR = '" + pnr + "'";
-                     String sql13 = db.fetchSingle(sql4);
-                    tfFornamn.setText(sql13);
-                }
-                if (!enamn.isEmpty()) {
+                            String sql3 = "UPDATE ANVANDARE SET TITEL ='" + titeln + "' WHERE PNR = '" + pnr + "'";
+                            String sql12 = db.fetchSingle(sql3);
+                            tfTitel.setText(sql12);
+                        }
+                        if (!fnamn.isEmpty()) {
 
-                    String sql5 = "UPDATE ANVANDARE SET EFTERNAMN ='" + enamn + "' WHERE PNR = '" + pnr + "'";
-                     String sql14 = db.fetchSingle(sql5);
-                    tfEfternamn.setText(sql14);
-                }
-               if (!beskrivningen.isEmpty()) {
+                            String sql4 = "UPDATE ANVANDARE SET FORNAMN ='" + fnamn + "' WHERE PNR = '" + pnr + "'";
+                            String sql13 = db.fetchSingle(sql4);
+                            tfFornamn.setText(sql13);
+                        }
+                        if (!enamn.isEmpty()) {
 
-                    String sql6 = "UPDATE ANVANDARE SET BESKRIVNING ='" + beskrivningen + "' WHERE PNR = '" + pnr + "'";
-                    String sql15 = db.fetchSingle(sql6);
-                    tfBeskrivning.setText(sql15);
-                }
-               if (!kontorsnr.isEmpty()) {
+                            String sql5 = "UPDATE ANVANDARE SET EFTERNAMN ='" + enamn + "' WHERE PNR = '" + pnr + "'";
+                            String sql14 = db.fetchSingle(sql5);
+                            tfEfternamn.setText(sql14);
+                        }
+                        if (!beskrivningen.isEmpty()) {
 
-                    String sql7 = "UPDATE ANVANDARE SET KONTORSNR ='" + kontorsnr + "' WHERE PNR = '" + pnr + "'";
-                     String sql16 = db.fetchSingle(sql7);
-                     
-                    tfRum.setText(sql16);
-                }
-                if (!email.isEmpty()) {
+                            String sql6 = "UPDATE ANVANDARE SET BESKRIVNING ='" + beskrivningen + "' WHERE PNR = '" + pnr + "'";
+                            String sql15 = db.fetchSingle(sql6);
+                            tfBeskrivning.setText(sql15);
+                        }
+                        if (!kontorsnr.isEmpty()) {
 
-                    String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + pnr + "'";
-                    String sql17 = db.fetchSingle(sql8);
-                    tfMail.setText(sql17);
+                            String sql7 = "UPDATE ANVANDARE SET KONTORSNR ='" + kontorsnr + "' WHERE PNR = '" + pnr + "'";
+                            String sql16 = db.fetchSingle(sql7);
+
+                            tfRum.setText(sql16);
+                        }
+                        if (!email.isEmpty()) {
+
+                            String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + pnr + "'";
+                            String sql17 = db.fetchSingle(sql8);
+                            tfMail.setText(sql17);
+                        }
+
+                    } catch (Exception e) {
+                    }
                 }
-               
-        }catch(Exception e){}}}}
+            }
+        }
 
     }//GEN-LAST:event_btnAndraActionPerformed
 
@@ -454,7 +442,7 @@ public class Profil extends javax.swing.JFrame {
     private void btnVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaActionPerformed
 
         String pnr = tfPnr2.getText();
-        String losen = tfLosen.getText();
+        String losen = tfLosen2.getText();
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
@@ -462,32 +450,25 @@ public class Profil extends javax.swing.JFrame {
         String kontorsnr = tfRum.getText();
         String email = tfMail.getText();
         String losen2 = tfLosen2.getText();
-        
-        
-      
+
         try {
-            String sql = "SELECT LOSENORD FROM ANVANDARE WHERE PNR =" + "'" + pnr + "'";
+            String sqlLosen = "SELECT LOSENORD FROM ANVANDARE WHERE PNR =" + "'" + pnr + "'";
 
-            String sql10 = db.fetchSingle(sql);
-            if (sql10.equals(losen)) {
-               
-               
-                
-                String sql2 = "SELECT LOSENORD FROM ANVANDARE WHERE PNR ='" + pnr + "'";
-                String sql11 = db.fetchSingle(sql2);
-                tfLosen2.setText(sql11);
+            String hittaLosen = db.fetchSingle(sqlLosen);
+            if (hittaLosen.equals(losen)) {
+                tfLosen2.setText(hittaLosen);
 
-                String sql3 = "SELECT TITEL FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String sql12 = db.fetchSingle(sql3);
-                tfTitel.setText(sql12);
+                String sqlTitel = "SELECT TITEL FROM ANVANDARE WHERE PNR = '" + pnr + "'";
+                String hittaTitel = db.fetchSingle(sqlTitel);
+                tfTitel.setText(hittaTitel);
 
-                String sql4 = "SELECT FORNAMN FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String sql13 = db.fetchSingle(sql4);
-                tfFornamn.setText(sql13);
+                String sqlFornamn = "SELECT FORNAMN FROM ANVANDARE WHERE PNR = '" + pnr + "'";
+                String hittaFornamn = db.fetchSingle(sqlFornamn);
+                tfFornamn.setText(hittaFornamn);
 
-                String sql5 = "SELECT EFTERNAMN FROM ANVANDARE WHERE PNR = '" + pnr + "'";
-                String sql14 = db.fetchSingle(sql5);
-                tfEfternamn.setText(sql14);
+                String sqlEfternamn = "SELECT EFTERNAMN FROM ANVANDARE WHERE PNR = '" + pnr + "'";
+                String hittaEfternamn = db.fetchSingle(sqlEfternamn);
+                tfEfternamn.setText(hittaEfternamn);
 
                 String sql6 = "SELECT BESKRIVNING FROM ANVANDARE WHERE PNR = '" + pnr + "'";
                 String sql15 = db.fetchSingle(sql6);
@@ -500,26 +481,18 @@ public class Profil extends javax.swing.JFrame {
                 String sql8 = "SELECT MAIL FROM EMAIL WHERE PNR = '" + pnr + "'";
                 String sql17 = db.fetchSingle(sql8);
                 tfMail.setText(sql17);
-                    
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Fel lösenord eller personnummer.");
             }
-                    
+
         } catch (Exception e) {
-        
+
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnVisaActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        dispose();
 
-        new GemensamKalender(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnAndra;
@@ -528,8 +501,6 @@ public class Profil extends javax.swing.JFrame {
     private javax.swing.JLabel fornamn;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel kontorsrum;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;

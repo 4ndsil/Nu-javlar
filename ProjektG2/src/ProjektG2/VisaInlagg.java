@@ -256,9 +256,9 @@ public class VisaInlagg extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jTabbedPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -306,7 +306,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         dispose(); // Stönger ner nuvarande fönster
-        AdminHuvud a = new AdminHuvud(); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
+        AdminHuvud a = new AdminHuvud(db); // Öppnar fytt fönster, AdminVal (instanserar nytt objekt av AdminVal)
         a.setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -315,42 +315,22 @@ public class VisaInlagg extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JLayeredPane jLayeredPane7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea lista;
-    private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mBlogg1;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
-    private javax.swing.JMenu mStart;
     private javax.swing.JMenu mStart1;
-    private javax.swing.JMenuBar mbAdminHuvud;
     private javax.swing.JMenuBar mbAdminHuvud1;
     private javax.swing.JMenuItem miLoggaUt;
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
     private javax.swing.JMenuItem miUnderkategori;
-    private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaInlagg1;
     private javax.swing.JMenuItem miVisaProfil;
     // End of variables declaration//GEN-END:variables
