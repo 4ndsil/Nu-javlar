@@ -46,7 +46,7 @@ public class AdminHuvud extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        miAnvandare = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,9 +156,14 @@ public class AdminHuvud extends javax.swing.JFrame {
         jMenu2.setText("Ta bort");
         jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jMenuItem2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jMenuItem2.setText("Användare");
-        jMenu2.add(jMenuItem2);
+        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miAnvandare.setText("Användare");
+        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAnvandareActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miAnvandare);
 
         mbAdminHuvud.add(jMenu2);
 
@@ -235,18 +240,23 @@ public class AdminHuvud extends javax.swing.JFrame {
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
+        dispose();
+       new TaBortAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miAnvandareActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
     private javax.swing.JMenu mStart;
     private javax.swing.JMenuBar mbAdminHuvud;
+    private javax.swing.JMenuItem miAnvandare;
     private javax.swing.JMenuItem miLoggaUt;
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
