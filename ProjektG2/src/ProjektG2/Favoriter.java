@@ -19,7 +19,7 @@ import oru.inf.InfException;
 public class Favoriter extends javax.swing.JFrame {
 
     private static InfDB db;
-    private String startValue = "Alla inlagg";
+    //private String startValue = "Alla inlagg";
 
     /**
      * Creates new form Favoriter
@@ -28,12 +28,11 @@ public class Favoriter extends javax.swing.JFrame {
         initComponents();
         this.db = db;
         fyllcbHK();
-        fyllTextArea();
     }
 
     // EJ KLAR!
     public void fyllTextArea() {
-        taFavoritOutput.removeAll();
+        taFavoritOutput.setText("");
         try {
             String hidQuery = "SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + cbHK.getSelectedItem().toString() + "'";
             int hid = Integer.parseInt(db.fetchSingle(hidQuery));
