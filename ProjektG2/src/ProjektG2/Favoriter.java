@@ -5,9 +5,11 @@
  */
 package ProjektG2;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -19,6 +21,7 @@ import oru.inf.InfException;
 public class Favoriter extends javax.swing.JFrame {
 
     private static InfDB db;
+    private byte[] picture;
     //private String startValue = "Alla inlagg";
 
     /**
@@ -69,6 +72,19 @@ public class Favoriter extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Något gick fel.");
             System.out.println(e.getMessage());
         }
+        
+//        //FÖRSÖK ATT PRINTA BILD
+//        SkapaInlagg.
+//        String bloggID = "SELECT BLOGGID FROM BLOGGINLAGG WHERE UID = " + cbUK.getSelectedItem().toString();
+//        String query = "SELECT BILFIL FROM BLOGGINLAGG WHERE BLOGGID = (" + bloggID + ")";
+//        String picturePath = db.fetchSingle(query);
+//
+//        //this.picture = ;
+//        this.picture = picturePath.getBytes(); 
+//        ImageIcon image = new ImageIcon(picture);
+//        Image im = image.getImage();
+//        Image myIm = im.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+//        ImageIcon newImage = new ImageIcon(myIm);
 
     }
 
