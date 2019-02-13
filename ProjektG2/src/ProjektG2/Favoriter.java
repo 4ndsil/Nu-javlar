@@ -29,10 +29,12 @@ public class Favoriter extends javax.swing.JFrame {
         this.db = db;
         fyllcbHK();
         fyllcbUK();
-        fyllTextArea();
+        taFavoritOutput.setText("Välj en kategori");
     }
 
-    // EJ KLAR!
+    // EJ KLAR! 
+    // PRINTA UT ETT MEDDELANDE OM DET INTE FINNS NÅGOT INLÄGG
+    // PRINTA UT BILDER MED INLÄGGEN
     private void fyllTextArea() {
         taFavoritOutput.setText("");
         try {
@@ -41,10 +43,14 @@ public class Favoriter extends javax.swing.JFrame {
             String uidQuery = "SELECT UID FROM UNDERKATEGORI WHERE NAMN = '" + cbUK.getSelectedItem().toString() + "'";
             int uid = Integer.parseInt(db.fetchSingle(uidQuery));
 
+            try{
             //EN ARRYLIST DÄR VI LÄGGER IN DATAN SOM SEDAN SKA SKRIVAS UT
             ArrayList<HashMap<String, String>> listaBloggInlagg;
-            listaBloggInlagg = db.fetchRows("SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG WHERE HID = "
-                    + hid + " AND UID = " + uid);
+            listaBloggInlagg = db.fetchRows("SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG " + 
+                                 "JOIN FAVORIT ON FAVORIT.BLOGGID = BLOGGINLAGG.BLOGGID " +
+                                 "WHERE BLOGGINLAGG.PNR = FAVORIT.PNR " +
+                                 "AND BLOGGINLAGG.HID = " + hid +
+                                 "AND BLOGGINLAGG.UID = " + uid);
 
             //LOOPAR LISTA OCH HÄMTAR DATAN SOM SKA SKRIVAS UT
             for (HashMap<String, String> inlagg : listaBloggInlagg) {
@@ -54,7 +60,10 @@ public class Favoriter extends javax.swing.JFrame {
 
                 taFavoritOutput.append(rubrik + "\n" + datum + "\n" + innehall + "\n\n");
             }
-
+            } catch (Exception e){
+                taFavoritOutput.setText("Du har inga favoritinlägg inom denna kategori.");
+            }
+            
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel.");
