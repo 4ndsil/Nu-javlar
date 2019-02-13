@@ -5,6 +5,10 @@
  */
 package ProjektG2;
 
+import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
@@ -12,8 +16,11 @@ import oru.inf.InfException;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -22,6 +29,12 @@ import java.util.logging.Logger;
 public class SkapaInlagg extends javax.swing.JFrame {
 
     private InfDB db;
+
+    //NYTT
+    String filename = null;
+    byte[] personal_image = null;
+//    //?
+//    private byte[] picture;
 
     public SkapaInlagg(InfDB db) {
         initComponents();
@@ -51,6 +64,10 @@ public class SkapaInlagg extends javax.swing.JFrame {
         btnPublicera = new javax.swing.JButton();
         lblVäljUnderkategori = new javax.swing.JLabel();
         lblVäljHuvudkategori = new javax.swing.JLabel();
+        lblLaggTillBildfil = new javax.swing.JLabel();
+        btnBildfil = new javax.swing.JButton();
+        tfBildfilNamn = new javax.swing.JTextField();
+        lblBilden = new javax.swing.JLabel();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -109,6 +126,21 @@ public class SkapaInlagg extends javax.swing.JFrame {
         lblVäljUnderkategori.setText("Välj Underkategori:");
 
         lblVäljHuvudkategori.setText("Välj Huvudkategori:");
+
+        lblLaggTillBildfil.setText("Lägg till bildfil:");
+
+        btnBildfil.setText("Välj bildfil");
+        btnBildfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBildfilActionPerformed(evt);
+            }
+        });
+
+        tfBildfilNamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfBildfilNamnActionPerformed(evt);
+            }
+        });
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -218,25 +250,36 @@ public class SkapaInlagg extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfRubrik)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 728, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSkapaNyKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfUnderkategori, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnPublicera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbHuvudkategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfRubrik))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPublicera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSkapaNyKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblVäljUnderkategori)
-                                    .addComponent(lblVäljHuvudkategori))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cbUnderkategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(lblLaggTillBildfil, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblBilden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(btnBildfil)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tfBildfilNamn, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                                        .addGap(8, 8, 8))))
+                            .addComponent(cbUnderkategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblVäljHuvudkategori)
+                            .addComponent(lblVäljUnderkategori)
+                            .addComponent(cbHuvudkategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfUnderkategori, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(290, 290, 290)
@@ -248,32 +291,45 @@ public class SkapaInlagg extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(lblSkrivInlagg)
-                .addGap(27, 27, 27)
-                .addComponent(lblRubrik)
-                .addGap(2, 2, 2)
-                .addComponent(tfRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRubrik)
+                    .addComponent(tfRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(lblVäljHuvudkategori)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbHuvudkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblVäljUnderkategori)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbUnderkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblSkapaNyKategori)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfUnderkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLaggTillBildfil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBildfil)
+                            .addComponent(tfBildfilNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblBilden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPublicera))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    //NYTT
+    public byte[] getImage() {
+        return personal_image;
+    }
 
     private void fyllHuvudkategoriComboBox() {
 
@@ -368,7 +424,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
             try {
 
                 //TILLDELAR UNDERKATEGORI AUTOMATISKT ID
-                //String newUid = db.getAutoIncrement("UNDERKATEGORI", "UID");
                 String fetchMaxID = db.fetchSingle("SELECT MAX(UID) FROM UNDERKATEGORI");
                 uid = Integer.parseInt(fetchMaxID) + 1;
                 String hamtaHID = "SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "'";
@@ -377,17 +432,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 String laggaTillUid = "INSERT INTO UNDERKATEGORI VALUES(" + uid + ",'" + nyUnderkategori + "', " + hid + ")";
                 db.insert(laggaTillUid);
 
-                //LAGRAR SQL I STRÄNG
-//                String uidQuery = "SELECT HID FROM UNDERKATEGORI WHERE UID = " + uid
-//                        + "(SELECT UID FROM UNDERKATEGOR WHERE NAMN = '" + nyUnderkategori + "') "
-//                        + "AND NAMN  = '" + huvudkategori + "'";
-//                try {
-//                    //OMVANDLAR STRING TILL INT OCH UPPDATERAR DATABASEN
-//                    hid = Integer.parseInt(db.fetchSingle(uidQuery));
-//                } catch (InfException e) {
-//                    JOptionPane.showMessageDialog(null, "Något gick fel.");
-//                    System.out.println(e.getMessage());
-//                }
             } catch (InfException ex) {
                 Logger.getLogger(SkapaInlagg.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -424,13 +468,18 @@ public class SkapaInlagg extends javax.swing.JFrame {
         if (Validering.textFaltHarVarde(rubrik)) {
             if (Validering.textFaltHarVarde(text)) {
                 try {
+                                       
                     //TILLDELAR INLAGG AUTOMATISKT ID 
-                    String bloggId = db.getAutoIncrement("BLOGGINLAGG", "BLOGGID");
-
+                    String fetchMaxID = db.fetchSingle("SELECT MAX(BLOGGID) FROM BLOGGINLAGG");
+                    int bloggId = Integer.parseInt(fetchMaxID) + 1;
                     //LÄGGER TILL INLÄGG I DATABASEN
-                    String skapaInlagg = "INSERT INTO BLOGGINLAGG VALUES(" + bloggId + ", '" + rubrik + "', '" + datumOchTid + "', '" + null
+                    String skapaInlagg = "INSERT INTO BLOGGINLAGG VALUES(" + bloggId + ", '" + rubrik + "', '" + datumOchTid + "', '" + personal_image
                             + "', '" + null + "', '" + text + "', '" + null + "', " + hid + ", '" + pnr + "'," + uid + ")";
-                    db.insert(skapaInlagg);
+                    try {
+                        db.insert(skapaInlagg);
+                    } catch (Exception e){
+                        JOptionPane.showMessageDialog(null, "Oj, vad hände nu?");
+                    }
 
                     //SKAPAR EN DIALOGRUTA MED ALTERNATIV
                     int input = JOptionPane.showOptionDialog(null, "Ditt blogginlägg har publicerats.", "Vind i seglen!", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -473,7 +522,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Var snäll och skriv en rubrik.");
 
-        }
+        
+    }
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
@@ -527,14 +577,61 @@ public class SkapaInlagg extends javax.swing.JFrame {
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void tfBildfilNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBildfilNamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfBildfilNamnActionPerformed
+
+    private void btnBildfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBildfilActionPerformed
+        // NYTT
+        // JFileChooser provides a simple mechanism for the user to choose a file. 
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        // An abstract representation of file and directory pathnames
+        File f = chooser.getSelectedFile();
+        // A pathname, whether abstract or in string form, may be either 
+        // absolute or relative. An absolute pathname is complete in that 
+        // no other information is required in order to locate the file that it denotes.
+        filename = f.getAbsolutePath();
+        // An implementation of the Icon interface that paints Icons from Images.
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblBilden.getWidth(), lblBilden.getHeight(), Image.SCALE_SMOOTH));
+        lblBilden.setIcon(imageIcon);
+        try{
+            File image = new File(filename);
+            // A FileInputStream obtains input bytes from a file in a file system.
+            // FileInputStream is meant for reading streams of raw bytes such as image data.
+            FileInputStream fis = new FileInputStream(image);
+            // This class implements an output stream in which the data is written into a byte 
+            // array. The buffer automatically grows as data is written to it. The data can be 
+            // retrieved using toByteArray() and toString().
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            // read() Reads a byte of data from this input stream.
+            for(int readNum; (readNum = fis.read(buf)) != -1;){
+                // Writes len bytes from the specified byte array starting at offset off to 
+                // this byte array output stream.
+                bos.write(buf, 0, readNum);
+                
+            }
+            // Creates a newly allocated byte array.
+            personal_image = bos.toByteArray();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+    }//GEN-LAST:event_btnBildfilActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBildfil;
     private javax.swing.JButton btnPublicera;
     private javax.swing.JComboBox<String> cbHuvudkategori;
     private javax.swing.JComboBox<String> cbUnderkategori;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBilden;
+    private javax.swing.JLabel lblLaggTillBildfil;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblSkapaNyKategori;
     private javax.swing.JLabel lblSkrivInlagg;
@@ -554,6 +651,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
     private javax.swing.JTextArea taText;
+    private javax.swing.JTextField tfBildfilNamn;
     private javax.swing.JTextField tfRubrik;
     private javax.swing.JTextField tfUnderkategori;
     // End of variables declaration//GEN-END:variables
