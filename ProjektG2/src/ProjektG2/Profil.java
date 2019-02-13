@@ -57,15 +57,16 @@ public class Profil extends javax.swing.JFrame {
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
+        mProfil = new javax.swing.JMenu();
+        miVisaProfil = new javax.swing.JMenuItem();
+        miFavoritInlagg = new javax.swing.JMenuItem();
+        miLoggaUt = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mLaggTill = new javax.swing.JMenu();
         miSkapaAnvandare = new javax.swing.JMenuItem();
         miSkapaHuvudkategori = new javax.swing.JMenuItem();
         miUnderkategori = new javax.swing.JMenuItem();
-        mProfil = new javax.swing.JMenu();
-        miVisaProfil = new javax.swing.JMenuItem();
-        miLoggaUt = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +151,48 @@ public class Profil extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mBlogg);
 
+        mProfil.setText("Profil");
+        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaProfil.setText("Visa profil");
+        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaProfilActionPerformed(evt);
+            }
+        });
+        mProfil.add(miVisaProfil);
+
+        miFavoritInlagg.setText("Favoritinlägg");
+        miFavoritInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFavoritInlaggActionPerformed(evt);
+            }
+        });
+        mProfil.add(miFavoritInlagg);
+
+        miLoggaUt.setText("Logga ut");
+        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLoggaUtActionPerformed(evt);
+            }
+        });
+        mProfil.add(miLoggaUt);
+
+        mbAdminHuvud.add(mProfil);
+
+        jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
+
         mLaggTill.setText("Lägg till");
         mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -178,40 +221,6 @@ public class Profil extends javax.swing.JFrame {
         mLaggTill.add(miUnderkategori);
 
         mbAdminHuvud.add(mLaggTill);
-
-        mProfil.setText("Profil");
-        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        miVisaProfil.setText("Visa profil");
-        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miVisaProfilActionPerformed(evt);
-            }
-        });
-        mProfil.add(miVisaProfil);
-
-        miLoggaUt.setText("Logga ut");
-        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miLoggaUtActionPerformed(evt);
-            }
-        });
-        mProfil.add(miLoggaUt);
-
-        mbAdminHuvud.add(mProfil);
-
-        jMenu1.setText("Kalender");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jMenuItem1.setText("Se Kalender");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        mbAdminHuvud.add(jMenu1);
 
         setJMenuBar(mbAdminHuvud);
 
@@ -467,6 +476,11 @@ public class Profil extends javax.swing.JFrame {
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void miFavoritInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFavoritInlaggActionPerformed
+        dispose();
+        new Favoriter(db).setVisible(true);
+    }//GEN-LAST:event_miFavoritInlaggActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -484,6 +498,7 @@ public class Profil extends javax.swing.JFrame {
     private javax.swing.JMenu mProfil;
     private javax.swing.JMenu mStart;
     private javax.swing.JMenuBar mbAdminHuvud;
+    private javax.swing.JMenuItem miFavoritInlagg;
     private javax.swing.JMenuItem miLoggaUt;
     private javax.swing.JMenuItem miSkapaAnvandare;
     private javax.swing.JMenuItem miSkapaHuvudkategori;
