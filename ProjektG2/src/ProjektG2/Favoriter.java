@@ -28,10 +28,12 @@ public class Favoriter extends javax.swing.JFrame {
         initComponents();
         this.db = db;
         fyllcbHK();
+        fyllcbUK();
+        fyllTextArea();
     }
 
     // EJ KLAR!
-    public void fyllTextArea() {
+    private void fyllTextArea() {
         taFavoritOutput.setText("");
         try {
             String hidQuery = "SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + cbHK.getSelectedItem().toString() + "'";
@@ -82,20 +84,20 @@ public class Favoriter extends javax.swing.JFrame {
         } catch (InfException e) {
             e.printStackTrace();
         }
-        //HÄMTAR VALD KATEGORI I COMBOBOX
-        String huvudkategori = cbHK.getSelectedItem().toString();
-
-        fyllcbUK(huvudkategori);
+//        //HÄMTAR VALD KATEGORI I COMBOBOX
+//        String huvudkategori = cbHK.getSelectedItem().toString();
+//
+//        fyllcbUK(huvudkategori);
     }
 
-    private void fyllcbUK(String huvudkategori) {
+    private void fyllcbUK() {
         //RENSAR CB
         cbUK.removeAllItems();
 
         //ARRAY SOM SKA LAGRA UNDERKATEGORIER
         ArrayList<String> cbListaUnderkategori;
 
-        String query = "SELECT NAMN FROM UNDERKATEGORI WHERE HID = (SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + huvudkategori + "')";
+        String query = "SELECT NAMN FROM UNDERKATEGORI WHERE HID = (SELECT HID FROM HUVUDKATEGORI WHERE NAMN = '" + cbHK.getSelectedItem().toString() + "')";
 
         try {
             cbListaUnderkategori = db.fetchColumn(query);
@@ -108,7 +110,6 @@ public class Favoriter extends javax.swing.JFrame {
             //lägg till jKPSGJSÖSFGSH
             e.printStackTrace();
         }
-        fyllTextArea();
     }
 
     /**
@@ -123,11 +124,12 @@ public class Favoriter extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbHK = new javax.swing.JComboBox<>();
-        cbUK = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         taFavoritOutput = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        cbUK = new javax.swing.JComboBox<>();
+        btnValj = new javax.swing.JButton();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -158,22 +160,6 @@ public class Favoriter extends javax.swing.JFrame {
             }
         });
 
-        cbUK.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbUKItemStateChanged(evt);
-            }
-        });
-        cbUK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbUKMouseClicked(evt);
-            }
-        });
-        cbUK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUKActionPerformed(evt);
-            }
-        });
-
         taFavoritOutput.setColumns(20);
         taFavoritOutput.setLineWrap(true);
         taFavoritOutput.setRows(5);
@@ -182,6 +168,19 @@ public class Favoriter extends javax.swing.JFrame {
         jLabel2.setText("Huvudkategori:");
 
         jLabel3.setText("Underkategori:");
+
+        cbUK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUKActionPerformed(evt);
+            }
+        });
+
+        btnValj.setText("Välj");
+        btnValj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValjActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -192,29 +191,32 @@ public class Favoriter extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbHK, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbHK, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbUK, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50))
+                        .addComponent(cbUK, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnValj)))
+                .addGap(69, 69, 69))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(39, 39, 39)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbHK)
-                    .addComponent(cbUK)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(cbUK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnValj))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
@@ -400,23 +402,18 @@ public class Favoriter extends javax.swing.JFrame {
 
     private void cbHKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHKActionPerformed
         //HÄMTAR VALD KATEGORI I COMBOBOX
-        String huvudkategori = cbHK.getSelectedItem().toString();
+        //String huvudkategori = cbHK.getSelectedItem().toString();
         //ANROPAR METOD SOM FYLLER UNDERKATEGORIER UTIFRÅN HUVUDKATEGORI
-        fyllcbUK(huvudkategori);
-        fyllTextArea();
+        fyllcbUK();        
     }//GEN-LAST:event_cbHKActionPerformed
 
     private void cbUKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUKActionPerformed
-
+      
     }//GEN-LAST:event_cbUKActionPerformed
 
-    private void cbUKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbUKMouseClicked
-
-    }//GEN-LAST:event_cbUKMouseClicked
-
-    private void cbUKItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbUKItemStateChanged
-
-    }//GEN-LAST:event_cbUKItemStateChanged
+    private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
+        fyllTextArea();
+    }//GEN-LAST:event_btnValjActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,6 +451,7 @@ public class Favoriter extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnValj;
     private javax.swing.JComboBox<String> cbHK;
     private javax.swing.JComboBox<String> cbUK;
     private javax.swing.JLabel jLabel1;
