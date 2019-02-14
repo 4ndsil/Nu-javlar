@@ -69,14 +69,12 @@ public class Favoriter extends javax.swing.JFrame {
                     String rubrik = inlagg.get("RUBRIK");
                     String datum = inlagg.get("DATUM");
                     String innehall = inlagg.get("INNEHALL");
-                    String bildfil = inlagg.get("BILDFIL");
+                    //String bildfil = inlagg.get("BILDFIL");
                     
                     //byte[] bild = hamtaBild(bildfil);
 
                     taFavoritOutput.append(rubrik + "\n" + datum + "\n" + innehall + "\n\n");
                     
-                    ImageIcon imageIcon = new ImageIcon(new ImageIcon(bildfil).getImage().getScaledInstance(lblTest.getWidth(), lblTest.getHeight(), Image.SCALE_SMOOTH));
-                    lblTest.setIcon(imageIcon);
                 }
             } catch (Exception e) {
                 taFavoritOutput.setText("Du har inga favoritinlägg inom denna kategori.");
