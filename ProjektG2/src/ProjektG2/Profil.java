@@ -17,13 +17,15 @@ public class Profil extends javax.swing.JFrame {
 
     private InfDB db;
     public LoggaIn loggaIn;
-    
-    
+    public static boolean notisForskning = true;
+    public static boolean notisUtbildning = true;
+    public static boolean notisInformell = true;
+
     public Profil(InfDB db) {
         initComponents();
         this.db = db;
         visaInformation();
-        
+
     }
 
     /**
@@ -121,6 +123,7 @@ public class Profil extends javax.swing.JFrame {
         personnummer2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         personnummer2.setText("Notiser");
 
+        chbForskning.setSelected(true);
         chbForskning.setText("Forskning");
         chbForskning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +131,7 @@ public class Profil extends javax.swing.JFrame {
             }
         });
 
+        chbUtbildning.setSelected(true);
         chbUtbildning.setText("Utbildning");
         chbUtbildning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +139,7 @@ public class Profil extends javax.swing.JFrame {
             }
         });
 
+        chbInformell.setSelected(true);
         chbInformell.setText("Informell");
         chbInformell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,11 +352,11 @@ public class Profil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
-    public void visaInformation(){
+
+    public void visaInformation() {
 
         String user = loggaIn.returneraInloggadPnr();
-        
+
         try {
             String sql2 = "SELECT LOSENORD FROM ANVANDARE WHERE PNR ='" + user + "'";
             String sql11 = db.fetchSingle(sql2);
@@ -380,14 +385,14 @@ public class Profil extends javax.swing.JFrame {
             String sql8 = "SELECT MAIL FROM EMAIL WHERE PNR = '" + user + "'";
             String sql17 = db.fetchSingle(sql8);
             tfMail.setText(sql17);
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
     private void btnAndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraActionPerformed
-        
+
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
@@ -400,7 +405,7 @@ public class Profil extends javax.swing.JFrame {
         if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
                 if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
-                                        
+
                     try {
 
                         if (!losen.isEmpty()) {
@@ -444,8 +449,7 @@ public class Profil extends javax.swing.JFrame {
                             String sql8 = "UPDATE EMAIL SET MAIL ='" + email + "' WHERE PNR = '" + user + "'";
                             String sql17 = db.fetchSingle(sql8);
                             tfMail.setText(sql17);
-                            
-                            
+
                             JOptionPane.showMessageDialog(null, "Informationen har ändrats.");
                             visaInformation();
                         }
@@ -462,7 +466,7 @@ public class Profil extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfMailActionPerformed
 
-    
+
     private void tfLosen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLosen2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfLosen2ActionPerformed
@@ -524,19 +528,24 @@ public class Profil extends javax.swing.JFrame {
     }//GEN-LAST:event_miFavoritInlaggActionPerformed
 
     private void chbForskningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbForskningActionPerformed
-        // TODO add your handling code here:
+        boolean isSelected = chbForskning.isSelected();
+        chbForskning.setSelected(isSelected);
+        notisForskning = isSelected;
     }//GEN-LAST:event_chbForskningActionPerformed
 
     private void chbUtbildningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbUtbildningActionPerformed
-        // TODO add your handling code here:
+        boolean isSelected = chbUtbildning.isSelected();
+        chbUtbildning.setSelected(isSelected);
+        notisUtbildning = isSelected;
     }//GEN-LAST:event_chbUtbildningActionPerformed
 
     private void chbInformellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbInformellActionPerformed
-        // TODO add your handling code here:
+        boolean isSelected = chbInformell.isSelected();
+        chbInformell.setSelected(isSelected);
+        notisInformell = isSelected;
     }//GEN-LAST:event_chbInformellActionPerformed
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnAndra;

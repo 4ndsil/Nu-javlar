@@ -385,6 +385,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chbForskning">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Forskning"/>
       </Properties>
       <Events>
@@ -393,6 +394,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chbUtbildning">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Utbildning"/>
       </Properties>
       <Events>
@@ -401,6 +403,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chbInformell">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Informell"/>
       </Properties>
       <Events>

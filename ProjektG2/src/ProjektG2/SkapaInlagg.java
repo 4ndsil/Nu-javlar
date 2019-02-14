@@ -337,7 +337,17 @@ public class SkapaInlagg extends javax.swing.JFrame {
     public void skickaNotis(String huvudkategori, String rubrik, ArrayList<HashMap<String, String>> mottagare) {
         String hk = huvudkategori;
         String amne = "Nytt inlägg har publicerats!";
+        boolean skicka = false;
 
+        if (huvudkategori.equals("Forskning") && Profil.notisForskning == true){
+            skicka = true;
+        } else if (huvudkategori.equals("Utbildning") && Profil.notisUtbildning == true){
+            skicka = true;
+        } else if (huvudkategori.equals("Informell") && Profil.notisInformell == true){
+            skicka = true;
+        }
+        
+        if (skicka == true){
         for (HashMap<String, String> resultat : mottagare) {
             String fnamn = resultat.get("FORNAMN");
             String email = resultat.get("MAIL");
@@ -348,6 +358,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     + "\n\n Gå in på plattformen för att se inlägget.";
 
             Mail.start(email, amne, text);
+        }
         }
     }
 

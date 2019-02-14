@@ -44,35 +44,6 @@ public class Favoriter extends javax.swing.JFrame {
         fyllcbUK();
         taFavoritOutput.setText("Välj en kategori");
     }
-
-    
-    private byte[] hamtaBild(String bildfil){
-     try{
-            File image = new File(bildfil);
-            // A FileInputStream obtains input bytes from a file in a file system.
-            // FileInputStream is meant for reading streams of raw bytes such as image data.
-            FileInputStream fis = new FileInputStream(image);
-            // This class implements an output stream in which the data is written into a byte 
-            // array. The buffer automatically grows as data is written to it. The data can be 
-            // retrieved using toByteArray() and toString().
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            // read() Reads a byte of data from this input stream.
-            for(int readNum; (readNum = fis.read(buf)) != -1;){
-                // Writes len bytes from the specified byte array starting at offset off to 
-                // this byte array output stream.
-                bos.write(buf, 0, readNum);
-                
-            }
-            // Creates a newly allocated byte array.
-            byte[] picture = bos.toByteArray();
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-            return picture;
-        }
-    
     
     // EJ KLAR! 
     // PRINTA UT BILDER MED INLÄGGEN
@@ -467,6 +438,7 @@ public class Favoriter extends javax.swing.JFrame {
         //HÄMTAR VALD KATEGORI I COMBOBOX
         //String huvudkategori = cbHK.getSelectedItem().toString();
         //ANROPAR METOD SOM FYLLER UNDERKATEGORIER UTIFRÅN HUVUDKATEGORI
+        fyllcbHK();
         fyllcbUK();
     }//GEN-LAST:event_cbHKActionPerformed
 
