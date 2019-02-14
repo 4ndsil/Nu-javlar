@@ -51,6 +51,10 @@ public class Profil extends javax.swing.JFrame {
         tfEfternamn = new javax.swing.JTextField();
         kontorsrum = new javax.swing.JLabel();
         lblRubrikAdminHuvud = new javax.swing.JLabel();
+        personnummer2 = new javax.swing.JLabel();
+        chbForskning = new javax.swing.JCheckBox();
+        chbUtbildning = new javax.swing.JCheckBox();
+        chbInformell = new javax.swing.JCheckBox();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -113,6 +117,30 @@ public class Profil extends javax.swing.JFrame {
 
         lblRubrikAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblRubrikAdminHuvud.setText("Profil");
+
+        personnummer2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        personnummer2.setText("Notiser");
+
+        chbForskning.setText("Forskning");
+        chbForskning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbForskningActionPerformed(evt);
+            }
+        });
+
+        chbUtbildning.setText("Utbildning");
+        chbUtbildning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbUtbildningActionPerformed(evt);
+            }
+        });
+
+        chbInformell.setText("Informell");
+        chbInformell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbInformellActionPerformed(evt);
+            }
+        });
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -233,12 +261,12 @@ public class Profil extends javax.swing.JFrame {
                 .addComponent(lblRubrikAdminHuvud)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAndra))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titel)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,24 +278,32 @@ public class Profil extends javax.swing.JFrame {
                                         .addComponent(fornamn)))
                                 .addComponent(kontorsrum, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addComponent(personnummer1)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(personnummer2))
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfMail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfRum, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfBeskrivning, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfEfternamn, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfFornamn, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfTitel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfLosen2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))))
-                .addGap(154, 154, 154))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(chbForskning)
+                                .addGap(18, 18, 18)
+                                .addComponent(chbUtbildning)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chbInformell)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(tfMail)
+                            .addComponent(tfRum)
+                            .addComponent(tfBeskrivning)
+                            .addComponent(tfEfternamn)
+                            .addComponent(tfFornamn)
+                            .addComponent(tfTitel)
+                            .addComponent(tfLosen2, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))))
+                .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(lblRubrikAdminHuvud)
-                .addGap(56, 56, 56)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titel)
                     .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -294,13 +330,19 @@ public class Profil extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(personnummer1))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAndra))
+                            .addComponent(personnummer1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(beskrivning)
-                        .addGap(233, 233, 233)))
-                .addGap(90, 90, 90))
+                        .addGap(203, 203, 203)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(personnummer2)
+                    .addComponent(chbForskning)
+                    .addComponent(chbUtbildning)
+                    .addComponent(chbInformell))
+                .addGap(30, 30, 30)
+                .addComponent(btnAndra)
+                .addGap(66, 66, 66))
         );
 
         pack();
@@ -481,11 +523,26 @@ public class Profil extends javax.swing.JFrame {
         new Favoriter(db).setVisible(true);
     }//GEN-LAST:event_miFavoritInlaggActionPerformed
 
+    private void chbForskningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbForskningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbForskningActionPerformed
+
+    private void chbUtbildningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbUtbildningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbUtbildningActionPerformed
+
+    private void chbInformellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbInformellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chbInformellActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel beskrivning;
     private javax.swing.JButton btnAndra;
+    private javax.swing.JCheckBox chbForskning;
+    private javax.swing.JCheckBox chbInformell;
+    private javax.swing.JCheckBox chbUtbildning;
     private javax.swing.JLabel efternamn;
     private javax.swing.JLabel fornamn;
     private javax.swing.JLabel jLabel3;
@@ -508,6 +565,7 @@ public class Profil extends javax.swing.JFrame {
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
     private javax.swing.JLabel personnummer1;
+    private javax.swing.JLabel personnummer2;
     private javax.swing.JTextField tfBeskrivning;
     private javax.swing.JTextField tfEfternamn;
     private javax.swing.JTextField tfFornamn;

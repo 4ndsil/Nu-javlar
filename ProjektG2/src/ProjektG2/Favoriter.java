@@ -6,8 +6,18 @@
 package ProjektG2;
 
 import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -35,8 +45,36 @@ public class Favoriter extends javax.swing.JFrame {
         taFavoritOutput.setText("Välj en kategori");
     }
 
+    
+    private byte[] hamtaBild(String bildfil){
+     try{
+            File image = new File(bildfil);
+            // A FileInputStream obtains input bytes from a file in a file system.
+            // FileInputStream is meant for reading streams of raw bytes such as image data.
+            FileInputStream fis = new FileInputStream(image);
+            // This class implements an output stream in which the data is written into a byte 
+            // array. The buffer automatically grows as data is written to it. The data can be 
+            // retrieved using toByteArray() and toString().
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            // read() Reads a byte of data from this input stream.
+            for(int readNum; (readNum = fis.read(buf)) != -1;){
+                // Writes len bytes from the specified byte array starting at offset off to 
+                // this byte array output stream.
+                bos.write(buf, 0, readNum);
+                
+            }
+            // Creates a newly allocated byte array.
+            byte[] picture = bos.toByteArray();
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+            return picture;
+        }
+    
+    
     // EJ KLAR! 
-    // PRINTA UT ETT MEDDELANDE OM DET INTE FINNS NÅGOT INLÄGG
     // PRINTA UT BILDER MED INLÄGGEN
     private void fyllTextArea() {
         taFavoritOutput.setText("");
@@ -46,46 +84,38 @@ public class Favoriter extends javax.swing.JFrame {
             String uidQuery = "SELECT UID FROM UNDERKATEGORI WHERE NAMN = '" + cbUK.getSelectedItem().toString() + "'";
             int uid = Integer.parseInt(db.fetchSingle(uidQuery));
 
-            try{
-            //EN ARRYLIST DÄR VI LÄGGER IN DATAN SOM SEDAN SKA SKRIVAS UT
-            ArrayList<HashMap<String, String>> listaBloggInlagg;
-            listaBloggInlagg = db.fetchRows("SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG " + 
-                                 "JOIN FAVORIT ON FAVORIT.BLOGGID = BLOGGINLAGG.BLOGGID " +
-                                 "WHERE BLOGGINLAGG.PNR = FAVORIT.PNR " +
-                                 "AND BLOGGINLAGG.HID = " + hid +
-                                 "AND BLOGGINLAGG.UID = " + uid);
+            try {
+                //EN ARRYLIST DÄR VI LÄGGER IN DATAN SOM SEDAN SKA SKRIVAS UT
+                ArrayList<HashMap<String, String>> listaBloggInlagg;
+                listaBloggInlagg = db.fetchRows("SELECT RUBRIK, DATUM, INNEHALL, BILDFIL FROM BLOGGINLAGG "
+                        + "JOIN FAVORIT ON FAVORIT.BLOGGID = BLOGGINLAGG.BLOGGID "
+                        + "WHERE BLOGGINLAGG.PNR = FAVORIT.PNR "
+                        + "AND BLOGGINLAGG.HID = " + hid
+                        + "AND BLOGGINLAGG.UID = " + uid);
 
-            //LOOPAR LISTA OCH HÄMTAR DATAN SOM SKA SKRIVAS UT
-            for (HashMap<String, String> inlagg : listaBloggInlagg) {
-                String rubrik = inlagg.get("RUBRIK");
-                String datum = inlagg.get("DATUM");
-                String innehall = inlagg.get("INNEHALL");
+                //LOOPAR LISTA OCH HÄMTAR DATAN SOM SKA SKRIVAS UT
+                for (HashMap<String, String> inlagg : listaBloggInlagg) {
+                    String rubrik = inlagg.get("RUBRIK");
+                    String datum = inlagg.get("DATUM");
+                    String innehall = inlagg.get("INNEHALL");
+                    String bildfil = inlagg.get("BILDFIL");
+                    
+                    //byte[] bild = hamtaBild(bildfil);
 
-                taFavoritOutput.append(rubrik + "\n" + datum + "\n" + innehall + "\n\n");
-            }
-            } catch (Exception e){
+                    taFavoritOutput.append(rubrik + "\n" + datum + "\n" + innehall + "\n\n");
+                    
+                    ImageIcon imageIcon = new ImageIcon(new ImageIcon(bildfil).getImage().getScaledInstance(lblTest.getWidth(), lblTest.getHeight(), Image.SCALE_SMOOTH));
+                    lblTest.setIcon(imageIcon);
+                }
+            } catch (Exception e) {
                 taFavoritOutput.setText("Du har inga favoritinlägg inom denna kategori.");
             }
-            
+
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel.");
             System.out.println(e.getMessage());
         }
-        
-//        //FÖRSÖK ATT PRINTA BILD
-//        SkapaInlagg.
-//        String bloggID = "SELECT BLOGGID FROM BLOGGINLAGG WHERE UID = " + cbUK.getSelectedItem().toString();
-//        String query = "SELECT BILFIL FROM BLOGGINLAGG WHERE BLOGGID = (" + bloggID + ")";
-//        String picturePath = db.fetchSingle(query);
-//
-//        //this.picture = ;
-//        this.picture = picturePath.getBytes(); 
-//        ImageIcon image = new ImageIcon(picture);
-//        Image im = image.getImage();
-//        Image myIm = im.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-//        ImageIcon newImage = new ImageIcon(myIm);
-
     }
 
     private void fyllcbHK() {
@@ -155,6 +185,7 @@ public class Favoriter extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cbUK = new javax.swing.JComboBox<>();
         btnValj = new javax.swing.JButton();
+        lblTest = new javax.swing.JLabel();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -234,8 +265,8 @@ public class Favoriter extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(38, 38, 38)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbHK)
                     .addComponent(jLabel2)
@@ -243,8 +274,8 @@ public class Favoriter extends javax.swing.JFrame {
                     .addComponent(cbUK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnValj))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                .addGap(50, 50, 50))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -361,13 +392,20 @@ public class Favoriter extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         pack();
@@ -429,11 +467,11 @@ public class Favoriter extends javax.swing.JFrame {
         //HÄMTAR VALD KATEGORI I COMBOBOX
         //String huvudkategori = cbHK.getSelectedItem().toString();
         //ANROPAR METOD SOM FYLLER UNDERKATEGORIER UTIFRÅN HUVUDKATEGORI
-        fyllcbUK();        
+        fyllcbUK();
     }//GEN-LAST:event_cbHKActionPerformed
 
     private void cbUKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUKActionPerformed
-      
+
     }//GEN-LAST:event_cbUKActionPerformed
 
     private void btnValjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValjActionPerformed
@@ -486,6 +524,7 @@ public class Favoriter extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTest;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
@@ -502,5 +541,7 @@ public class Favoriter extends javax.swing.JFrame {
     private javax.swing.JMenuItem miVisaProfil;
     private javax.swing.JTextArea taFavoritOutput;
     // End of variables declaration//GEN-END:variables
-
+ 
+   
+    
 }

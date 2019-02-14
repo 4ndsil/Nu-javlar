@@ -89,7 +89,7 @@ public class Mail {
     }
 
     //LOGGAR IN PÅ KONTOT FÖR ATT KUNNA SKICKA MAIL
-    public static void start(String mailTill, String amne, String valkommen) {
+    public static void start(String mailTill, String amne, String text) {
 
         //AVSÄNDARENS ADRESS
         String mailFran = new String("javagrupp2@gmail.com");
@@ -103,7 +103,7 @@ public class Mail {
         //SÄTTER KONTOUPPGIFTER
         newGmailClient.sattKontoUppgifter(senderUserName, senderPassword);
         //SKICKAR GMAIL MED METODEN SKICKAGMAIL:S INFO
-        newGmailClient.skickaGmail(mailFran, mailTill, amne, valkommen);
+        newGmailClient.skickaGmail(mailFran, mailTill, amne, text);
 
     }
 

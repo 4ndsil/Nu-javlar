@@ -17,6 +17,7 @@ import java.util.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -33,6 +34,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
     //NYTT
     String filename = null;
     byte[] personal_image = null;
+    private byte[] picture;
 //    //?
 //    private byte[] picture;
 
@@ -99,6 +101,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         });
 
         taText.setColumns(20);
+        taText.setLineWrap(true);
         taText.setRows(5);
         jScrollPane1.setViewportView(taText);
 
@@ -327,8 +330,25 @@ public class SkapaInlagg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //NYTT
-    public byte[] getImage() {
-        return personal_image;
+    public byte[] getImage() throws InfException {
+        return picture;
+    }
+
+    public void skickaNotis(String huvudkategori, String rubrik, ArrayList<HashMap<String, String>> mottagare) {
+        String hk = huvudkategori;
+        String amne = "Nytt inlägg har publicerats!";
+
+        for (HashMap<String, String> resultat : mottagare) {
+            String fnamn = resultat.get("FORNAMN");
+            String email = resultat.get("MAIL");
+
+            String text = "Hej " + fnamn + "!"
+                    + "\nEtt nytt inlägg har skapats inom kategorin " + hk + ":"
+                    + "\n <i>" + rubrik + "</i>"
+                    + "\n\n Gå in på plattformen för att se inlägget.";
+
+            Mail.start(email, amne, text);
+        }
     }
 
     private void fyllHuvudkategoriComboBox() {
@@ -468,7 +488,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         if (Validering.textFaltHarVarde(rubrik)) {
             if (Validering.textFaltHarVarde(text)) {
                 try {
-                                       
+
                     //TILLDELAR INLAGG AUTOMATISKT ID 
                     String fetchMaxID = db.fetchSingle("SELECT MAX(BLOGGID) FROM BLOGGINLAGG");
                     int bloggId = Integer.parseInt(fetchMaxID) + 1;
@@ -477,7 +497,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                             + "', '" + null + "', '" + text + "', '" + null + "', " + hid + ", '" + pnr + "'," + uid + ")";
                     try {
                         db.insert(skapaInlagg);
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Oj, vad hände nu?");
                     }
 
@@ -509,7 +529,14 @@ public class SkapaInlagg extends javax.swing.JFrame {
                             break;
                         default:
                             break;
+
                     }
+                    ArrayList<HashMap<String, String>> mottagare;
+                    String sql = "SELECT ANVANDARE.FORNAMN, EMAIL.MAIL FROM ANVANDARE "
+                    + "JOIN EMAIL ON EMAIL.PNR = ANVANDARE.PNR";
+                    mottagare = db.fetchRows(sql);
+                    skickaNotis(huvudkategori, rubrik, mottagare);
+                    
                     //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
                 } catch (InfException e) {
                     JOptionPane.showMessageDialog(null, "Något gick fel..");
@@ -522,8 +549,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Var snäll och skriv en rubrik.");
 
-        
-    }
+        }
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
@@ -595,7 +621,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         // An implementation of the Icon interface that paints Icons from Images.
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblBilden.getWidth(), lblBilden.getHeight(), Image.SCALE_SMOOTH));
         lblBilden.setIcon(imageIcon);
-        try{
+        try {
             File image = new File(filename);
             // A FileInputStream obtains input bytes from a file in a file system.
             // FileInputStream is meant for reading streams of raw bytes such as image data.
@@ -606,19 +632,18 @@ public class SkapaInlagg extends javax.swing.JFrame {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
             // read() Reads a byte of data from this input stream.
-            for(int readNum; (readNum = fis.read(buf)) != -1;){
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
                 // Writes len bytes from the specified byte array starting at offset off to 
                 // this byte array output stream.
                 bos.write(buf, 0, readNum);
-                
+
             }
             // Creates a newly allocated byte array.
             personal_image = bos.toByteArray();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
     }//GEN-LAST:event_btnBildfilActionPerformed
 
 
