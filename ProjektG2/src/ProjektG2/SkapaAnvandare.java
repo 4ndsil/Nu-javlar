@@ -22,7 +22,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
      */
     public SkapaAnvandare(InfDB idb) {
         initComponents();
-        this.db = db;
+        this.db = idb;
     }
 
     /**
@@ -304,7 +304,7 @@ public class SkapaAnvandare extends javax.swing.JFrame {
         String titeln = tfTitel.getText();
         String fnamn = tfFornamn.getText();
         String enamn = tfEfternamn.getText();
-        String beskrivning = tfBeskrivning.getText();
+        String beskrivningen = tfBeskrivning.getText();
         String kontorsnr = tfRum.getText();
         String losenord = tfLosen.getText();
         String admin = "V"; //Sätter användare till icke admin by default
@@ -313,14 +313,14 @@ public class SkapaAnvandare extends javax.swing.JFrame {
 
         //KOLLAR OM NÅGON RUTA ÄR TOM
         if (Validering.textFaltHarVarde(pnr) && Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(fnamn)
-                && Validering.textFaltHarVarde(enamn) && Validering.textFaltHarVarde(beskrivning) && Validering.textFaltHarVarde(kontorsnr)
+                && Validering.textFaltHarVarde(enamn) && Validering.textFaltHarVarde(beskrivningen) && Validering.textFaltHarVarde(kontorsnr)
                 && Validering.textFaltHarVarde(losenord) && Validering.textFaltHarVarde(email)) {
 
             //KOLLA OM NAMN ELLER EFTERNAMN ÄR I BOKSTÄVER
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
 
-                //KOLLAR OM PERSONNR ÄR SIFFRA
-                if (Validering.vardeArSiffra(tfPnr) && tfPnr.getText().length() == 12) {
+                //KOLLAR OM PERSONNR ÄR TOLV TECKEN
+                if (tfPnr.getText().length() == 12) {
 
                     //VARIABLAR FÖR EMAIL
                     String amne = "Nytt konto har skapats";
@@ -328,21 +328,22 @@ public class SkapaAnvandare extends javax.swing.JFrame {
                             + "Ditt användarnamn är: " + pnr + " \n"
                             + "Ditt lösenord är: " + losenord;
 
+                    String laggTillAnvandare = "INSERT INTO ANVANDARE VALUES ('" + pnr + "', '" + fnamn + "', '" 
+                                + beskrivningen + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln 
+                                + "', '" + admin + "', '" + enamn + "')";
+                    String laggTillEmail = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "','" + notis + "', '" + pnr + "')";
+
                     try {
-
-                        String fraga = "INSERT INTO anvandare(PNR, fornamn, efternamn, beskrivning, losenord, kontorsnr, titel, adminstatus) VALUES(" + pnr + ", '" + fnamn + "', '" + enamn + "', '" + beskrivning + "', '" + losenord + "', '" + kontorsnr + "', '" + titeln + "', '" + admin + "')";
-                        db.insert(fraga); // Uppdaterar databasen
-
-                        String fraga2 = "INSERT INTO EMAIL(MAIL, NOTIS, PNR) VALUES('" + email + "', '" + notis + "', '" + pnr + "')";
-
+                        db.insert(laggTillAnvandare);
+                        db.insert(laggTillEmail); // Uppdaterar databasen  
+                                                
                         JOptionPane.showMessageDialog(null, "Användaren har lagts till i systemet");
-                        db.insert(fraga2); // Uppdaterar databasen         
 
                         //KÖR METOD FÖR ATT SKICKA MAIL I KLASSEN START
                         Mail.start(email, amne, valkommen);
 
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
+                        JOptionPane.showMessageDialog(null, "Ops! Något gick fel!"); // Pop up felmeddelande
                     }
                     // PERSONNUMMRET ÄR INTE 12 SIFFOR
                     } else {
