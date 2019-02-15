@@ -40,13 +40,15 @@ public class AdminHuvud extends javax.swing.JFrame {
         miSkapaAnvandare = new javax.swing.JMenuItem();
         miSkapaHuvudkategori = new javax.swing.JMenuItem();
         miUnderkategori = new javax.swing.JMenuItem();
+        mMote = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        miAnvandare = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miLoggaUt = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        miAnvandare = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,7 +119,50 @@ public class AdminHuvud extends javax.swing.JFrame {
         });
         mLaggTill.add(miUnderkategori);
 
+        mMote.setText("Möte");
+        mMote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mMoteActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(mMote);
+
         mbAdminHuvud.add(mLaggTill);
+
+        jMenu2.setText("Ta bort");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miAnvandare.setText("Användare");
+        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAnvandareActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miAnvandare);
+
+        jMenuItem2.setText("Möte");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        mbAdminHuvud.add(jMenu2);
+
+        jMenu1.setText("Kalender");
+        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        mbAdminHuvud.add(jMenu1);
 
         mProfil.setText("Profil");
         mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -140,33 +185,6 @@ public class AdminHuvud extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mProfil);
 
-        jMenu1.setText("Kalender");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jMenuItem1.setText("Se Kalender");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        mbAdminHuvud.add(jMenu1);
-
-        jMenu2.setText("Ta bort");
-        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        miAnvandare.setText("Användare");
-        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miAnvandareActionPerformed(evt);
-            }
-        });
-        jMenu2.add(miAnvandare);
-
-        mbAdminHuvud.add(jMenu2);
-
         setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,7 +201,7 @@ public class AdminHuvud extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(lblRubrikAdminHuvud)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,14 +263,24 @@ public class AdminHuvud extends javax.swing.JFrame {
        new TaBortAnvandare(db).setVisible(true);
     }//GEN-LAST:event_miAnvandareActionPerformed
 
+    private void mMoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMoteActionPerformed
+        new SkapaMote(db).setVisible(true);
+    }//GEN-LAST:event_mMoteActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new TabortMote(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
+    private javax.swing.JMenuItem mMote;
     private javax.swing.JMenu mProfil;
     private javax.swing.JMenu mStart;
     private javax.swing.JMenuBar mbAdminHuvud;
