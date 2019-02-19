@@ -63,5 +63,16 @@ public class Validering{
         }
         return arSiffra;
     } 
+    public static boolean arTid(JTextField rutaAttKolla){
+    
+    boolean arTid = false;
+
+        if (rutaAttKolla.getText().matches("([01]?[0-9]|2[0-3]).[0-5][0-9]")) {
+            arTid = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Var god skriv in korrekt tidsformat.");
+        }
+        return arTid;
+    }  
     
 }
