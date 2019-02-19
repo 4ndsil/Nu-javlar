@@ -54,6 +54,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+
         <Menu class="javax.swing.JMenu" name="mProfil">
           <Properties>
             <Property name="text" type="java.lang.String" value="Profil"/>
@@ -410,5 +411,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chbInformellActionPerformed"/>
       </Events>
     </Component>
+
   </SubComponents>
 </Form>
