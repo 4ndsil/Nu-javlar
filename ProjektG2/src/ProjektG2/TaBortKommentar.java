@@ -33,13 +33,17 @@ public class TaBortKommentar extends javax.swing.JFrame {
 
             DefaultListModel list = new DefaultListModel();
             ArrayList<HashMap<String, String>> anvandare;
-            String sql = "SELECT DATUM, TEXT FROM KOMMENTAR WHERE PNR = " + inloggadPerson;
+            String sql = "SELECT KOMMENTAR.KID, KOMMENTAR.DATUM, KOMMENTAR.TEXT, BLOGGINLAGG.RUBRIK FROM KOMMENTAR\n" +
+            "JOIN BLOGGINLAGG ON BLOGGINLAGG.BLOGGID = KOMMENTAR.BLOGGID\n" +
+            "WHERE KOMMENTAR.PNR = '" + inloggadPerson +"'";
             anvandare = db.fetchRows(sql);
 
             anvandare.stream().map((hittad) -> {
                 String datum = hittad.get("DATUM");
                 String text = hittad.get("TEXT");
-                list.addElement("Datum: " + datum + " Kommentar: " + text);
+                String rubrik = hittad.get("RUBRIK");
+                String KID = hittad.get("KID");
+                list.addElement(" Rubrik: " + rubrik + ". Datum: " + datum + " Kommentar: " + text + " Kommentars-ID: " + KID);
                 return hittad;
             }).forEachOrdered((_item) -> {
                 lKommentarer.setModel(list);
@@ -117,18 +121,15 @@ public class TaBortKommentar extends javax.swing.JFrame {
         DefaultListModel list = (DefaultListModel) lKommentarer.getModel();
         String valdKommentar = lKommentarer.getSelectedValue();
 
-        String[] part = valdKommentar.split("Kommentar: ");
+        String[] part = valdKommentar.split("Kommentars-ID: ");
         for (int i = 0; i < part.length; i++) {
             String felDel = part[0];
             String rättDel = part[1];
-
+            System.out.print(rättDel);
             {
                 try {
-                    db.update("UPDATE KOMMENTAR SET PNR = NULL WHERE TEXT ='" + rättDel + "'");
 
-                    db.update("UPDATE KOMMENTAR SET BLOGGID = NULL WHERE TEXT ='" + rättDel + "'");
-
-                    String sql1 = "DELETE FROM KOMMENTAR WHERE TEXT ='" + rättDel + "'";
+                    String sql1 = "DELETE FROM KOMMENTAR WHERE KID =" + rättDel;
                     db.delete(sql1);
 
                 } catch (InfException e) {
@@ -139,6 +140,7 @@ public class TaBortKommentar extends javax.swing.JFrame {
             fyllLista();
     }//GEN-LAST:event_btnTaBortActionPerformed
     }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
