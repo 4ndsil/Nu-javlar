@@ -16,12 +16,14 @@ import oru.inf.InfException;
  *
  * @author andre
  */
-public class TabortMote extends javax.swing.JFrame {
+public class BjudInTillMote extends javax.swing.JFrame {
 
     private InfDB db;
-    public TabortMote(InfDB db) {
+    private Mail mail;
+    public BjudInTillMote(InfDB db) {
         initComponents();
         this.db = db;
+        listaAnvandare();
         lista();
     }
 
@@ -34,13 +36,18 @@ public class TabortMote extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lAnvandare = new javax.swing.JList<>();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lMoten = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lAnvandare1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnTaBort = new javax.swing.JButton();
-        mbAdminHuvud = new javax.swing.JMenuBar();
+        btnLaggTill = new javax.swing.JButton();
+        lblRubrikAdminHuvud = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
         mBlogg = new javax.swing.JMenu();
@@ -50,19 +57,23 @@ public class TabortMote extends javax.swing.JFrame {
         miSkapaAnvandare = new javax.swing.JMenuItem();
         miSkapaHuvudkategori = new javax.swing.JMenuItem();
         miUnderkategori = new javax.swing.JMenuItem();
-        mMote = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        miAnvandare = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miLoggaUt = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        miAnvandare = new javax.swing.JMenuItem();
+
+        lAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lAnvandare.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(lAnvandare);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setDoubleBuffered(false);
 
         lMoten.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lMoten.setModel(new javax.swing.AbstractListModel<String>() {
@@ -72,51 +83,75 @@ public class TabortMote extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lMoten);
 
-        jLabel1.setFont(new java.awt.Font("Menlo", 0, 36)); // NOI18N
-        jLabel1.setText("Ta bort möte");
+        lAnvandare1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lAnvandare1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(lAnvandare1);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Användare");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Inplanerade möten");
 
-        btnTaBort.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnTaBort.setText("Ta bort");
-        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+        btnLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnLaggTill.setText("Lägg till");
+        btnLaggTill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBortActionPerformed(evt);
+                btnLaggTillActionPerformed(evt);
             }
         });
+
+        lblRubrikAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblRubrikAdminHuvud.setText("Bjud in till möte");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(btnTaBort)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLaggTill))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblRubrikAdminHuvud)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(lblRubrikAdminHuvud)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTaBort))
-                .addGap(42, 42, 42))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(btnLaggTill)
+                .addGap(41, 41, 41))
         );
-
-        mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mbAdminHuvud.setRequestFocusEnabled(false);
 
         mStart.setText("Start");
         mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -129,7 +164,7 @@ public class TabortMote extends javax.swing.JFrame {
         });
         mStart.add(miTillStart);
 
-        mbAdminHuvud.add(mStart);
+        jMenuBar1.add(mStart);
 
         mBlogg.setText("Blogg");
         mBlogg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -150,7 +185,7 @@ public class TabortMote extends javax.swing.JFrame {
         });
         mBlogg.add(miSkapaInlagg);
 
-        mbAdminHuvud.add(mBlogg);
+        jMenuBar1.add(mBlogg);
 
         mLaggTill.setText("Lägg till");
         mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -179,50 +214,7 @@ public class TabortMote extends javax.swing.JFrame {
         });
         mLaggTill.add(miUnderkategori);
 
-        mMote.setText("Möte");
-        mMote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mMoteActionPerformed(evt);
-            }
-        });
-        mLaggTill.add(mMote);
-
-        mbAdminHuvud.add(mLaggTill);
-
-        jMenu2.setText("Ta bort");
-        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        miAnvandare.setText("Användare");
-        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miAnvandareActionPerformed(evt);
-            }
-        });
-        jMenu2.add(miAnvandare);
-
-        jMenuItem2.setText("Möte");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
-
-        mbAdminHuvud.add(jMenu2);
-
-        jMenu1.setText("Kalender");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jMenuItem1.setText("Se Kalender");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        mbAdminHuvud.add(jMenu1);
+        jMenuBar1.add(mLaggTill);
 
         mProfil.setText("Profil");
         mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -243,25 +235,58 @@ public class TabortMote extends javax.swing.JFrame {
         });
         mProfil.add(miLoggaUt);
 
-        mbAdminHuvud.add(mProfil);
+        jMenuBar1.add(mProfil);
 
-        setJMenuBar(mbAdminHuvud);
+        jMenu3.setText("Kalender");
+        jMenu3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jMenuItem1.setText("Se Kalender");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Ta bort");
+        jMenu4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miAnvandare.setText("Användare");
+        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAnvandareActionPerformed(evt);
+            }
+        });
+        jMenu4.add(miAnvandare);
+
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void lista() {
+     public void lista() {
         lMoten.clearSelection();
 
         try {
@@ -282,13 +307,33 @@ public class TabortMote extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
+     
+      public void listaAnvandare() {
+        lAnvandare1.clearSelection();
+
+        try {
+            DefaultListModel list = new DefaultListModel();
+            ArrayList<HashMap<String, String>> anvandare;
+            String sql = "SELECT FORNAMN, EFTERNAMN FROM ANVANDARE";
+            anvandare = db.fetchRows(sql);
+
+            for (HashMap<String, String> hittad : anvandare) {
+                String fnamn = hittad.get("FORNAMN");
+                String enamn = hittad.get("EFTERNAMN");
+                list.addElement(fnamn + " " + enamn);
+
+                lAnvandare1.setModel(list);
+            }
+        } catch (InfException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
         //STÄNGER NUVARANDE FLIK
         dispose();
         //ÖPPNAR STARTSIDA
         new AdminHuvud(db).setVisible(true);
-
     }//GEN-LAST:event_miTillStartActionPerformed
 
     private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
@@ -317,24 +362,6 @@ public class TabortMote extends javax.swing.JFrame {
         new SkapaUnderkategori(db).setVisible(true);
     }//GEN-LAST:event_miUnderkategoriActionPerformed
 
-    private void mMoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMoteActionPerformed
-        new SkapaMote(db).setVisible(true);
-    }//GEN-LAST:event_mMoteActionPerformed
-
-    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
-        dispose();
-        new TaBortAnvandare(db).setVisible(true);
-    }//GEN-LAST:event_miAnvandareActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new TabortMote(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        dispose();
-        new GemensamKalender(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
         dispose();
         new Profil(db).setVisible(true);
@@ -345,61 +372,63 @@ public class TabortMote extends javax.swing.JFrame {
         new LoggaIn(db).setVisible(true);
     }//GEN-LAST:event_miLoggaUtActionPerformed
 
-    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
-        DefaultListModel list = (DefaultListModel) lMoten.getModel();
-//        list.setSelectedIndex(0);
-       
-        String dela = lMoten.getSelectedValue();
+        dispose();
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
+        dispose();
+        new TaBortAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miAnvandareActionPerformed
+
+    private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
         
+        String mote = lMoten.getSelectedValue();
+        String dela = lAnvandare1.getSelectedValue();
+
+        String[] anvandare = dela.split(" ");
+        for (int i = 0; i < anvandare.length; i++) {
+            String fnamn = anvandare[0];
+            String enamn = anvandare[1];
         
-        String[] mote = dela.split(" ", 3);
-        for (int i = 0; i < mote.length; i++) {
-            String titel = mote[0];
-            String datum = mote[1];
-            String tid = mote[2];
-            
-            String[] tid2 = tid.split("-",2);
-            for (int i1 = 0; i1 < tid2.length; i1++) {
-                String start = tid2[0];
-                String slut = tid2[1];
-           
-                try {
-                    String id = "SELECT MOTESID FROM MOTE WHERE TITEL ='" + titel + "' AND DATUM ='" + datum + "' AND STARTTID ='" + start + "' AND SLUTTID ='" + slut +"'";
-                    String id1 = db.fetchSingle(id);
+            try {
+                
+                String mottagare = "SELECT MAIL FROM EMAIL WHERE PNR =(SELECT PNR FROM ANVANDARE WHERE FORNAMN = '" + fnamn + "' AND EFTERNAMN = '" + enamn + "')";
+                String varde = db.fetchSingle(mottagare);
+                String amne = "Inbjudan till möte.";
+                String text = "Du har fått en inbjudan till mötet" + mote + ", var god svara om du kan delta.";
 
-                    db.update("UPDATE DELTAMOTE SET MOTESID = NULL WHERE MOTESID =" + id1 + "");
-
-                    String sql = "DELETE FROM MOTE WHERE MOTESID =" + id1 + "";
-                    db.delete(sql);
-
-                } catch (InfException e) {
-                    System.out.println(e.getMessage());
-                }
+                mail.start(varde, amne, text);
+                
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
-        list.removeElement(lMoten.getSelectedValue());
-        JOptionPane.showMessageDialog(null, "Mötet har tagits bort");
-        lista();
-    }//GEN-LAST:event_btnTaBortActionPerformed
+            JOptionPane.showMessageDialog(null, dela + " har fått en inbjudan till mötet " + mote + ".");
+    }//GEN-LAST:event_btnLaggTillActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnLaggTill;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JList<String> lAnvandare;
+    private javax.swing.JList<String> lAnvandare1;
     private javax.swing.JList<String> lMoten;
+    private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
-    private javax.swing.JMenuItem mMote;
     private javax.swing.JMenu mProfil;
     private javax.swing.JMenu mStart;
-    private javax.swing.JMenuBar mbAdminHuvud;
     private javax.swing.JMenuItem miAnvandare;
     private javax.swing.JMenuItem miLoggaUt;
     private javax.swing.JMenuItem miSkapaAnvandare;

@@ -41,6 +41,7 @@ public class AdminHuvud extends javax.swing.JFrame {
         miSkapaHuvudkategori = new javax.swing.JMenuItem();
         miUnderkategori = new javax.swing.JMenuItem();
         mMote = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miAnvandare = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -126,6 +127,14 @@ public class AdminHuvud extends javax.swing.JFrame {
             }
         });
         mLaggTill.add(mMote);
+
+        jMenuItem3.setText("Person till möte");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mLaggTill.add(jMenuItem3);
 
         mbAdminHuvud.add(mLaggTill);
 
@@ -264,12 +273,19 @@ public class AdminHuvud extends javax.swing.JFrame {
     }//GEN-LAST:event_miAnvandareActionPerformed
 
     private void mMoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMoteActionPerformed
+        dispose();
         new SkapaMote(db).setVisible(true);
     }//GEN-LAST:event_mMoteActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        dispose();
         new TabortMote(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        dispose();
+        new BjudInTillMote(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -277,6 +293,7 @@ public class AdminHuvud extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JLabel lblRubrikAdminHuvud;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
