@@ -5,6 +5,7 @@
  */
 package ProjektG2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -75,7 +76,6 @@ public class VisaInlagg extends javax.swing.JFrame {
     
     public void fyllCbRubrik() {
        
-        System.out.print(cbUKategori.getSelectedItem().toString());
         
         cbRubrik.removeAllItems();
         
@@ -115,7 +115,7 @@ public class VisaInlagg extends javax.swing.JFrame {
 
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            JOptionPane.showMessageDialog(null, "Något gick fel 1.");
             System.out.println(e.getMessage());
         }
 
@@ -143,7 +143,7 @@ public class VisaInlagg extends javax.swing.JFrame {
 
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            JOptionPane.showMessageDialog(null, "Något gick fel 2.");
             System.out.println(e.getMessage());
         }
 
@@ -175,7 +175,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
 
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            JOptionPane.showMessageDialog(null, "Något gick fel 3.");
             System.out.println(e.getMessage());
         }    
     }
@@ -187,10 +187,7 @@ public class VisaInlagg extends javax.swing.JFrame {
 
             try{
 
-            String fraga =  "SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG\n" +
-                            "JOIN UNDERKATEGORI \n" +
-                            "ON BLOGGINLAGG.UID = UNDERKATEGORI.UID\n" +
-                            "WHERE UNDERKATEGORI.NAMN ='" + cbRubrik.getSelectedItem() + "'";
+            String fraga = "SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG WHERE RUBRIK = '" + cbRubrik.getSelectedItem() + "'";
             
             ArrayList<HashMap<String, String>> listaBloggInlagg;
             listaBloggInlagg = db.fetchRows(fraga);
@@ -203,6 +200,37 @@ public class VisaInlagg extends javax.swing.JFrame {
                 taInlagg.append(rubrik + "\n" + datum + "\n" + innehall + "\n\n");
             }
 
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel 4.");
+            System.out.println(e.getMessage());
+        }    
+    }
+    
+    private void kommenteraValtInlagg() {
+    // Kommentera valt inlägg
+
+            int kid = 0;
+            
+            // SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
+            // datum = format1.format(datum);
+            // System.out.print(datum);
+            
+            try{
+//            String datum = "20180101";
+            String fetchMaxID = db.fetchSingle("SELECT MAX(KID) FROM KOMMENTAR");
+            kid = Integer.parseInt(fetchMaxID) + 1;
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
+            Date date = new Date();
+            String datum = format1.format(date);
+            String text = tfKommentar.getText();
+            String varde = cbRubrik.getSelectedItem().toString();
+            String bloggId = db.fetchSingle("SELECT BLOGGID FROM BLOGGINLAGG WHERE RUBRIK = '"+ varde + "'");
+            String pnr = LoggaIn.returneraInloggadPnr();
+                
+                
+            String fraga = "INSERT INTO KOMMENTAR(KID, DATUM, TEXT, BLOGGID, PNR) VALUES(" + kid + ", '" + datum + "', '" + text + "', '" + bloggId + "', '" + pnr + "')";
+            db.insert(fraga);
+            
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel.");
             System.out.println(e.getMessage());
@@ -537,10 +565,11 @@ public class VisaInlagg extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbVisaInlagg)
-                    .addComponent(jToggleButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbVisaInlagg, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jToggleButton2)))
                 .addGap(4, 4, 4)
                 .addComponent(jLabel7)
                 .addGap(36, 36, 36)
@@ -613,27 +642,29 @@ public class VisaInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jbKommenteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbKommenteraActionPerformed
-        // Knapp för att kommentera inlägg
-        
-                //DATUM OBJEKT 
-        Date date = new Date();
-        
-        try {
-            String kommentar = tfKommentar.getText(); 
-            
-                //TILLDELAR KOMMENTAR AUTOMATISKT ID
-                String fetchMaxID = db.fetchSingle("SELECT MAX(KID) FROM KOMMENTAR");
-                int KID = Integer.parseInt(fetchMaxID) + 1;
-                
-                String fraga1 = "INSERT INTO kommentar(text) VALUES('" + KID + "', '" + date + "', '" + kommentar + "');"; // SQL fråga
-                db.insert(fraga1); // Uppdaterar databasen
+        kommenteraValtInlagg();
 
-            JOptionPane.showMessageDialog(null, "Tack för din kommentar!"); // Pop up meddelande när eleven lagts till i databasen
-        }
-
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
-        }
+//        // Knapp för att kommentera inlägg
+//        
+//                //DATUM OBJEKT 
+//        Date date = new Date();
+//        
+//        try {
+//            String kommentar = tfKommentar.getText(); 
+//            
+//                //TILLDELAR KOMMENTAR AUTOMATISKT ID
+//                String fetchMaxID = db.fetchSingle("SELECT MAX(KID) FROM KOMMENTAR");
+//                int KID = Integer.parseInt(fetchMaxID) + 1;
+//                
+//                String fraga1 = "INSERT INTO kommentar(KID, DATUM, TEXT VALUES('" + KID + "', '" + date + "', '" + kommentar + "');"; // SQL fråga
+//                db.insert(fraga1); // Uppdaterar databasen
+//
+//            JOptionPane.showMessageDialog(null, "Tack för din kommentar!"); // Pop up meddelande när eleven lagts till i databasen
+//        }
+//
+//        catch(InfException e) {
+//            JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
+//        }
         
     }//GEN-LAST:event_jbKommenteraActionPerformed
 
