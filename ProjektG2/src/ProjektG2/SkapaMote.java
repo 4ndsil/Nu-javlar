@@ -323,7 +323,6 @@ public class SkapaMote extends javax.swing.JFrame {
 
     public void lista() {
         lMoten.clearSelection();
-
         try {
             DefaultListModel list = new DefaultListModel();
             ArrayList<HashMap<String, String>> anvandare;
@@ -342,7 +341,6 @@ public class SkapaMote extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
         //STÄNGER NUVARANDE FLIK
         dispose();
@@ -389,7 +387,6 @@ public class SkapaMote extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         dispose();
-
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -443,7 +440,6 @@ public class SkapaMote extends javax.swing.JFrame {
         }
         return id;
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkapa;
     private com.toedter.calendar.JCalendar jCal;
