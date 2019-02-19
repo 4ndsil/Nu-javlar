@@ -211,10 +211,38 @@ public class AdminHuvud extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addComponent(lblRubrikAdminHuvud)
                 .addContainerGap(299, Short.MAX_VALUE))
+
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
+        dispose();
+        new LoggaIn(db).setVisible(true);
+    }//GEN-LAST:event_miLoggaUtActionPerformed
+
+    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
+        dispose();
+        new Profil(db).setVisible(true);
+    }//GEN-LAST:event_miVisaProfilActionPerformed
+
+    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
+        dispose();
+        new SkapaUnderkategori(db).setVisible(true);
+    }//GEN-LAST:event_miUnderkategoriActionPerformed
+
+    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
+        dispose();
+        new SkapaHuvudkategori(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
 
     private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
         dispose();
@@ -222,50 +250,23 @@ public class AdminHuvud extends javax.swing.JFrame {
     }//GEN-LAST:event_miSkapaAnvandareActionPerformed
 
     private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
-      dispose();
-        new SkapaInlagg(db).setVisible(true); 
+        dispose();
+        new SkapaInlagg(db).setVisible(true);
     }//GEN-LAST:event_miSkapaInlaggActionPerformed
 
-    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
-         dispose();
-        new Profil(db).setVisible(true);  
-    }//GEN-LAST:event_miVisaProfilActionPerformed
-
     private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
-    
-       dispose();
-        new VisaInlagg(db).setVisible(true);  
-    }//GEN-LAST:event_miVisaInlaggActionPerformed
 
-    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
-      dispose();
-        new SkapaHuvudkategori(db).setVisible(true);  
-    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
-
-    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
         dispose();
-        new SkapaUnderkategori(db).setVisible(true);  
-    }//GEN-LAST:event_miUnderkategoriActionPerformed
-
-    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
-    dispose();
-    new LoggaIn(db).setVisible(true);
-    }//GEN-LAST:event_miLoggaUtActionPerformed
+        new VisaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miVisaInlaggActionPerformed
 
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
         //STÄNGER NUVARANDE FLIK
         dispose();
-        //ÖPPNAR STARTSIDA 
+        //ÖPPNAR STARTSIDA
         new AdminHuvud(db).setVisible(true);
-    
-    }//GEN-LAST:event_miTillStartActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        
-        new GemensamKalender(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_miTillStartActionPerformed
 
     private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
         dispose();
