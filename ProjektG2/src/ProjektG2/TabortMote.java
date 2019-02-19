@@ -5,19 +5,24 @@
  */
 package ProjektG2;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
  * @author andre
  */
-public class AdminHuvud extends javax.swing.JFrame {
+public class TabortMote extends javax.swing.JFrame {
 
     private InfDB db;
-    
-    public AdminHuvud(InfDB db) {
+    public TabortMote(InfDB db) {
         initComponents();
         this.db = db;
+        lista();
     }
 
     /**
@@ -29,7 +34,12 @@ public class AdminHuvud extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblRubrikAdminHuvud = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lMoten = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnTaBort = new javax.swing.JButton();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -41,7 +51,6 @@ public class AdminHuvud extends javax.swing.JFrame {
         miSkapaHuvudkategori = new javax.swing.JMenuItem();
         miUnderkategori = new javax.swing.JMenuItem();
         mMote = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         miAnvandare = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -53,8 +62,58 @@ public class AdminHuvud extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblRubrikAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        lblRubrikAdminHuvud.setText("Välkommen till lärarplattformen för informatik");
+        jPanel1.setDoubleBuffered(false);
+
+        lMoten.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lMoten.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lMoten);
+
+        jLabel1.setFont(new java.awt.Font("Menlo", 0, 36)); // NOI18N
+        jLabel1.setText("Ta bort möte");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Inplanerade möten");
+
+        btnTaBort.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnTaBort.setText("Ta bort");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(btnTaBort)))
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTaBort))
+                .addGap(42, 42, 42))
+        );
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -128,14 +187,6 @@ public class AdminHuvud extends javax.swing.JFrame {
         });
         mLaggTill.add(mMote);
 
-        jMenuItem3.setText("Person till möte");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        mLaggTill.add(jMenuItem3);
-
         mbAdminHuvud.add(mLaggTill);
 
         jMenu2.setText("Ta bort");
@@ -200,66 +251,38 @@ public class AdminHuvud extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblRubrikAdminHuvud)
-                .addContainerGap(135, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(lblRubrikAdminHuvud)
-                .addContainerGap(299, Short.MAX_VALUE))
-
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        dispose();
+    public void lista() {
+        lMoten.clearSelection();
 
-        new GemensamKalender(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        try {
+            DefaultListModel list = new DefaultListModel();
+            ArrayList<HashMap<String, String>> anvandare;
+            String sql = "SELECT TITEL, DATUM, STARTTID, SLUTTID FROM MOTE";
+            anvandare = db.fetchRows(sql);
 
-    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
-        dispose();
-        new LoggaIn(db).setVisible(true);
-    }//GEN-LAST:event_miLoggaUtActionPerformed
-
-    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
-        dispose();
-        new Profil(db).setVisible(true);
-    }//GEN-LAST:event_miVisaProfilActionPerformed
-
-    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
-        dispose();
-        new SkapaUnderkategori(db).setVisible(true);
-    }//GEN-LAST:event_miUnderkategoriActionPerformed
-
-    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
-        dispose();
-        new SkapaHuvudkategori(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
-
-    private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
-        dispose();
-        new SkapaAnvandare(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaAnvandareActionPerformed
-
-    private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
-        dispose();
-        new SkapaInlagg(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaInlaggActionPerformed
-
-    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
-
-        dispose();
-        new VisaInlagg(db).setVisible(true);
-    }//GEN-LAST:event_miVisaInlaggActionPerformed
-
+            for (HashMap<String, String> hittad : anvandare) {
+                String titel = hittad.get("TITEL");
+                String datum = hittad.get("DATUM");
+                String start = hittad.get("STARTTID");
+                String slut = hittad.get("SLUTTID");
+                list.add(0, titel + " " + datum + " " + start + "-" + slut);
+                lMoten.setModel(list);
+            }
+        } catch (InfException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
         //STÄNGER NUVARANDE FLIK
         dispose();
@@ -268,34 +291,109 @@ public class AdminHuvud extends javax.swing.JFrame {
 
     }//GEN-LAST:event_miTillStartActionPerformed
 
-    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
+    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
+
         dispose();
-       new TaBortAnvandare(db).setVisible(true);
-    }//GEN-LAST:event_miAnvandareActionPerformed
+        new VisaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miVisaInlaggActionPerformed
+
+    private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
+        dispose();
+        new SkapaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaInlaggActionPerformed
+
+    private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
+        dispose();
+        new SkapaAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaAnvandareActionPerformed
+
+    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
+        dispose();
+        new SkapaHuvudkategori(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
+
+    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
+        dispose();
+        new SkapaUnderkategori(db).setVisible(true);
+    }//GEN-LAST:event_miUnderkategoriActionPerformed
 
     private void mMoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMoteActionPerformed
-        dispose();
         new SkapaMote(db).setVisible(true);
     }//GEN-LAST:event_mMoteActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
         dispose();
+        new TaBortAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miAnvandareActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         new TabortMote(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         dispose();
-        new BjudInTillMote(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
+        dispose();
+        new Profil(db).setVisible(true);
+    }//GEN-LAST:event_miVisaProfilActionPerformed
+
+    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
+        dispose();
+        new LoggaIn(db).setVisible(true);
+    }//GEN-LAST:event_miLoggaUtActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        
+        DefaultListModel list = (DefaultListModel) lMoten.getModel();
+//        list.setSelectedIndex(0);
+       
+        String dela = lMoten.getSelectedValue();
+        
+        
+        String[] mote = dela.split(" ", 3);
+        for (int i = 0; i < mote.length; i++) {
+            String titel = mote[0];
+            String datum = mote[1];
+            String tid = mote[2];
+            
+            String[] tid2 = tid.split("-",2);
+            for (int i1 = 0; i1 < tid2.length; i1++) {
+                String start = tid2[0];
+                String slut = tid2[1];
+           
+                try {
+                    String id = "SELECT MOTESID FROM MOTE WHERE TITEL ='" + titel + "' AND DATUM ='" + datum + "' AND STARTTID ='" + start + "' AND SLUTTID ='" + slut +"'";
+                    String id1 = db.fetchSingle(id);
+
+                    db.update("UPDATE DELTAMOTE SET MOTESID = NULL WHERE MOTESID =" + id1 + "");
+
+                    String sql = "DELETE FROM MOTE WHERE MOTESID =" + id1 + "";
+                    db.delete(sql);
+
+                } catch (InfException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        list.removeElement(lMoten.getSelectedValue());
+        JOptionPane.showMessageDialog(null, "Mötet har tagits bort");
+        lista();
+    }//GEN-LAST:event_btnTaBortActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTaBort;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JLabel lblRubrikAdminHuvud;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> lMoten;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenuItem mMote;

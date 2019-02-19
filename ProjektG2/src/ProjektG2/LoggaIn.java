@@ -53,6 +53,7 @@ public class LoggaIn extends javax.swing.JFrame {
         jLabel1.setText("Logga in");
 
         tfUser.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        tfUser.setText("444444444444");
         tfUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfUserActionPerformed(evt);
@@ -60,6 +61,7 @@ public class LoggaIn extends javax.swing.JFrame {
         });
 
         pfText.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        pfText.setText("4");
         pfText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pfTextActionPerformed(evt);

@@ -401,7 +401,8 @@ public class Profil extends javax.swing.JFrame {
         String email = tfMail.getText();
         String losen = tfLosen2.getText();
         String user = loggaIn.returneraInloggadPnr();
-
+        System.out.println(user);
+        
         if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
                 if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
