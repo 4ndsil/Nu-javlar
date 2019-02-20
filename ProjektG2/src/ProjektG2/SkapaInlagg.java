@@ -294,7 +294,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addComponent(btnBildfil)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tfBildfilNamn, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                                                .addComponent(tfBildfilNamn)))
                                         .addGap(8, 8, 8))))
                             .addComponent(cbUnderkategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblVäljHuvudkategori)
@@ -346,6 +346,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     //NYTT

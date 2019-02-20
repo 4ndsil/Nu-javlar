@@ -460,11 +460,10 @@ public class VisaInlagg extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtVisaAllaInlagg)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jbKommentera)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jbKommentera, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
                     .addComponent(tfKommentar))
@@ -508,6 +507,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbKommenteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbKommenteraActionPerformed
