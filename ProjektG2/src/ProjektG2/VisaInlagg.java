@@ -44,7 +44,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             for (String aResult : cbListaHuvudkategori) {
                 cbHKategori.addItem(aResult);
             }}else {
-                JOptionPane.showMessageDialog(null, "Finns ingen underkategori 33333333333333333.");
+                taInlagg.append("Det finns inga Huvudkategorier att visa");
             }
             
         } catch (InfException e) {
@@ -70,7 +70,7 @@ public class VisaInlagg extends javax.swing.JFrame {
                 cbUKategori.addItem(aResult);
             } }
             else {
-                JOptionPane.showMessageDialog(null, "Finns ingen underkategori 11111111.");
+                taInlagg.append("Det finns inga underkatergorier att visa att visa");
             }
         } catch (InfException e) {
             e.printStackTrace();
@@ -78,7 +78,6 @@ public class VisaInlagg extends javax.swing.JFrame {
         
     }
     
-
     public void fyllKommentar() {
 
         try {
@@ -96,7 +95,7 @@ public class VisaInlagg extends javax.swing.JFrame {
                 taKommentar.append(rubrik + "\n" + persnr + "\n" + "\n");
             }}
                 else {
-                JOptionPane.showMessageDialog(null, "Finns inga kommentarer att visa. 999999");
+                taKommentar.append("Det finns inga kommentarer att visa");
             }
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
@@ -126,7 +125,7 @@ public class VisaInlagg extends javax.swing.JFrame {
                 taInlagg.append(rubrik + "\n" + datum + "\n" + innehall + "\n" + "\n");
             }}
             else {
-                JOptionPane.showMessageDialog(null, "Finns inga blogginlägg att visa.");
+                taInlagg.append("Finns inga blogginlägg att visa.");
             }
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
@@ -160,7 +159,7 @@ public class VisaInlagg extends javax.swing.JFrame {
 
                 taInlagg.append(rubrik + "\n" + datum + "\n" + innehall + "\n \n");
             }}else {
-                JOptionPane.showMessageDialog(null, "Finns inga uderkategorier2 att visa.");
+                taInlagg.append("DEt finns inga underkategorier att visa");
             }
 
         } catch (InfException e) {
@@ -168,10 +167,6 @@ public class VisaInlagg extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }    
     }
-  
-    
-  
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,7 +177,6 @@ public class VisaInlagg extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         cbHKategori = new javax.swing.JComboBox<>();
         jScrollPane5 = new javax.swing.JScrollPane();
         taInlagg = new javax.swing.JTextArea();
@@ -207,28 +201,23 @@ public class VisaInlagg extends javax.swing.JFrame {
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
-        mLaggTill = new javax.swing.JMenu();
-        miSkapaAnvandare = new javax.swing.JMenuItem();
-        miSkapaHuvudkategori = new javax.swing.JMenuItem();
-        miUnderkategori = new javax.swing.JMenuItem();
-        mProfil = new javax.swing.JMenu();
-        miVisaProfil = new javax.swing.JMenuItem();
-        miLoggaUt = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        miAnvandare = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        mProfil = new javax.swing.JMenu();
+        miVisaProfil = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        miLoggaUt = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Lärarplattform Informatik: Bloggportal");
 
-        jButton1.setText("Tillbaka");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
+        cbHKategori.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbHKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbHKategoriActionPerformed(evt);
@@ -248,6 +237,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
+        cbUKategori.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbUKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbUKategoriActionPerformed(evt);
@@ -269,6 +259,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         taKommentar.setRows(5);
         jScrollPane2.setViewportView(taKommentar);
 
+        tfKommentar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tfKommentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfKommentarActionPerformed(evt);
@@ -310,6 +301,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
+        jbtVisaAllaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbtVisaAllaInlagg.setText("Visa alla inlägg");
         jbtVisaAllaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,6 +315,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         mStart.setText("Start");
         mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        miTillStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         miTillStart.setText("Till Startsidan");
         miTillStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,6 +329,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         mBlogg.setText("Blogg");
         mBlogg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        miVisaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         miVisaInlagg.setText("Visa inlägg");
         miVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,6 +338,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         });
         mBlogg.add(miVisaInlagg);
 
+        miSkapaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         miSkapaInlagg.setText("Skapa inlägg");
         miSkapaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,59 +349,42 @@ public class VisaInlagg extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mBlogg);
 
-        mLaggTill.setText("Lägg till");
-        mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenu2.setText("Ta bort");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        miSkapaAnvandare.setText("Användare");
-        miSkapaAnvandare.addActionListener(new java.awt.event.ActionListener() {
+        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miAnvandare.setText("Användare");
+        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSkapaAnvandareActionPerformed(evt);
+                miAnvandareActionPerformed(evt);
             }
         });
-        mLaggTill.add(miSkapaAnvandare);
+        jMenu2.add(miAnvandare);
 
-        miSkapaHuvudkategori.setText("Huvudkategori");
-        miSkapaHuvudkategori.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem2.setText("Möte");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSkapaHuvudkategoriActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        mLaggTill.add(miSkapaHuvudkategori);
+        jMenu2.add(jMenuItem2);
 
-        miUnderkategori.setText("Underkategori");
-        miUnderkategori.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem5.setText("Kommentar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miUnderkategoriActionPerformed(evt);
+                jMenuItem5ActionPerformed(evt);
             }
         });
-        mLaggTill.add(miUnderkategori);
+        jMenu2.add(jMenuItem5);
 
-        mbAdminHuvud.add(mLaggTill);
-
-        mProfil.setText("Profil");
-        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        miVisaProfil.setText("Visa profil");
-        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miVisaProfilActionPerformed(evt);
-            }
-        });
-        mProfil.add(miVisaProfil);
-
-        miLoggaUt.setText("Logga ut");
-        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miLoggaUtActionPerformed(evt);
-            }
-        });
-        mProfil.add(miLoggaUt);
-
-        mbAdminHuvud.add(mProfil);
+        mbAdminHuvud.add(jMenu2);
 
         jMenu1.setText("Kalender");
         jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem1.setText("Se Kalender");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,160 +395,120 @@ public class VisaInlagg extends javax.swing.JFrame {
 
         mbAdminHuvud.add(jMenu1);
 
+        mProfil.setText("Profil");
+        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miVisaProfil.setText("Visa profil");
+        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaProfilActionPerformed(evt);
+            }
+        });
+        mProfil.add(miVisaProfil);
+
+        jMenuItem4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem4.setText("Favoritinlägg");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        mProfil.add(jMenuItem4);
+
+        miLoggaUt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miLoggaUt.setText("Logga ut");
+        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLoggaUtActionPerformed(evt);
+            }
+        });
+        mProfil.add(miLoggaUt);
+
+        mbAdminHuvud.add(mProfil);
+
         setJMenuBar(mbAdminHuvud);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(234, 234, 234))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel2)
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(395, 395, 395)
+                        .addComponent(jLabel7))
+                    .addComponent(jLabel2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfKommentar)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jbKommentera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jbVisaInlagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(cbHKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(cbUKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbHKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbUKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnVisaR))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel7))
-                                            .addComponent(btnVisaInlagg))))
+                                .addComponent(btnVisaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbVisaInlagg))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnVisaR, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jbtVisaAllaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jbtVisaAllaInlagg)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jbKommentera)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(tfKommentar))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbHKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbUKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisaR)
-                    .addComponent(jbtVisaAllaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtVisaAllaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVisaR))
                 .addGap(44, 44, 44)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbVisaInlagg, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnVisaInlagg)))
-                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbVisaInlagg)
+                    .addComponent(btnVisaInlagg))
+                .addGap(12, 12, 12)
                 .addComponent(jLabel7)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbKommentera)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(tfKommentar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfKommentar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbKommentera)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(14, 14, 14))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose(); 
-        AdminHuvud a = new AdminHuvud(db);
-        a.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
-        dispose();
-        new AdminHuvud(db).setVisible(true);
-    }//GEN-LAST:event_miTillStartActionPerformed
-
-    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
-        dispose();
-        new VisaInlagg(db).setVisible(true);
-    }//GEN-LAST:event_miVisaInlaggActionPerformed
-
-    private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
-        dispose();
-        new SkapaInlagg(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaInlaggActionPerformed
-
-    private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
-        dispose();
-        new SkapaAnvandare(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaAnvandareActionPerformed
-
-    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
-        dispose();
-        new SkapaHuvudkategori(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
-
-    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
-        dispose();
-        new SkapaUnderkategori(db).setVisible(true);
-    }//GEN-LAST:event_miUnderkategoriActionPerformed
-
-    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
-        dispose();
-        new Profil(db).setVisible(true);
-    }//GEN-LAST:event_miVisaProfilActionPerformed
-
-    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
-        dispose();
-        new LoggaIn(db).setVisible(true);
-    }//GEN-LAST:event_miLoggaUtActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        dispose();
-        new GemensamKalender(db).setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jbKommenteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbKommenteraActionPerformed
         int kid = 0;
@@ -603,14 +541,13 @@ public class VisaInlagg extends javax.swing.JFrame {
             db.insert(fraga);
             JOptionPane.showMessageDialog(null, "Tack för din kommentar!");
         }             else {
-                        JOptionPane.showMessageDialog(null, "Finns ingen kommentar att visa 2");
+                       taInlagg.append("Det Finns ingen kommentar att visa");
                     }
                 } 
         catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel.");
             System.out.println(e.getMessage());
         }
-
     }//GEN-LAST:event_jbKommenteraActionPerformed
 
     private void tfKommentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKommentarActionPerformed
@@ -639,7 +576,9 @@ public class VisaInlagg extends javax.swing.JFrame {
     private void btnVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInlaggActionPerformed
         
                 taInlagg.setText("");
+                if(cbRubrik.getSelectedItem() != null){
             String rubrik = cbRubrik.getSelectedItem().toString();
+                
             try{
 
             String fraga = "SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG WHERE RUBRIK = '" + rubrik + "'";
@@ -655,14 +594,14 @@ public class VisaInlagg extends javax.swing.JFrame {
 
                 taInlagg.append(rubrik1 + "\n" + datum + "\n" + innehall + "\n\n");
             }}else {
-                JOptionPane.showMessageDialog(null, "Finns inga rubrik2 att visa.");
+                taInlagg.append("Det finns inga rubriker att visa.");
             }
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel 4.");
             System.out.println(e.getMessage());
-        }    
-    
+        } 
+            }else {JOptionPane.showMessageDialog(null, "Du måste välja huvud och underkatogori sedan trycka visa rubrik för att kunna välja att se ett specifikt inlägg med vald rubrik i rulllistan! ");}
     }//GEN-LAST:event_btnVisaInlaggActionPerformed
 
     private void btnVisaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaRActionPerformed
@@ -678,7 +617,7 @@ public class VisaInlagg extends javax.swing.JFrame {
                     cbRubrik.addItem(aResult);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Finns ingen rubrik att visa.8888888888888888");
+                taInlagg.append("Det finns inga rubriker att visa.");
             }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -689,14 +628,69 @@ public class VisaInlagg extends javax.swing.JFrame {
             fyllTAUnderkategori();
     }//GEN-LAST:event_jbtVisaAllaInlaggActionPerformed
 
-    
+    private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
+        //STÄNGER NUVARANDE FLIK
+        dispose();
+        //ÖPPNAR STARTSIDA
+        new AdminHuvud(db).setVisible(true);
+    }//GEN-LAST:event_miTillStartActionPerformed
+
+    private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
+
+        dispose();
+        new VisaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miVisaInlaggActionPerformed
+
+    private void miSkapaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaInlaggActionPerformed
+        dispose();
+        new SkapaInlagg(db).setVisible(true);
+    }//GEN-LAST:event_miSkapaInlaggActionPerformed
+
+    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
+        dispose();
+        new TaBortAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miAnvandareActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        dispose();
+        new TabortMote(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+
+        dispose();
+        new TaBortKommentar(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+
+        new GemensamKalender(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
+        dispose();
+        new Profil(db).setVisible(true);
+    }//GEN-LAST:event_miVisaProfilActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+        dispose();
+        new Favoriter(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
+        dispose();
+        new LoggaIn(db).setVisible(true);
+    }//GEN-LAST:event_miLoggaUtActionPerformed
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnVisaInlagg;
     private javax.swing.JButton btnVisaR;
     private javax.swing.JComboBox<String> cbHKategori;
     private javax.swing.JComboBox<String> cbRubrik;
     private javax.swing.JComboBox<String> cbUKategori;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -704,23 +698,24 @@ public class VisaInlagg extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton jbKommentera;
     private javax.swing.JButton jbVisaInlagg;
     private javax.swing.JButton jbtVisaAllaInlagg;
     private javax.swing.JMenu mBlogg;
-    private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
     private javax.swing.JMenu mStart;
     private javax.swing.JMenuBar mbAdminHuvud;
+    private javax.swing.JMenuItem miAnvandare;
     private javax.swing.JMenuItem miLoggaUt;
-    private javax.swing.JMenuItem miSkapaAnvandare;
-    private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
     private javax.swing.JMenuItem miTillStart;
-    private javax.swing.JMenuItem miUnderkategori;
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
     private javax.swing.JTextArea taInlagg;
