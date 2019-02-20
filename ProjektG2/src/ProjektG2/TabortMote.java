@@ -24,7 +24,6 @@ public class TabortMote extends javax.swing.JFrame {
         this.db = db;
         lista();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -262,22 +261,26 @@ public class TabortMote extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void lista() {
+        DefaultListModel list = new DefaultListModel();
         lMoten.clearSelection();
-
-        try {
-            DefaultListModel list = new DefaultListModel();
+        
+        try {  
             ArrayList<HashMap<String, String>> anvandare;
             String sql = "SELECT TITEL, DATUM, STARTTID, SLUTTID FROM MOTE";
             anvandare = db.fetchRows(sql);
+            if(anvandare !=null){
 
             for (HashMap<String, String> hittad : anvandare) {
                 String titel = hittad.get("TITEL");
                 String datum = hittad.get("DATUM");
                 String start = hittad.get("STARTTID");
                 String slut = hittad.get("SLUTTID");
-                list.add(0, titel + " " + datum + " " + start + "-" + slut);
+                list.addElement(titel + " " + datum + " " + start + "-" + slut);
                 lMoten.setModel(list);
-            }
+            }}else{ lMoten.setModel(list);
+            list.addElement("Det finns inga inplanerade möten.");
+                    }
+            
         } catch (InfException e) {
             System.out.println(e.getMessage());
         }

@@ -322,13 +322,14 @@ public class SkapaMote extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void lista() {
+        DefaultListModel list = new DefaultListModel();
         lMoten.clearSelection();
-
-        try {
-            DefaultListModel list = new DefaultListModel();
+        
+        try {  
             ArrayList<HashMap<String, String>> anvandare;
             String sql = "SELECT TITEL, DATUM, STARTTID, SLUTTID FROM MOTE";
             anvandare = db.fetchRows(sql);
+            if(anvandare !=null){
 
             for (HashMap<String, String> hittad : anvandare) {
                 String titel = hittad.get("TITEL");
@@ -337,12 +338,15 @@ public class SkapaMote extends javax.swing.JFrame {
                 String slut = hittad.get("SLUTTID");
                 list.addElement(titel + " " + datum + " " + start + "-" + slut);
                 lMoten.setModel(list);
-            }
+            }}else{ lMoten.setModel(list);
+            list.addElement("Det finns inga inplanerade möten.");
+                    }
+            
         } catch (InfException e) {
             System.out.println(e.getMessage());
         }
+        
     }
-    
     private void miTillStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miTillStartActionPerformed
         //STÄNGER NUVARANDE FLIK
         dispose();
@@ -389,7 +393,6 @@ public class SkapaMote extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         dispose();
-
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -443,7 +446,6 @@ public class SkapaMote extends javax.swing.JFrame {
         }
         return id;
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkapa;
     private com.toedter.calendar.JCalendar jCal;
