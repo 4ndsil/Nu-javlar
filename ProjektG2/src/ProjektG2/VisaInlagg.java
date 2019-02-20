@@ -5,6 +5,7 @@
  */
 package ProjektG2;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,12 +22,10 @@ public class VisaInlagg extends javax.swing.JFrame {
     public VisaInlagg(InfDB db) {
         initComponents();
         this.db = db;
-
+        
         fyllKommentar();
         fyllCbHKategori();
         fyllCbUKategori();
-        fyllCbRubrik();
-        // fyllTextArea();
 
     }
    
@@ -41,10 +40,13 @@ public class VisaInlagg extends javax.swing.JFrame {
         
         try {
             cbListaHuvudkategori = db.fetchColumn(query);
-
+            if(cbListaHuvudkategori != null){
             for (String aResult : cbListaHuvudkategori) {
                 cbHKategori.addItem(aResult);
+            }}else {
+                JOptionPane.showMessageDialog(null, "Finns ingen underkategori 33333333333333333.");
             }
+            
         } catch (InfException e) {
             e.printStackTrace();
         }
@@ -62,10 +64,13 @@ public class VisaInlagg extends javax.swing.JFrame {
         
         try {
             cbListaUnderkategori = db.fetchColumn(query);
-
+            if(cbListaUnderkategori != null){
             for(String aResult : cbListaUnderkategori)
             {
                 cbUKategori.addItem(aResult);
+            } }
+            else {
+                JOptionPane.showMessageDialog(null, "Finns ingen underkategori 11111111.");
             }
         } catch (InfException e) {
             e.printStackTrace();
@@ -73,29 +78,7 @@ public class VisaInlagg extends javax.swing.JFrame {
         
     }
     
-    public void fyllCbRubrik() {
-       
-        System.out.print(cbUKategori.getSelectedItem().toString());
-        
-        cbRubrik.removeAllItems();
-        
-        ArrayList<String> cbListaRubrik;
 
-        String query = "SELECT BLOGGINLAGG.RUBRIK FROM BLOGGINLAGG JOIN UNDERKATEGORI ON UNDERKATEGORI.UID = BLOGGINLAGG.UID WHERE UNDERKATEGORI.NAMN = '" + cbUKategori.getSelectedItem().toString() + "'";
-        
-        try {
-            cbListaRubrik = db.fetchColumn(query);
-
-            for(String aResult : cbListaRubrik)
-            {
-                cbRubrik.addItem(aResult);
-            }
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-    }
-    
     public void fyllKommentar() {
 
         try {
@@ -104,18 +87,20 @@ public class VisaInlagg extends javax.swing.JFrame {
             listaKommentarer = db.fetchRows("SELECT TEXT, PNR FROM KOMMENTAR");
 
             DefaultListModel dlm = new DefaultListModel();
-
+            if(listaKommentarer  != null){
             //LOOPAR LISTA OCH HÄMTAR ELEVHEMSNAMN OCH LÄGGER IN DEM I ELEVHEMSLISTAN
             for (HashMap<String, String> kommentar : listaKommentarer) {
 
                 String rubrik = kommentar.get("TEXT");
                 String persnr = kommentar.get("PNR");
                 taKommentar.append(rubrik + "\n" + persnr + "\n" + "\n");
+            }}
+                else {
+                JOptionPane.showMessageDialog(null, "Finns inga kommentarer att visa. 999999");
             }
-
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            JOptionPane.showMessageDialog(null, "Något gick fel 1.");
             System.out.println(e.getMessage());
         }
 
@@ -131,7 +116,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             listaBloggInlagg = db.fetchRows("SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG");
 
             DefaultListModel dlm = new DefaultListModel();
-
+            if(listaBloggInlagg  != null){
             //LOOPAR LISTA OCH HÄMTAR ELEVHEMSNAMN OCH LÄGGER IN DEM I ELEVHEMSLISTAN
             for (HashMap<String, String> inlagg : listaBloggInlagg) {
 
@@ -139,11 +124,13 @@ public class VisaInlagg extends javax.swing.JFrame {
                 String datum = inlagg.get("DATUM");
                 String innehall = inlagg.get("INNEHALL");
                 taInlagg.append(rubrik + "\n" + datum + "\n" + innehall + "\n" + "\n");
+            }}
+            else {
+                JOptionPane.showMessageDialog(null, "Finns inga blogginlägg att visa.");
             }
-
             //OM NÅGOT FEL FÅNGAS SKRIV UT I POPUP-RUTA
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            JOptionPane.showMessageDialog(null, "Något gick fel 2.");
             System.out.println(e.getMessage());
         }
 
@@ -165,49 +152,25 @@ public class VisaInlagg extends javax.swing.JFrame {
             
             ArrayList<HashMap<String, String>> listaBloggInlagg;
             listaBloggInlagg = db.fetchRows(fraga);
-
+            if(listaBloggInlagg  != null){
             for (HashMap<String, String> inlagg : listaBloggInlagg) {
                 String rubrik = inlagg.get("RUBRIK");
                 String datum = inlagg.get("DATUM");
                 String innehall = inlagg.get("INNEHALL");
 
                 taInlagg.append(rubrik + "\n" + datum + "\n" + innehall + "\n \n");
+            }}else {
+                JOptionPane.showMessageDialog(null, "Finns inga uderkategorier2 att visa.");
             }
 
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            JOptionPane.showMessageDialog(null, "Något gick fel 3.");
             System.out.println(e.getMessage());
         }    
     }
+  
     
-    private void fyllTARubrik() {
-    // Fyller TextArea baserat på vad som valts i Combo boxen med Rubriker
-    
-            taInlagg.setText("");
-
-            try{
-
-            String fraga =  "SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG\n" +
-                            "JOIN UNDERKATEGORI \n" +
-                            "ON BLOGGINLAGG.UID = UNDERKATEGORI.UID\n" +
-                            "WHERE UNDERKATEGORI.NAMN ='" + cbRubrik.getSelectedItem() + "'";
-            
-            ArrayList<HashMap<String, String>> listaBloggInlagg;
-            listaBloggInlagg = db.fetchRows(fraga);
-
-            for (HashMap<String, String> inlagg : listaBloggInlagg) {
-                String rubrik = inlagg.get("RUBRIK");
-                String datum = inlagg.get("DATUM");
-                String innehall = inlagg.get("INNEHALL");
-
-                taInlagg.append(rubrik + "\n" + datum + "\n" + innehall + "\n\n");
-            }
-
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel.");
-            System.out.println(e.getMessage());
-        }    
-    }
+  
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -230,15 +193,14 @@ public class VisaInlagg extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         taKommentar = new javax.swing.JTextArea();
         tfKommentar = new javax.swing.JTextField();
-        jbKategori = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jbVisaInlagg = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jLabel6 = new javax.swing.JLabel();
+        btnVisaInlagg = new javax.swing.JToggleButton();
         jLabel7 = new javax.swing.JLabel();
+        btnVisaR = new javax.swing.JButton();
+        jbtVisaAllaInlagg = new javax.swing.JButton();
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
@@ -292,6 +254,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
+        jbKommentera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbKommentera.setText("Kommentera valt inlägg");
         jbKommentera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,6 +262,7 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Kommentera");
 
         taKommentar.setColumns(20);
@@ -311,19 +275,16 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
-        jbKategori.setText("Välj underkategori");
-        jbKategori.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbKategoriActionPerformed(evt);
-            }
-        });
-
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Huvudkategori");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Underkategori");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Rubrik");
 
+        jbVisaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbVisaInlagg.setText("Visa alla inlägg");
         jbVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,25 +292,30 @@ public class VisaInlagg extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Visa inlägg");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVisaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnVisaInlagg.setText("Visa inlägg");
+        btnVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                btnVisaInlaggActionPerformed(evt);
             }
         });
-
-        jToggleButton2.setText("Visa inlägg");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        jLabel6.setText("Baserat på vald underkategori");
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        jLabel7.setText("Baserat på vald rubrik");
+
+        btnVisaR.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnVisaR.setText("Visa rubriker");
+        btnVisaR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaRActionPerformed(evt);
+            }
+        });
+
+        jbtVisaAllaInlagg.setText("Visa alla inlägg");
+        jbtVisaAllaInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtVisaAllaInlaggActionPerformed(evt);
+            }
+        });
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -462,50 +428,6 @@ public class VisaInlagg extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(234, 234, 234))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfKommentar)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbHKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbUKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel7))
-                                            .addComponent(jToggleButton2))))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbKommentera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jbVisaInlagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(jLabel6))
-                                            .addComponent(jToggleButton1))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 12, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -516,6 +438,45 @@ public class VisaInlagg extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfKommentar)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jbKommentera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbVisaInlagg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbHKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbUKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnVisaR))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(jLabel7))
+                                            .addComponent(btnVisaInlagg))))
+                                .addGap(18, 18, 18)
+                                .addComponent(jbtVisaAllaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,24 +487,23 @@ public class VisaInlagg extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbHKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbUKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbKategori)
-                    .addComponent(jToggleButton1))
-                .addGap(9, 9, 9)
-                .addComponent(jLabel6)
-                .addGap(21, 21, 21)
+                    .addComponent(btnVisaR)
+                    .addComponent(jbtVisaAllaInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbVisaInlagg)
-                    .addComponent(jToggleButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbVisaInlagg, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVisaInlagg)))
                 .addGap(4, 4, 4)
                 .addComponent(jLabel7)
-                .addGap(36, 36, 36)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbKommentera)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -553,7 +513,7 @@ public class VisaInlagg extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(14, 14, 14))
         );
@@ -613,28 +573,44 @@ public class VisaInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jbKommenteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbKommenteraActionPerformed
-        // Knapp för att kommentera inlägg
-        
-                //DATUM OBJEKT 
-        Date date = new Date();
-        
+        int kid = 0;
+
         try {
-            String kommentar = tfKommentar.getText(); 
+            String fetchMaxID = db.fetchSingle("SELECT MAX(KID) FROM KOMMENTAR");
+            kid = Integer.parseInt(fetchMaxID) + 1;
+            System.out.println(kid);
+          
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
+            Date date = new Date();
+            String datum = format1.format(date);
+            System.out.println(datum);
             
-                //TILLDELAR KOMMENTAR AUTOMATISKT ID
-                String fetchMaxID = db.fetchSingle("SELECT MAX(KID) FROM KOMMENTAR");
-                int KID = Integer.parseInt(fetchMaxID) + 1;
+            
+            String text = tfKommentar.getText();
+            System.out.println(text);
+            
+            String varde = cbRubrik.getSelectedItem().toString();
+            System.out.println(varde);
+            
+            String bloggId = db.fetchSingle("SELECT BLOGGID FROM BLOGGINLAGG WHERE RUBRIK = '" + varde + "'");
+            System.out.println(bloggId);
                 
-                String fraga1 = "INSERT INTO kommentar(text) VALUES('" + KID + "', '" + date + "', '" + kommentar + "');"; // SQL fråga
-                db.insert(fraga1); // Uppdaterar databasen
-
-            JOptionPane.showMessageDialog(null, "Tack för din kommentar!"); // Pop up meddelande när eleven lagts till i databasen
+            if (bloggId != null) {
+            String pnr = LoggaIn.returneraInloggadPnr();
+            System.out.println(pnr);
+            
+            String fraga = "INSERT INTO KOMMENTAR(KID, DATUM, TEXT, BLOGGID, PNR) VALUES(" + kid + ", '" + datum + "', '" + text + "', '" + bloggId + "', '" + pnr + "')";
+            db.insert(fraga);
+            JOptionPane.showMessageDialog(null, "Tack för din kommentar!");
+        }             else {
+                        JOptionPane.showMessageDialog(null, "Finns ingen kommentar att visa 2");
+                    }
+                } 
+        catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel.");
+            System.out.println(e.getMessage());
         }
 
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage()); // Pop up felmeddelande
-        }
-        
     }//GEN-LAST:event_jbKommenteraActionPerformed
 
     private void tfKommentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKommentarActionPerformed
@@ -651,11 +627,6 @@ public class VisaInlagg extends javax.swing.JFrame {
        
     }//GEN-LAST:event_cbUKategoriActionPerformed
 
-    private void jbKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbKategoriActionPerformed
-        // TODO add your handling code here:
-        fyllCbRubrik();
-    }//GEN-LAST:event_jbKategoriActionPerformed
-
     private void cbRubrikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRubrikActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbRubrikActionPerformed
@@ -665,18 +636,63 @@ public class VisaInlagg extends javax.swing.JFrame {
         fyllTextArea();
     }//GEN-LAST:event_jbVisaInlaggActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-        fyllTAUnderkategori();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void btnVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInlaggActionPerformed
+        
+                taInlagg.setText("");
+            String rubrik = cbRubrik.getSelectedItem().toString();
+            try{
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-        fyllTARubrik();
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+            String fraga = "SELECT RUBRIK, DATUM, INNEHALL FROM BLOGGINLAGG WHERE RUBRIK = '" + rubrik + "'";
+            
+            ArrayList<HashMap<String, String>> listaBloggInlagg;
+            listaBloggInlagg = db.fetchRows(fraga);
+            
+            if(listaBloggInlagg  != null){
+            for (HashMap<String, String> inlagg : listaBloggInlagg) {
+                String rubrik1 = inlagg.get("RUBRIK");
+                String datum = inlagg.get("DATUM");
+                String innehall = inlagg.get("INNEHALL");
+
+                taInlagg.append(rubrik1 + "\n" + datum + "\n" + innehall + "\n\n");
+            }}else {
+                JOptionPane.showMessageDialog(null, "Finns inga rubrik2 att visa.");
+            }
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel 4.");
+            System.out.println(e.getMessage());
+        }    
+    
+    }//GEN-LAST:event_btnVisaInlaggActionPerformed
+
+    private void btnVisaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaRActionPerformed
+        cbRubrik.removeAllItems();
+
+        try {
+            String query = "SELECT BLOGGINLAGG.RUBRIK FROM BLOGGINLAGG JOIN UNDERKATEGORI ON UNDERKATEGORI.UID = BLOGGINLAGG.UID WHERE UNDERKATEGORI.NAMN = '" + cbUKategori.getSelectedItem().toString() + "'";
+            if (query != null) {
+                ArrayList<String> cbListaRubrik;
+                cbListaRubrik = db.fetchColumn(query);
+
+                for (String aResult : cbListaRubrik) {
+                    cbRubrik.addItem(aResult);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Finns ingen rubrik att visa.8888888888888888");
+            }
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnVisaRActionPerformed
+
+    private void jbtVisaAllaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtVisaAllaInlaggActionPerformed
+            fyllTAUnderkategori();
+    }//GEN-LAST:event_jbtVisaAllaInlaggActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnVisaInlagg;
+    private javax.swing.JButton btnVisaR;
     private javax.swing.JComboBox<String> cbHKategori;
     private javax.swing.JComboBox<String> cbRubrik;
     private javax.swing.JComboBox<String> cbUKategori;
@@ -686,17 +702,14 @@ public class VisaInlagg extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JButton jbKategori;
     private javax.swing.JButton jbKommentera;
     private javax.swing.JButton jbVisaInlagg;
+    private javax.swing.JButton jbtVisaAllaInlagg;
     private javax.swing.JMenu mBlogg;
     private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;

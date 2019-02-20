@@ -53,16 +53,19 @@ public class Profil extends javax.swing.JFrame {
         tfEfternamn = new javax.swing.JTextField();
         kontorsrum = new javax.swing.JLabel();
         lblRubrikAdminHuvud = new javax.swing.JLabel();
+
         personnummer2 = new javax.swing.JLabel();
         chbForskning = new javax.swing.JCheckBox();
         chbUtbildning = new javax.swing.JCheckBox();
         chbInformell = new javax.swing.JCheckBox();
+
         mbAdminHuvud = new javax.swing.JMenuBar();
         mStart = new javax.swing.JMenu();
         miTillStart = new javax.swing.JMenuItem();
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
+
         mProfil = new javax.swing.JMenu();
         miVisaProfil = new javax.swing.JMenuItem();
         miFavoritInlagg = new javax.swing.JMenuItem();
@@ -146,6 +149,7 @@ public class Profil extends javax.swing.JFrame {
                 chbInformellActionPerformed(evt);
             }
         });
+
 
         mbAdminHuvud.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         mbAdminHuvud.setRequestFocusEnabled(false);
@@ -267,11 +271,13 @@ public class Profil extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
+
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAndra))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titel)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,7 +412,6 @@ public class Profil extends javax.swing.JFrame {
         if (Validering.textFaltHarVarde(fnamn) && Validering.textFaltHarVarde(enamn)) {
             if (Validering.vardeArString(tfFornamn) && Validering.vardeArString(tfEfternamn)) {
                 if (Validering.textFaltHarVarde(titeln) && Validering.textFaltHarVarde(email) && Validering.textFaltHarVarde(kontorsnr)) {
-
                     try {
 
                         if (!losen.isEmpty()) {
@@ -466,7 +471,6 @@ public class Profil extends javax.swing.JFrame {
     private void tfMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfMailActionPerformed
-
 
     private void tfLosen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLosen2ActionPerformed
         // TODO add your handling code here:
