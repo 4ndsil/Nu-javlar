@@ -50,15 +50,16 @@ public class GemensamKalender extends javax.swing.JFrame {
         mBlogg = new javax.swing.JMenu();
         miVisaInlagg = new javax.swing.JMenuItem();
         miSkapaInlagg = new javax.swing.JMenuItem();
-        mLaggTill = new javax.swing.JMenu();
-        miSkapaAnvandare = new javax.swing.JMenuItem();
-        miSkapaHuvudkategori = new javax.swing.JMenuItem();
-        miUnderkategori = new javax.swing.JMenuItem();
-        mProfil = new javax.swing.JMenu();
-        miVisaProfil = new javax.swing.JMenuItem();
-        miLoggaUt = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        miAnvandare = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        mProfil = new javax.swing.JMenu();
+        miVisaProfil = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        miLoggaUt = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +103,7 @@ public class GemensamKalender extends javax.swing.JFrame {
         mStart.setText("Start");
         mStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        miTillStart.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         miTillStart.setText("Till Startsidan");
         miTillStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +117,7 @@ public class GemensamKalender extends javax.swing.JFrame {
         mBlogg.setText("Blogg");
         mBlogg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        miVisaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         miVisaInlagg.setText("Visa inlägg");
         miVisaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +126,7 @@ public class GemensamKalender extends javax.swing.JFrame {
         });
         mBlogg.add(miVisaInlagg);
 
+        miSkapaInlagg.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         miSkapaInlagg.setText("Skapa inlägg");
         miSkapaInlagg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,59 +137,42 @@ public class GemensamKalender extends javax.swing.JFrame {
 
         mbAdminHuvud.add(mBlogg);
 
-        mLaggTill.setText("Lägg till");
-        mLaggTill.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenu2.setText("Ta bort");
+        jMenu2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        miSkapaAnvandare.setText("Användare");
-        miSkapaAnvandare.addActionListener(new java.awt.event.ActionListener() {
+        miAnvandare.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miAnvandare.setText("Användare");
+        miAnvandare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSkapaAnvandareActionPerformed(evt);
+                miAnvandareActionPerformed(evt);
             }
         });
-        mLaggTill.add(miSkapaAnvandare);
+        jMenu2.add(miAnvandare);
 
-        miSkapaHuvudkategori.setText("Huvudkategori");
-        miSkapaHuvudkategori.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem2.setText("Möte");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSkapaHuvudkategoriActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        mLaggTill.add(miSkapaHuvudkategori);
+        jMenu2.add(jMenuItem2);
 
-        miUnderkategori.setText("Underkategori");
-        miUnderkategori.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem5.setText("Kommentar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miUnderkategoriActionPerformed(evt);
+                jMenuItem5ActionPerformed(evt);
             }
         });
-        mLaggTill.add(miUnderkategori);
+        jMenu2.add(jMenuItem5);
 
-        mbAdminHuvud.add(mLaggTill);
-
-        mProfil.setText("Profil");
-        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        miVisaProfil.setText("Visa profil");
-        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miVisaProfilActionPerformed(evt);
-            }
-        });
-        mProfil.add(miVisaProfil);
-
-        miLoggaUt.setText("Logga ut");
-        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miLoggaUtActionPerformed(evt);
-            }
-        });
-        mProfil.add(miLoggaUt);
-
-        mbAdminHuvud.add(mProfil);
+        mbAdminHuvud.add(jMenu2);
 
         jMenu1.setText("Kalender");
         jMenu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem1.setText("Se Kalender");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +182,38 @@ public class GemensamKalender extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         mbAdminHuvud.add(jMenu1);
+
+        mProfil.setText("Profil");
+        mProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        miVisaProfil.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miVisaProfil.setText("Visa profil");
+        miVisaProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miVisaProfilActionPerformed(evt);
+            }
+        });
+        mProfil.add(miVisaProfil);
+
+        jMenuItem4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jMenuItem4.setText("Favoritinlägg");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        mProfil.add(jMenuItem4);
+
+        miLoggaUt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        miLoggaUt.setText("Logga ut");
+        miLoggaUt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miLoggaUtActionPerformed(evt);
+            }
+        });
+        mProfil.add(miLoggaUt);
+
+        mbAdminHuvud.add(mProfil);
 
         setJMenuBar(mbAdminHuvud);
 
@@ -270,7 +289,6 @@ public class GemensamKalender extends javax.swing.JFrame {
         dispose();
         //ÖPPNAR STARTSIDA
         new AdminHuvud(db).setVisible(true);
-
     }//GEN-LAST:event_miTillStartActionPerformed
 
     private void miVisaInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaInlaggActionPerformed
@@ -284,30 +302,21 @@ public class GemensamKalender extends javax.swing.JFrame {
         new SkapaInlagg(db).setVisible(true);
     }//GEN-LAST:event_miSkapaInlaggActionPerformed
 
-    private void miSkapaAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaAnvandareActionPerformed
+    private void miAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAnvandareActionPerformed
         dispose();
-        new SkapaAnvandare(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaAnvandareActionPerformed
+        new TaBortAnvandare(db).setVisible(true);
+    }//GEN-LAST:event_miAnvandareActionPerformed
 
-    private void miSkapaHuvudkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSkapaHuvudkategoriActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         dispose();
-        new SkapaHuvudkategori(db).setVisible(true);
-    }//GEN-LAST:event_miSkapaHuvudkategoriActionPerformed
+        new TabortMote(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void miUnderkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miUnderkategoriActionPerformed
-        dispose();
-        new SkapaUnderkategori(db).setVisible(true);
-    }//GEN-LAST:event_miUnderkategoriActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
 
-    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
         dispose();
-        new Profil(db).setVisible(true);
-    }//GEN-LAST:event_miVisaProfilActionPerformed
-
-    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
-        dispose();
-        new LoggaIn(db).setVisible(true);
-    }//GEN-LAST:event_miLoggaUtActionPerformed
+        new TaBortKommentar(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -315,6 +324,22 @@ public class GemensamKalender extends javax.swing.JFrame {
 
         new GemensamKalender(db).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void miVisaProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVisaProfilActionPerformed
+        dispose();
+        new Profil(db).setVisible(true);
+    }//GEN-LAST:event_miVisaProfilActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+        dispose();
+        new Favoriter(db).setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void miLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLoggaUtActionPerformed
+        dispose();
+        new LoggaIn(db).setVisible(true);
+    }//GEN-LAST:event_miLoggaUtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,20 +380,21 @@ public class GemensamKalender extends javax.swing.JFrame {
     private javax.swing.JButton btnVisaResultat;
     private com.toedter.calendar.JCalendar jCal;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mBlogg;
-    private javax.swing.JMenu mLaggTill;
     private javax.swing.JMenu mProfil;
     private javax.swing.JMenu mStart;
     private javax.swing.JMenuBar mbAdminHuvud;
+    private javax.swing.JMenuItem miAnvandare;
     private javax.swing.JMenuItem miLoggaUt;
-    private javax.swing.JMenuItem miSkapaAnvandare;
-    private javax.swing.JMenuItem miSkapaHuvudkategori;
     private javax.swing.JMenuItem miSkapaInlagg;
     private javax.swing.JMenuItem miTillStart;
-    private javax.swing.JMenuItem miUnderkategori;
     private javax.swing.JMenuItem miVisaInlagg;
     private javax.swing.JMenuItem miVisaProfil;
     private javax.swing.JTextArea taVisaResultat;
